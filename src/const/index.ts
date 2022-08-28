@@ -1,18 +1,12 @@
-export const tags = [
-  '升学',
-  '比赛',
-  '求职',
-  '求财',
-  '天气',
-  '婚姻',
-  '疾病',
-  '官司',
-  '出行',
-  '失物',
-  '饮食',
-  '生产',
-  '外应',
-  '来意',
-  '一生',
-  '其他',
+export const menus = [
+  {
+    name: '首页',
+    path: '/',
+    icon: 'home-o',
+  },
+  {
+    name: '我的',
+    path: '/mine',
+    icon: 'user-circle-o',
+  },
 ]

@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { Toast } from 'vant'
+import { menus } from '@/const'
 const router = useRouter()
 const active = ref(0)
 const onChange = (index: number) => {
@@ -7,24 +8,19 @@ const onChange = (index: number) => {
     message: `标签 ${index}`,
   })
   router.push({
-    path: '/query',
+    path: menus[index].path,
   })
 }
 </script>
 
 <template>
   <VanTabbar v-model="active" class="!static" @change="onChange">
-    <VanTabbarItem icon="question-o">
-      卜卦
-    </VanTabbarItem>
-    <VanTabbarItem icon="gift-o">
-      查卦
-    </VanTabbarItem>
-    <VanTabbarItem icon="medal-o">
-      名卦
-    </VanTabbarItem>
-    <VanTabbarItem icon="user-circle-o">
-      我的
+    <VanTabbarItem
+      v-for="item in menus"
+      :key="item.icon"
+      :icon="item.icon"
+    >
+      {{ item.name }}
     </VanTabbarItem>
   </VanTabbar>
 </template>
