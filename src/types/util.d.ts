@@ -1,7 +1,12 @@
 declare namespace Util {
-  interface Result {
-    status?: Boolean
-    data?: string
-    base64Data?: string
+  interface FileResult {
+    status: Boolean
+    data: string
+  }
+  interface ImageResult {
+    base64Data: string
+    data: string
+    duration: number
   }
 }
+

@@ -5,7 +5,7 @@ export function readFile(path = 'fs://meihua.json') {
         {
           path,
         },
-        (ret: Util.Result, err: any) => {
+        (ret: Util.FileResult, err: any) => {
           ret.status ? resolve(JSON.parse(ret.data || '[]')) : reject(err)
         },
       )
@@ -24,7 +24,7 @@ export function writeFile(path = 'fs://meihua.json', data: Object[]) {
           path,
           data: JSON.stringify(data),
         },
-        (ret: Util.Result, err: any) => {
+        (ret: Util.FileResult, err: any) => {
           ret.status ? resolve(ret.data) : reject(err)
         },
       )
@@ -49,8 +49,8 @@ export function getPicture() {
           targetWidth: 800,
           saveToPhotoAlbum: false,
         },
-        (ret: Util.Result, err: any) => {
-          ret ? resolve(ret) : reject(err)
+        (ret: Util.ImageResult, err: any) => {
+          ret.base64Data ? resolve(ret.base64Data) : reject(err)
         },
       )
     }
