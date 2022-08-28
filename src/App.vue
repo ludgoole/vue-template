@@ -4,22 +4,15 @@ const title = ref('')
 
 useHead({ title })
 
-provide('onChangeTitle', onChangeTitle)
-
 watch(() => route.meta, (meta) => {
-  onChangeTitle(meta.title)
+  if (typeof route.name === 'string') title.value = route.name
+  if (typeof meta.title === 'string') title.value = meta.title
 })
-
-function onChangeTitle(val) {
-  route.meta.title = val
-  title.value = val
-}
 </script>
 
 <template>
-  <div class="flex flex-col justify-between pt-6 h-100vh">
-    <AppHeader :title="title" />
-    <RouterView class="flex-1 overflow-auto" />
-    <AppFooter />
+  <div bg-base color-base font-sans min-h-full>
+    <AppHeader />
+    <RouterView />
   </div>
 </template>
