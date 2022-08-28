@@ -22,4 +22,4 @@ const emitter = mitt()
 
 createApp(App).use(head).use(router).provide('emitter', emitter).mount('#app')
 
-// const vConsole = new VConsole()
+const vConsole = new VConsole()
