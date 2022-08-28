@@ -5,10 +5,10 @@ meta:
 
 <script lang="ts" setup>
 import { getPicture, readFile, writeFile } from '@/utils'
-writeFile('fs://test1.json', [{ a: 1 }]).then((res) => {
+writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
   console.log('writeFile', res)
 })
-readFile('fs://test1.json').then((res) => {
+readFile('fs://test.json').then((res) => {
   console.log('readFile', res)
 })
 getPicture().then((res) => {
