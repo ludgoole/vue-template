@@ -31,7 +31,11 @@ export default defineConfig({
       resolvers: [VantResolver()],
     }),
     // https://www.npmjs.com/package/vite-copy-plugin
-    CopyPlugin([{ from: 'config.xml.bak', to: 'dist/config.xml' }]),
+    CopyPlugin([
+      { from: 'config.xml.bak', to: 'dist/config.xml' },
+      // mock里面的文件 =>dist/mock文件夹
+      { from: 'mock', to: 'dist/mock' },
+    ]),
     vue(),
     pages(),
     unocss(),
