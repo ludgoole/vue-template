@@ -1,2 +1,0 @@
-// general
-export * from './dark'
