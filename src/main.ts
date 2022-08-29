@@ -7,10 +7,10 @@ import { createApp } from 'vue'
 import { createHead } from '@vueuse/head'
 import { createRouter, createWebHashHistory } from 'vue-router'
 import mitt from 'mitt'
-import { plugin as storePlugin } from './stores'
-// import VConsole from 'vconsole'
+import { store } from './stores'
 import App from './App.vue'
 import routes from '~pages'
+// import VConsole from 'vconsole'
 
 const head = createHead()
 
@@ -24,7 +24,7 @@ const emitter = mitt()
 createApp(App)
   .use(head)
   .use(router)
-  .use(storePlugin)
+  .use(store)
   .provide('emitter', emitter)
   .mount('#app')
 

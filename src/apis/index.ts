@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant'
+import type { AXIOS } from '../types/axios'
 const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
 
 /**
@@ -95,18 +96,7 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance
 
-// get请求
-export const get = (url = '', { data = {}, loading = true } = {}) => {
-  return axiosInstance.request<unknown, AXIOS.TypeRequestApiResult>({
-    method: 'get',
-    url,
-    data,
-    loading,
-  })
-}
-
-// post请求
-export const post = (url = '', { data = {}, loading = true } = {}) => {
+export function post(url: string, data: object, loading = true) {
   return axiosInstance.request<unknown, AXIOS.TypeRequestApiResult>({
     method: 'post',
     url,
