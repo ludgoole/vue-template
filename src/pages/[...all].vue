@@ -7,8 +7,9 @@ meta:
 
 <script setup lang="ts">
 import { Toast } from 'vant'
+import type { Emitter } from 'mitt'
 import { useHeaderStore } from '@/stores/header'
-const emitter = inject('emitter')
+const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 
 const { title } = toRefs(useHeaderStore())
 const router = useRouter()

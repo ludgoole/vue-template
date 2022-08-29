@@ -16,12 +16,12 @@
     ],
     // @无法解析问题
     // https://www.samyoc.com/single/3766
-    // "baseUrl": "./",
+    "baseUrl": "./",
     "paths": {
       "/*": ["./*"],
       // 未设置 "baseUrl" 时，不允许使用非相对路径。是否忘记了前导 "./"
       // src/ =>/src/
-      "@/*": ["/src/*"]
+      "@/*": ["src/*"]
     },
     "typeRoots": ["./node_modules/@types/", "./types/"]
   },
