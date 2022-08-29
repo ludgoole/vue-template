@@ -6,8 +6,9 @@ import '/src/styles/vant.css'
 import { createApp } from 'vue'
 import { createHead } from '@vueuse/head'
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import VConsole from 'vconsole'
 import mitt from 'mitt'
+import { plugin as storePlugin } from './stores'
+// import VConsole from 'vconsole'
 import App from './App.vue'
 import routes from '~pages'
 
@@ -20,6 +21,11 @@ const router = createRouter({
 
 const emitter = mitt()
 
-createApp(App).use(head).use(router).provide('emitter', emitter).mount('#app')
+createApp(App)
+  .use(head)
+  .use(router)
+  .use(storePlugin)
+  .provide('emitter', emitter)
+  .mount('#app')
 
 // const vConsole = new VConsole()

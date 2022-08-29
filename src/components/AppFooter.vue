@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Toast } from 'vant'
-import { menus } from '@/const'
+import { menus } from '@/consts'
 const router = useRouter()
 const active = ref(0)
 const onChange = (index: number) => {

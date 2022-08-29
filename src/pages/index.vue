@@ -4,7 +4,12 @@ meta:
 </route>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia'
+import { useCounterStore } from '@/stores/counter'
 import { getPicture, readFile, writeFile } from '@/utils'
+
+const { count } = storeToRefs(useCounterStore())
+
 writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
   console.log('writeFile', res)
 })
@@ -18,6 +23,9 @@ getPicture().then((res) => {
 
 <template>
   <div class="Home">
-    this is home page
+    <p>this is home page</p>
+    <VanButton @click="count++">
+      count is: {{ count }}
+    </VanButton>
   </div>
 </template>
