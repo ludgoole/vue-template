@@ -18,7 +18,7 @@ function onChangeTitle(val) {
 
 <template>
   <div class="flex flex-col justify-between pt-6 h-100vh">
-    <AppHeader :title="title" />
+    <AppHeader />
     <RouterView class="flex-1 overflow-auto text-center" />
     <AppFooter />
   </div>

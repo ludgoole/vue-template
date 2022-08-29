@@ -7,13 +7,15 @@ meta:
 
 <script setup lang="ts">
 import { Toast } from 'vant'
+import { useHeaderStore } from '@/stores/header'
 const emitter = inject('emitter')
-const onChangeTitle = inject('onChangeTitle')
+
+const { title } = toRefs(useHeaderStore())
 const router = useRouter()
 
 // created
+title.value = '404'
 emitter.on('on-click-right', onClickRight)
-onChangeTitle('404')
 
 // method
 function onClickRight() {

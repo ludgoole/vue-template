@@ -4,11 +4,10 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia'
-import { useCounterStore } from '@/stores/counter'
 import { getPicture, readFile, writeFile } from '@/utils'
+import { useCounterStore } from '@/stores/counter'
 
-const { count } = storeToRefs(useCounterStore())
+const { count } = toRefs(useCounterStore())
 
 writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
   console.log('writeFile', res)
