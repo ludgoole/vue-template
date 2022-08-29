@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant'
-// const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
-const baseURL = './'
+const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
 
 /**
   * 创建axios实例
@@ -96,7 +95,7 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance
 
-// 请求
+// get请求
 export const get = (url = '', { data = {}, loading = true } = {}) => {
   return axiosInstance.request<unknown, AXIOS.TypeRequestApiResult>({
     method: 'get',
@@ -106,8 +105,8 @@ export const get = (url = '', { data = {}, loading = true } = {}) => {
   })
 }
 
-// 请求
-export const post = (url = '', { data = {}, loading = true }) => {
+// post请求
+export const post = (url = '', { data = {}, loading = true } = {}) => {
   return axiosInstance.request<unknown, AXIOS.TypeRequestApiResult>({
     method: 'post',
     url,
