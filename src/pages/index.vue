@@ -6,6 +6,7 @@ meta:
 <script lang="ts" setup>
 import { getPicture, readFile, writeFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
+import { get } from '@/apis'
 
 const { count } = toRefs(useCounterStore())
 
@@ -17,6 +18,10 @@ readFile('fs://test.json').then((res) => {
 })
 getPicture().then((res) => {
   console.log('getPicture', res)
+})
+
+get('mock/memory.json').then((a) => {
+  console.log('🚀 ~ file: index.vue ~ line 24 ~ request.get ~ a', a)
 })
 </script>
 

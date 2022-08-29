@@ -10,6 +10,7 @@ import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 import CopyPlugin from 'vite-copy-plugin'
+import viteMock from 'vite-plugin-easy-mock'
 import build from './vite.build'
 
 // https://vitejs.dev/config/
@@ -35,6 +36,7 @@ export default defineConfig({
     pages(),
     unocss(),
     viteSingleFile(),
+    viteMock(),
   ],
   build,
 })

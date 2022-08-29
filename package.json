@@ -13,6 +13,7 @@
   "dependencies": {
     "@vueuse/core": "^9.0.2",
     "@vueuse/head": "^0.7.8",
+    "axios": "^0.27.2",
     "cnchar": "^3.2.2",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -41,6 +42,7 @@
     "unplugin-vue-components": "^0.21.2",
     "vite": "^3.0.4",
     "vite-copy-plugin": "^0.4.0",
+    "vite-plugin-easy-mock": "^1.0.3",
     "vite-plugin-pages": "^0.25.0",
     "vite-plugin-singlefile": "^0.11.0",
     "vitest": "^0.19.1",
