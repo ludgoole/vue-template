@@ -1,7 +1,10 @@
 import axios from 'axios'
-import { Toast } from 'vant'
+
+import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
+import { ElLoading, ElMessage } from 'element-plus'
 import type { AXIOS } from '../types/axios'
 const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
+let loadingInstance: LoadingInstance
 
 /**
   * 创建axios实例
@@ -17,14 +20,8 @@ const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     // 打开 loading
-    if (config.loading) {
-      Toast.loading({
-        message: 'loading...',
-        forbidClick: true,
-        duration: 0,
-      })
-    }
-
+    if (config.loading)
+      loadingInstance = ElLoading.service({ fullscreen: true })
     return config
   },
   (error) => {
@@ -40,7 +37,7 @@ axiosInstance.interceptors.response.use(
   (response) => {
     // 关闭 loading
     if (response.config.loading)
-      Toast.clear()
+      loadingInstance.close()
 
     // 对响应数据做点什么
     return response.data
@@ -48,7 +45,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     // 关闭 loading
     if (error.config.loading)
-      Toast.clear()
+      loadingInstance.close()
 
     // 对响应错误做点什么
     switch (error.response?.status) {
@@ -88,7 +85,8 @@ axiosInstance.interceptors.response.use(
       default:
         error.message = `连接出错(${error.response?.status})!`
     }
-    Toast.fail(error.message)
+
+    ElMessage.error(error.message)
 
     return Promise.reject(error)
   },

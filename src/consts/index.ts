@@ -2,11 +2,11 @@ export const menus = [
   {
     name: '首页',
     path: '/',
-    icon: 'home-o',
+    icon: 'i-mdi:home',
   },
   {
     name: '我的',
     path: '/mine',
-    icon: 'user-circle-o',
+    icon: 'i-mdi:person',
   },
 ]

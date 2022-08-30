@@ -1,7 +1,6 @@
 <template>
-  <div flex="~ col" justify-between pt-6 h-100vh>
-    <AppHeader />
+  <div flex="~ col" justify-between h-100vh>
+    <TheHeader />
     <RouterView flex-1 overflow-auto text-center />
-    <AppFooter />
   </div>
 </template>

@@ -1,29 +1,16 @@
 <route lang="yaml">
 meta:
   title: Page Not Found
-  leftArrow: true
-  rightText: 刷新
 </route>
 
 <script setup lang="ts">
-import { Toast } from 'vant'
-import type { Emitter } from 'mitt'
 import { useHeaderStore } from '@/stores/header'
-const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 
 const { title } = toRefs(useHeaderStore())
 const router = useRouter()
 
 // created
 title.value = '404'
-emitter.on('on-click-right', onClickRight)
-
-// method
-function onClickRight() {
-  Toast({
-    message: '刷新',
-  })
-}
 </script>
 
 <template>

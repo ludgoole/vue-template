@@ -7,7 +7,7 @@ import unocss from 'unocss/vite'
 import pages from 'vite-plugin-pages'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-import { VantResolver } from 'unplugin-vue-components/resolvers'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 import CopyPlugin from 'vite-copy-plugin'
 import viteMock from 'vite-plugin-easy-mock'
@@ -28,11 +28,10 @@ export default defineConfig({
     }),
     Components({
       dts: './src/components.d.ts',
-      resolvers: [VantResolver()],
+      resolvers: [ElementPlusResolver()],
     }),
     // https://www.npmjs.com/package/vite-copy-plugin
     CopyPlugin([
-      { from: 'config.xml.bak', to: 'dist/config.xml' },
       // mock里面的文件 =>dist/mock文件夹
       { from: 'mock', to: 'dist/mock' },
     ]),

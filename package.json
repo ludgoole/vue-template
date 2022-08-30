@@ -16,6 +16,8 @@
     "@vueuse/head": "^0.7.8",
     "axios": "^0.27.2",
     "cnchar": "^3.2.2",
+    "downloadjs": "^1.4.7",
+    "element-plus": "^2.2.15",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",

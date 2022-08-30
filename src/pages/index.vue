@@ -4,32 +4,22 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { getPicture, readFile, writeFile } from '@/utils'
+import { downloadFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
 import { getTestData } from '@/apis/test'
-
 const { count } = toRefs(useCounterStore())
 
-writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
-  console.log('writeFile', res)
-})
-readFile('fs://test.json').then((res) => {
-  console.log('readFile', res)
-})
-getPicture().then((res) => {
-  console.log('getPicture', res)
-})
-
 getTestData({ id: 1 }).then((data) => {
-  console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data)
+  console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data, downloadFile)
+  // downloadFile(data, 'text.json')
 })
 </script>
 
 <template>
   <div class="Home">
     <p>this is home page</p>
-    <VanButton @click="count++">
+    <ElButton @click="count++">
       count is: {{ count }}
-    </VanButton>
+    </ElButton>
   </div>
 </template>

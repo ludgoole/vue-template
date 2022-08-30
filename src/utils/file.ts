@@ -1,3 +1,6 @@
+// https://www.npmjs.com/package/downloadjs
+import download from 'downloadjs'
+
 export function readFile(path = 'fs://meihua.json') {
   return new Promise((resolve, reject) => {
     try {
@@ -58,4 +61,8 @@ export function getPicture() {
       reject(err)
     }
   })
+}
+
+export function downloadFile(data: object, filename: string) {
+  download(JSON.stringify(data), filename)
 }
