@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import type { Emitter } from 'mitt'
 import { useGlobalStore } from '@/stores/global'
 
@@ -9,10 +10,11 @@ type Form = Partial<MOCK.STOCk_BASE_ITEM> & {
 }
 interface Prop {
   names: MOCK.STOCK_SELECT
-  onClose: Function
+  onClose: () => void
 }
 
 const props = defineProps<Prop>()
+const attrs = useAttrs()
 // const emit = defineEmits(['input'])
 
 const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
@@ -39,10 +41,11 @@ const rules = reactive<FormRules>({
   sizes: [{ required: true, message: '请选择尺码', trigger: 'blur' }],
   area: [{ required: true, message: '请选择位置', trigger: 'blur' }],
 })
-const { names } = toRefs(props)
+const names = computed(() => toRefs(props).names.value.filter((name) => name.value))
 const colors = ref(['红', '粉', '橙', '黄', '绿', '青', '蓝', '紫', '黑', '白', '灰'].map(mapFn))
 const sizes = ref(['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'].map(mapFn))
 const areas = ref(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(mapFn))
+const editId = ref('')
 
 // init
 emitter.on('onEdit', (row) => {
@@ -50,25 +53,42 @@ emitter.on('onEdit', (row) => {
   form.price = row.price
   form.name = row.name
   form.colors = row.children.map((child) => child.color)
-  form.sizes = row.children.reduce((a: string[], child) => a.concat(child.sizes), [])
+  form.sizes = row.children.reduce((a: string[], child) => [...new Set(a.concat(child.sizes))].sort(), [])
   form.area = row.area
+
+  editId.value = row.id
 })
 
 // method
 async function onSubmit(formEl: FormInstance | undefined) {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
-    if (valid) {
+    if (valid && form.id && form.colors.length && form.sizes.length) {
       // emit('submit', getAddData())
-      g_data.value.push(...getAddData())
+      if (attrs.title === '编辑') {
+        const index = g_data.value.findIndex((item) => item.id === editId.value)
+        const len = g_data.value.filter((item) => item.id === editId.value).length
+        g_data.value.splice(index, len, ...getAddData())
+      }
+      else {
+        g_data.value.push(...getAddData())
+      }
 
       console.log('submit!', g_data)
-      formEl.resetFields()
+      // formEl.resetFields()
+      resetFields(null)
       props.onClose()
     }
 
     else {
       console.log('error submit!', fields)
+
+      if (!form.sizes.length)
+        ElMessage('请输入尺码')
+      else if (!form.colors.length)
+        ElMessage('请输入颜色')
+      else
+        ElMessage('请输入货号')
     }
   })
 }
@@ -80,9 +100,9 @@ function getAddData() {
     sizes.forEach((size) => {
       addData.push({
         id,
-        price,
-        name,
-        area,
+        price: price || '--',
+        name: name || '--',
+        area: area || '--',
         color,
         size,
         time: Date.now(),
@@ -93,16 +113,26 @@ function getAddData() {
   return addData
 }
 
+function resetFields(done: any) {
+  form.id = ''
+  form.price = ''
+  form.name = ''
+  form.colors = []
+  form.sizes = []
+  form.area = ''
+  done && done()
+}
+
 function onCancel(formEl: FormInstance | undefined) {
   if (!formEl) return
-  formEl.resetFields()
+  resetFields(null)
   props.onClose()
 }
 </script>
 
 <template>
   <div class="StockAdd">
-    <ElDialog v-bind="$attrs" :close-on-click-modal="false">
+    <ElDialog v-bind="$attrs" :close-on-click-modal="false" :before-close="resetFields">
       <ElForm ref="ruleFormRef" :model="form" :rules="rules">
         <ElFormItem label="货号">
           <ElInput v-model="form.id" placeholder="001" />
@@ -172,7 +202,7 @@ function onCancel(formEl: FormInstance | undefined) {
             />
           </ElSelect>
         </ElFormItem>
-        <ElFormItem>
+        <ElFormItem class="!mb-0">
           <div flex="~ 1" justify-end>
             <ElButton type="primary" @click="onCancel(ruleFormRef)">
               取消

@@ -1,17 +1,15 @@
 export default function useShoe() {
   const uniqueBy = (flat: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
     const s = new Set()
-    const tree: MOCK.STOCK_UNIQUE = []
+    const tree: (string | number | undefined)[] = []
     flat.forEach((item) => {
       if (!s.has(item[key])) {
         s.add(item[key])
-        tree.push({
-          [key]: item[key],
-        })
+        tree.push(item[key] || '')
       }
     })
 
-    return tree
+    return tree.sort()
   }
 
   const getTreeStock = (data: MOCK.STOCk) => {

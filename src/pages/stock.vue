@@ -33,10 +33,15 @@ const formInline = reactive<Partial<MOCK.STOCk_ITEM>>({
 
 const visible = ref(false)
 const title = ref('添加')
+const isQuery = ref(false)
 
 // init
 watchEffect(() => {
-  init(g_data.value)
+  if (isQuery.value)
+    isQuery.value = false
+
+  else
+    init(g_data.value)
 })
 
 // method
@@ -54,37 +59,28 @@ function init(data: MOCK.STOCk) {
 }
 
 function initSelect(stock: MOCK.STOCk) {
+  const mapFn = (value: string | number | undefined) => {
+    return {
+      value: `${value}`,
+      label: `${value}`,
+    }
+  }
+  const filterFn = ({ value = '' }) => value
   names.value = all.concat(
-    uniqueBy((stock), 'name').map((data) => {
-      return {
-        value: data.name || '',
-        label: data.name || '',
-      }
-    }),
+    uniqueBy((stock), 'name')
+      .map(mapFn).filter(filterFn),
   )
   colors.value = all.concat(
-    uniqueBy((stock), 'color').map((data) => {
-      return {
-        value: data.color || '',
-        label: data.color || '',
-      }
-    }),
+    uniqueBy((stock), 'color')
+      .map(mapFn).filter(filterFn),
   )
   areas.value = all.concat(
-    uniqueBy((stock), 'area').map((data) => {
-      return {
-        value: data.area || '',
-        label: data.area || '',
-      }
-    }),
+    uniqueBy((stock), 'area')
+      .map(mapFn).filter(filterFn),
   )
   sizes.value = all.concat(
-    uniqueBy((stock), 'size').map((data) => {
-      return {
-        value: data.size || '',
-        label: data.size || '',
-      }
-    }),
+    uniqueBy((stock), 'size')
+      .map(mapFn).filter(filterFn),
   )
 }
 
@@ -114,6 +110,7 @@ function onSubmit() {
   })
 
   refresh(stock.value)
+  isQuery.value = true
 }
 
 function onShow(_title = '新增') {
@@ -176,7 +173,7 @@ function onClose() {
         <ElButton type="primary" @click="onSubmit">
           查询
         </ElButton>
-        <ElButton type="primary" @click="onShow('添加')">
+        <ElButton type="primary" @click="onShow('新增')">
           添加
         </ElButton>
       </ElFormItem>
@@ -251,6 +248,6 @@ function onClose() {
         </template>
       </ElTableColumn>
     </ElTable>
-    <StockAdd v-model="visible" :names="names" :on-close="onClose" />
+    <StockAdd v-model="visible" :title="title" :names="names" :on-close="onClose" />
   </div>
 </template>
