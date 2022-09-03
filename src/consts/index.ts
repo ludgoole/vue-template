@@ -5,6 +5,16 @@ export const menus = [
     icon: 'i-mdi:home',
   },
   {
+    name: '仓库',
+    path: '/stock',
+    icon: 'i-mdi:stock',
+  },
+  {
+    name: '账本',
+    path: '/account',
+    icon: 'i-mdi:account',
+  },
+  {
     name: '我的',
     path: '/mine',
     icon: 'i-mdi:person',

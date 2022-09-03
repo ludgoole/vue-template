@@ -1,35 +1,35 @@
 declare namespace MOCK {
-  interface YILI_ITEM {
-    situation: string,
-    how: string,
-    premise: string,
-    why: string,
-    or: string,
-    story: string,
-    note: string,
+  interface STOCk_BASE_ITEM {
+    id: string
+    area: string
+    name: string
+    price: string
+    desc?: string
+    time?: number
+  }
+  interface STOCk_SUB_ITEM {
+    color: string
+    size: string
+  }
+  interface STOCk_CHILD_ITEM {
+    color: string
+    sizes: string[]
   }
 
-  interface GUA {
-    guaXu: number,
-    guaMing: string,
-    guaXiang: string,
-    daXiang: string,
-    guaCi: string,
-    yaoCi: string [],
-    yiXiang: string,
-    yiLi: YILI_ITEM [],
-    leiXiang: string,
-    yaoXiang: string [],
-    baGong: string,
-    baGongOrder: 10,
-    chongHe: string,
-    naJia: string [],
-    shiYing: {
-      [key: number]: string
-    },
+  interface STOCK_OPTION {
+    label: string
+    value: string
   }
 
-  type ZHOUYI = GUA []
+  interface STOCK_TREE_ITEM extends STOCk_BASE_ITEM {
+    children: STOCk_CHILD_ITEM[]
+  }
+
+  type STOCk_ITEM = STOCk_BASE_ITEM & STOCk_SUB_ITEM
+  type STOCk = STOCk_ITEM []
+  type STOCK_UNIQUE = Partial<STOCk_ITEM>[]
+  type STOCK_TREE = STOCK_TREE_ITEM[]
+  type STOCK_SELECT = STOCK_OPTION[]
 }
 
 
