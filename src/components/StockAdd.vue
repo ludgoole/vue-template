@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
+import type { Emitter } from 'mitt'
 import { useGlobalStore } from '@/stores/global'
 
 type Form = Partial<MOCK.STOCk_BASE_ITEM> & {
@@ -13,7 +14,8 @@ interface Prop {
 
 const props = defineProps<Prop>()
 // const emit = defineEmits(['input'])
-const emitter = inject('emitter')
+
+const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
 const { g_data } = toRefs(useGlobalStore())
 const ruleFormRef = ref<FormInstance>()
 const mapFn = (name: string) => {
@@ -43,7 +45,7 @@ const sizes = ref(['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '
 const areas = ref(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(mapFn))
 
 // init
-emitter.on('onEdit', (row: MOCK.STOCK_TREE_ITEM) => {
+emitter.on('onEdit', (row) => {
   form.id = row.id
   form.price = row.price
   form.name = row.name

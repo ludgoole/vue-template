@@ -7,7 +7,7 @@ import { useGlobalStore } from '@/stores/global'
 type FormKey = 'id' | 'name' | 'color' | 'area' | 'size'
 
 const { g_data } = toRefs(useGlobalStore())
-const emitter: Emitter<'onEdit'> = inject('emitter')
+const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
 
 const { uniqueBy, getTreeStock } = useShoe()
 const stock = ref<MOCK.STOCk>([])
