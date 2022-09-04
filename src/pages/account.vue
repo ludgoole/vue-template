@@ -38,7 +38,7 @@ function init(data: MOCK.STOCk) {
 
 function onChange(data: Event) {
   isQuery.value = true
-  account.value = g_account.value.filter((item) => moment(item.time).format('YYYYMMDD') === moment(data).format('YYYYMMDD'))
+  account.value = g_account.value.filter((item) => moment(item.time).format('YYYYMMDD') === moment(data as any as string).format('YYYYMMDD'))
   refresh(account.value)
   console.log('🚀 ~ file: account.vue ~ line 41 ~ onChange ~ data', account.value, tableData)
 }
