@@ -1,39 +1,20 @@
+<route lang="yaml">
+meta:
+  title: 仓库
+  </route>
+
 <script lang="ts" setup>
 import moment from 'moment'
-// import { getTestData } from '@/apis/test'
-import type { Emitter } from 'mitt'
-import useShoe from '@/todos/use-shoe'
 import { useGlobalStore } from '@/stores/global'
-type FormKey = 'id' | 'name' | 'color' | 'area' | 'size'
+import useForm from '@/todos/stock/use-form'
+import useTable from '@/todos/stock/use-table'
+import useAdd from '@/todos/stock/use-add'
 
+const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery } = useForm()
+const { tableData, onEdit, onDelete, refresh } = useTable()
+const { visible, title, onShow, onClose, onSubmit } = useAdd()
 const { g_data } = toRefs(useGlobalStore())
-const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
-
-const { uniqueBy, getTreeStock } = useShoe()
 const stock = ref<MOCK.STOCk>([])
-const tableData = ref<MOCK.STOCK_TREE>([])
-const names = ref<MOCK.STOCK_SELECT>([])
-const colors = ref<MOCK.STOCK_SELECT>([])
-const areas = ref<MOCK.STOCK_SELECT>([])
-const sizes = ref<MOCK.STOCK_SELECT>([])
-const all = [
-  {
-    value: '',
-    label: '全部',
-  },
-]
-
-const formInline = reactive<Partial<MOCK.STOCk_ITEM>>({
-  id: '',
-  name: '',
-  color: '',
-  size: '',
-  area: '',
-})
-
-const visible = ref(false)
-const title = ref('添加')
-const isQuery = ref(false)
 
 // init
 watchEffect(() => {
@@ -49,85 +30,22 @@ function init(data: MOCK.STOCk) {
   stock.value = data
   initSelect(stock.value)
   refresh(stock.value)
-  // getTestData({ id: 1 }).then((data) => {
-  //   console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data)
-  //   g_data.value = g_data.value.length ? g_data.value : data.data as MOCK.STOCk
-  //   stock.value = g_data.value
-  //   initSelect(stock.value)
-  //   refresh(stock.value)
-  // })
 }
 
-function initSelect(stock: MOCK.STOCk) {
-  const mapFn = (value: string | number | undefined) => {
-    return {
-      value: `${value}`,
-      label: `${value}`,
-    }
-  }
-  const filterFn = ({ value = '' }) => value
-  names.value = all.concat(
-    uniqueBy((stock), 'name')
-      .map(mapFn).filter(filterFn),
-  )
-  colors.value = all.concat(
-    uniqueBy((stock), 'color')
-      .map(mapFn).filter(filterFn),
-  )
-  areas.value = all.concat(
-    uniqueBy((stock), 'area')
-      .map(mapFn).filter(filterFn),
-  )
-  sizes.value = all.concat(
-    uniqueBy((stock), 'size')
-      .map(mapFn).filter(filterFn),
-  )
+function _onQuery() {
+  onQuery(stock, refresh)
 }
 
-function refresh(stock: MOCK.STOCk) {
-  tableData.value = getTreeStock(stock)
-}
-
-function onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
-  onShow('编辑')
-
-  console.log(index, row)
-  emitter.emit('onEdit', row)
-}
-
-function onDelete(index: number, row: MOCK.STOCk_ITEM) {
-  console.log(index, row)
-  g_data.value = g_data.value.filter((item) => item.id !== row.id)
-  refresh(g_data.value)
-}
-
-function onSubmit() {
-  stock.value = g_data.value
-  const keys = Object.keys(formInline) as FormKey []
-
-  keys.forEach((key) => {
-    formInline[key] && (stock.value = stock.value.filter((item) => item[key] === formInline[key]))
-  })
-
-  refresh(stock.value)
-  isQuery.value = true
-}
-
-function onShow(_title = '新增') {
-  title.value = _title
-  visible.value = true
-}
-
-function onClose() {
-  visible.value = false
+function _onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
+  onEdit(index, row, onShow)
 }
 </script>
 
 <template>
   <div class="Stock">
-    <ElForm inline relative flex :model="formInline">
+    <ElForm inline relative flex :model="form">
       <ElFormItem label="厂商" w-50>
-        <ElSelect v-model="formInline.name" placeholder="古雲轩">
+        <ElSelect v-model="form.name" placeholder="古雲轩">
           <ElOption
             v-for="({ label, value }) in names"
             :key="value"
@@ -137,7 +55,7 @@ function onClose() {
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="颜色" w-50>
-        <ElSelect v-model="formInline.color" placeholder="红">
+        <ElSelect v-model="form.color" placeholder="红">
           <ElOption
             v-for="({ label, value }) in colors"
             :key="value"
@@ -147,7 +65,7 @@ function onClose() {
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="尺码" w-50>
-        <ElSelect v-model="formInline.size" placeholder="35">
+        <ElSelect v-model="form.size" placeholder="35">
           <ElOption
             v-for="({ label, value }) in sizes"
             :key="value"
@@ -157,7 +75,7 @@ function onClose() {
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="位置" w-50>
-        <ElSelect v-model="formInline.area" placeholder="A">
+        <ElSelect v-model="form.area" placeholder="A">
           <ElOption
             v-for="({ label, value }) in areas"
             :key="value"
@@ -167,10 +85,10 @@ function onClose() {
         </ElSelect>
       </ElFormItem>
       <ElFormItem label="货号" w-50>
-        <ElInput v-model="formInline.id" placeholder="001" />
+        <ElInput v-model="form.id" placeholder="001" />
       </ElFormItem>
       <ElFormItem ml-auto class="!mr-0">
-        <ElButton type="primary" @click="onSubmit">
+        <ElButton type="primary" @click="_onQuery">
           查询
         </ElButton>
         <ElButton type="primary" @click="onShow('新增')">
@@ -191,7 +109,7 @@ function onClose() {
             <p m="t-0 b-2">
               价格: {{ props.row.price }}
             </p>
-            <h3>数量</h3>
+            <h3>数量: {{ props.row.children.length * props.row.children[0].sizes.length }}</h3>
             <ElTable :data="props.row.children" :border="true">
               <ElTableColumn label="颜色">
                 <template #default="scope">
@@ -227,6 +145,11 @@ function onClose() {
       <ElTableColumn label="货号" prop="id" />
       <ElTableColumn label="厂商" prop="name" />
       <ElTableColumn label="价格" prop="price" />
+      <ElTableColumn label="数量">
+        <template #default="scope">
+          {{ scope.row.children.length * scope.row.children[0].sizes.length }}
+        </template>
+      </ElTableColumn>
       <ElTableColumn label="位置" prop="area" />
       <ElTableColumn label="时间">
         <template #default="scope">
@@ -235,7 +158,7 @@ function onClose() {
       </ElTableColumn>
       <ElTableColumn label="操作">
         <template #default="scope">
-          <ElButton size="small" @click="onEdit(scope.$index, scope.row)">
+          <ElButton size="small" @click="_onEdit(scope.$index, scope.row)">
             编辑
           </ElButton>
           <ElButton
@@ -248,6 +171,6 @@ function onClose() {
         </template>
       </ElTableColumn>
     </ElTable>
-    <StockAdd v-model="visible" :title="title" :names="names" :on-close="onClose" />
+    <StockAdd v-model="visible" :title="title" :names="names" :on-close="onClose" @onSubmit="onSubmit" />
   </div>
 </template>

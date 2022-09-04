@@ -9,7 +9,7 @@ export default function useShoe() {
       }
     })
 
-    return tree.sort()
+    return Array.from(new Set(tree)).sort().filter((v) => v && v !== '--')
   }
 
   const getTreeStock = (data: MOCK.STOCk) => {
