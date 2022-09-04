@@ -1,4 +1,5 @@
 import type { Ref } from 'vue'
+import { downloadFile } from '@/utils'
 import useShoe from '/src/todos/common/use-shoe'
 type FormKey = 'id' | 'name' | 'color' | 'area' | 'size'
 
@@ -39,6 +40,10 @@ export default function useForm(g_stock: Ref<MOCK.STOCk>, stock: Ref<MOCK.STOCk>
     isQuery.value = true
   }
 
+  function onSave(filename = 'shoe') {
+    downloadFile(g_stock.value, `${filename}.json`)
+  }
+
   return {
     form,
     isQuery,
@@ -48,5 +53,6 @@ export default function useForm(g_stock: Ref<MOCK.STOCk>, stock: Ref<MOCK.STOCk>
     sizes,
     initSelect,
     onQuery,
+    onSave,
   }
 }

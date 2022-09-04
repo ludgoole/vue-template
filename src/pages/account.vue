@@ -7,14 +7,15 @@ meta:
 import moment from 'moment'
 import { useGlobalStore } from '@/stores/global'
 import useAdd from '@/todos/stock/use-add'
+import useForm from '@/todos/stock/use-form'
 import useTable from '@/todos/account/use-table'
 
 const { g_account, g_stock } = toRefs(useGlobalStore())
 const account = ref<MOCK.STOCk>([])
 const { visible, title, onShow, onClose } = useAdd(g_account)
 const { tableData, currIndex, onEdit, onDelete, refresh } = useTable(g_account, onShow)
+const { isQuery, onSave } = useForm(g_account, account, refresh)
 
-const isQuery = ref(false)
 const date = ref(new Date())
 
 const totalPrice = computed(() => {
@@ -76,6 +77,9 @@ function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, price: string) {
       />
       <ElButton ml-4 type="primary" @click="onShow('新增')">
         添加
+      </ElButton>
+      <ElButton type="primary" @click="onSave('account')">
+        保存
       </ElButton>
     </div>
     <ElTable :data="tableData" :border="true">

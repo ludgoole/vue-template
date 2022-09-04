@@ -14,7 +14,7 @@ const { g_stock } = toRefs(useGlobalStore())
 const stock = ref<MOCK.STOCk>([])
 const { visible, title, onShow, onClose, onSubmit } = useAdd(g_stock)
 const { tableData, onEdit, onDelete, refresh } = useTable(g_stock, onShow)
-const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery } = useForm(g_stock, stock, refresh)
+const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery, onSave } = useForm(g_stock, stock, refresh)
 
 // init
 watchEffect(() => {
@@ -85,6 +85,9 @@ function init(data: MOCK.STOCk) {
         </ElButton>
         <ElButton type="primary" @click="onShow('新增')">
           添加
+        </ElButton>
+        <ElButton type="primary" @click="onSave('stock')">
+          保存
         </ElButton>
       </ElFormItem>
     </ElForm>
