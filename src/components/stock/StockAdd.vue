@@ -62,7 +62,6 @@ async function onSubmit(formEl: FormInstance | undefined) {
       props.onClose()
       ElMessage.success('提交成功')
     }
-
     else {
       console.log('error submit!', fields)
     }

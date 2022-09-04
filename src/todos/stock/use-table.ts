@@ -1,16 +1,15 @@
+import type { Ref } from 'vue'
 import type { Emitter } from 'mitt'
-import { useGlobalStore } from '@/stores/global'
 import useShoe from '/src/todos/common/use-shoe'
 
-export default function useTable() {
-  const { g_stock } = toRefs(useGlobalStore())
+export default function useTable(g_stock: Ref<MOCK.STOCk>, onShow: (title: string) => void) {
   const { getTreeStock } = useShoe()
 
   const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
   const tableData = ref<MOCK.STOCK_TREE>([])
 
   // method
-  function onEdit(index: number, row: MOCK.STOCK_TREE_ITEM, onShow: (title: string) => void) {
+  function onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
     onShow('编辑')
 
     console.log(index, row)

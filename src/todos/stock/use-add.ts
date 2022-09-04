@@ -1,7 +1,5 @@
-import { useGlobalStore } from '@/stores/global'
-
-export default function useAdd() {
-  const { g_stock } = toRefs(useGlobalStore())
+import type { Ref } from 'vue'
+export default function useAdd(g_stock: Ref<MOCK.STOCk>) {
   const visible = ref(false)
   const title = ref('添加')
 

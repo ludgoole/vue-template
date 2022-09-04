@@ -10,11 +10,11 @@ import useForm from '@/todos/stock/use-form'
 import useTable from '@/todos/stock/use-table'
 import useAdd from '@/todos/stock/use-add'
 
-const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery } = useForm()
-const { tableData, onEdit, onDelete, refresh } = useTable()
-const { visible, title, onShow, onClose, onSubmit } = useAdd()
 const { g_stock } = toRefs(useGlobalStore())
 const stock = ref<MOCK.STOCk>([])
+const { visible, title, onShow, onClose, onSubmit } = useAdd(g_stock)
+const { tableData, onEdit, onDelete, refresh } = useTable(g_stock, onShow)
+const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery } = useForm(g_stock, stock, refresh)
 
 // init
 watchEffect(() => {
@@ -30,14 +30,6 @@ function init(data: MOCK.STOCk) {
   stock.value = data
   initSelect(stock.value)
   refresh(stock.value)
-}
-
-function _onQuery() {
-  onQuery(stock, refresh)
-}
-
-function _onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
-  onEdit(index, row, onShow)
 }
 </script>
 
@@ -88,7 +80,7 @@ function _onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
         <ElInput v-model="form.id" placeholder="001" />
       </ElFormItem>
       <ElFormItem ml-auto class="!mr-0">
-        <ElButton type="primary" @click="_onQuery">
+        <ElButton type="primary" @click="onQuery">
           查询
         </ElButton>
         <ElButton type="primary" @click="onShow('新增')">
@@ -158,7 +150,7 @@ function _onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
       </ElTableColumn>
       <ElTableColumn label="操作">
         <template #default="scope">
-          <ElButton size="small" @click="_onEdit(scope.$index, scope.row)">
+          <ElButton size="small" @click="onEdit(scope.$index, scope.row)">
             编辑
           </ElButton>
           <ElButton

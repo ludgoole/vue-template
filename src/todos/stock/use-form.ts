@@ -1,11 +1,9 @@
 import type { Ref } from 'vue'
 import useShoe from '/src/todos/common/use-shoe'
-import { useGlobalStore } from '@/stores/global'
 type FormKey = 'id' | 'name' | 'color' | 'area' | 'size'
 
-export default function useForm() {
+export default function useForm(g_stock: Ref<MOCK.STOCk>, stock: Ref<MOCK.STOCk>, refresh: (data: MOCK.STOCk) => void) {
   const { uniqueBy } = useShoe()
-  const { g_stock } = toRefs(useGlobalStore())
   const form = reactive<Partial<MOCK.STOCk_ITEM>>({
     id: '',
     name: '',
@@ -30,7 +28,7 @@ export default function useForm() {
     sizes.value = all.concat(uniqueBy((stock), 'size').map(mapFn))
   }
 
-  function onQuery(stock: Ref<MOCK.STOCk>, refresh: (data: MOCK.STOCk) => void) {
+  function onQuery() {
     stock.value = g_stock.value
     const keys = Object.keys(form) as FormKey []
 

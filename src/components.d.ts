@@ -29,7 +29,7 @@ declare module '@vue/runtime-core' {
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    StockAdd: typeof import('./components/StockAdd.vue')['default']
+    StockAdd: typeof import('./components/stock/StockAdd.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
   }
 }
