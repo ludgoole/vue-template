@@ -3,7 +3,7 @@ import { useGlobalStore } from '@/stores/global'
 import useShoe from '/src/todos/common/use-shoe'
 
 export default function useTable() {
-  const { g_data } = toRefs(useGlobalStore())
+  const { g_stock } = toRefs(useGlobalStore())
   const { getTreeStock } = useShoe()
 
   const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
@@ -19,7 +19,7 @@ export default function useTable() {
 
   function onDelete(index: number, row: MOCK.STOCk_ITEM) {
     console.log(index, row)
-    g_data.value = g_data.value.filter((item) => item.id !== row.id)
+    g_stock.value = g_stock.value.filter((item) => item.id !== row.id)
   }
 
   function refresh(data: MOCK.STOCk) {

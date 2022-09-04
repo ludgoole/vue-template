@@ -6,7 +6,7 @@ export default function useTemplate() {
     title: string
   }
 
-  const { g_data } = toRefs(useGlobalStore())
+  const { g_stock } = toRefs(useGlobalStore())
   const emitter = inject('emitter') as Emitter<{ 'global.loading': boolean }>
   const props = withDefaults(defineProps<Prop>(), {
     title: '首页',
@@ -20,7 +20,7 @@ export default function useTemplate() {
   emitter.emit('global.loading', false)
 
   return {
-    g_data,
+    g_stock,
     count,
     state,
     props,

@@ -5,7 +5,7 @@ type FormKey = 'id' | 'name' | 'color' | 'area' | 'size'
 
 export default function useForm() {
   const { uniqueBy } = useShoe()
-  const { g_data } = toRefs(useGlobalStore())
+  const { g_stock } = toRefs(useGlobalStore())
   const form = reactive<Partial<MOCK.STOCk_ITEM>>({
     id: '',
     name: '',
@@ -31,7 +31,7 @@ export default function useForm() {
   }
 
   function onQuery(stock: Ref<MOCK.STOCk>, refresh: (data: MOCK.STOCk) => void) {
-    stock.value = g_data.value
+    stock.value = g_stock.value
     const keys = Object.keys(form) as FormKey []
 
     keys.forEach((key) => {

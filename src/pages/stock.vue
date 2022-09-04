@@ -13,7 +13,7 @@ import useAdd from '@/todos/stock/use-add'
 const { form, isQuery, names, colors, areas, sizes, initSelect, onQuery } = useForm()
 const { tableData, onEdit, onDelete, refresh } = useTable()
 const { visible, title, onShow, onClose, onSubmit } = useAdd()
-const { g_data } = toRefs(useGlobalStore())
+const { g_stock } = toRefs(useGlobalStore())
 const stock = ref<MOCK.STOCk>([])
 
 // init
@@ -22,7 +22,7 @@ watchEffect(() => {
     isQuery.value = false
 
   else
-    init(g_data.value)
+    init(g_stock.value)
 })
 
 // method
@@ -124,7 +124,7 @@ function _onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
                       'bg-blue': scope.row.color === '蓝',
                       'bg-purple': scope.row.color === '紫',
                       'bg-black': scope.row.color === '黑',
-                      'bg-white': scope.row.color === '白',
+                      'bg-gray-2': scope.row.color === '白',
                       'bg-gray': scope.row.color === '灰',
                     }"
                     i-mdi:shoe-sneaker
