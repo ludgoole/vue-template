@@ -1,12 +1,12 @@
 import type { Emitter } from 'mitt'
-import { useGlobalStore } from '@/stores/global'
+import { useHeaderStore } from '@/stores/header'
 
 export default function useTemplate() {
   interface Prop {
     title: string
   }
 
-  const { g_data } = toRefs(useGlobalStore())
+  const { title } = toRefs(useHeaderStore())
   const emitter = inject('emitter') as Emitter<{ 'global.loading': boolean }>
   const props = withDefaults(defineProps<Prop>(), {
     title: '首页',
@@ -20,7 +20,7 @@ export default function useTemplate() {
   emitter.emit('global.loading', false)
 
   return {
-    g_data,
+    title,
     count,
     state,
     props,
