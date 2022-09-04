@@ -163,6 +163,6 @@ function init(data: MOCK.STOCk) {
         </template>
       </ElTableColumn>
     </ElTable>
-    <StockAdd v-model="visible" :title="title" :names="names" :on-close="onClose" @onSubmit="onSubmit" />
+    <StockAdd v-model="visible" :title="title" :names="names" :on-close="onClose" @on-submit="onSubmit" />
   </div>
 </template>

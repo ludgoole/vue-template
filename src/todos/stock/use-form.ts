@@ -29,11 +29,10 @@ export default function useForm(g_stock: Ref<MOCK.STOCk>, stock: Ref<MOCK.STOCk>
   }
 
   function onQuery() {
-    stock.value = g_stock.value
     const keys = Object.keys(form) as FormKey []
 
     keys.forEach((key) => {
-      form[key] && (stock.value = stock.value.filter((item) => item[key] === form[key]))
+      form[key] && (stock.value = g_stock.value.filter((item) => item[key] === form[key]))
     })
 
     refresh(stock.value)

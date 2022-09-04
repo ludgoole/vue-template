@@ -1,88 +1,76 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { ElMessage } from 'element-plus'
 import type { Emitter } from 'mitt'
+import { ElMessage } from 'element-plus'
+import { useGlobalStore } from '@/stores/global'
+import useShoe from '/src/todos/common/use-shoe'
 
-type Form = Partial<MOCK.STOCk_BASE_ITEM> & {
-  colors: string[]
-  sizes: string[]
-}
+type Form = Partial<MOCK.STOCk_ITEM>
 interface Prop {
-  names: MOCK.STOCK_SELECT
   onClose: () => void
 }
 
 const props = defineProps<Prop>()
 const emit = defineEmits(['on-submit'])
-const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
+const { uniqueBy, pickBy } = useShoe()
+const { g_stock } = toRefs(useGlobalStore())
+const emitter = inject('emitter') as Emitter<{ 'onEdit': (MOCK.STOCK_TREE_ITEM & MOCK.STOCk_ITEM) }>
 const ruleFormRef = ref<FormInstance>()
 
 const form = reactive<Form>({
   id: '',
   price: '',
-  name: '',
-  colors: [],
-  sizes: [],
-  area: '',
+  color: '',
+  size: '',
 })
 const rules = reactive<FormRules>({
   id: [{ required: true, message: '请输入货号', trigger: 'blur' }],
   price: [{ required: true, message: '请输入价格', trigger: 'blur' }],
-  name: [{ required: true, message: '请选择厂商', trigger: 'blur' }],
-  colors: [{ required: true, message: '请选择颜色', trigger: 'blur' }],
-  sizes: [{ required: true, message: '请选择尺码', trigger: 'blur' }],
-  area: [{ required: true, message: '请选择位置', trigger: 'blur' }],
+  color: [{ required: true, message: '请选择颜色', trigger: 'blur' }],
+  size: [{ required: true, message: '请选择尺码', trigger: 'blur' }],
 })
 const mapFn = (name: string) => ({ value: name, label: name })
-const names = computed(() => toRefs(props).names.value.filter((name) => name.value))
+const ids = ref(['001', '002', '110', '111'].map(mapFn))
 const colors = ref(['红', '粉', '橙', '黄', '绿', '青', '蓝', '紫', '黑', '白', '灰'].map(mapFn))
 const sizes = ref(['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'].map(mapFn))
-const areas = ref(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(mapFn))
 
 // init
 emitter.on('onEdit', (row) => {
   form.id = row.id
   form.price = row.price
-  form.name = row.name
-  form.colors = row.children.map((child) => child.color)
-  form.sizes = row.children.reduce((a: string[], child) => [...new Set(a.concat(child.sizes))].sort(), [])
-  form.area = row.area
+  form.color = row.color
+  form.size = row.size
+})
+
+watchEffect(() => {
+  const mapFn = (name: string | number | undefined) => ({ value: `${name}`, label: `${name}` })
+  ids.value = uniqueBy((g_stock.value), 'id').map(mapFn)
+  form.price = g_stock.value.find((item) => item.id === form.id)?.price || ''
+  colors.value = pickBy((g_stock.value.filter((item) => item.id === form.id)), 'color').map((v) => v.color).map(mapFn)
+  sizes.value = pickBy(
+    (g_stock.value.filter((item) => item.id === form.id).filter((item) => item.color === form.color)),
+    'size',
+  ).map((v) => v.size).map(mapFn)
 })
 
 // method
 async function onSubmit(formEl: FormInstance | undefined) {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
-    if (valid) {
-      emit('on-submit', getAddData(), form.id)
+    const { id, color, size } = form
+    const adddata = g_stock.value.find((item) => [item.id, item.color, item.size].join() === [id, color, size].join())
+    if (valid && adddata) {
+      const addIndex = g_stock.value.findIndex((item) => [item.id, item.color, item.size].join() === [id, color, size].join())
+      emit('on-submit', adddata, addIndex, form.price)
       formEl.resetFields()
       props.onClose()
       ElMessage.success('提交成功')
     }
     else {
-      console.log('error submit!', fields)
+      console.log('提交失败', fields)
+      ElMessage.error('提交失败')
     }
   })
-
-  function getAddData() {
-    const addData: MOCK.STOCk = []
-    const { colors, sizes, id = '', price = '', name = '', area = '' } = form
-    colors.forEach((color) => {
-      sizes.forEach((size) => {
-        addData.push({
-          id,
-          price: price || '--',
-          name: name || '--',
-          area: area || '--',
-          color,
-          size,
-          time: Date.now(),
-        })
-      })
-    })
-
-    return addData
-  }
 }
 
 function onBeforeClose(formEl: FormInstance | undefined, done: () => void) {
@@ -103,33 +91,29 @@ function onCancel(formEl: FormInstance | undefined) {
     <ElDialog v-bind="$attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
       <ElForm ref="ruleFormRef" :model="form" :rules="rules">
         <ElFormItem label="货号" prop="id">
-          <ElInput v-model="form.id" placeholder="001" />
-        </ElFormItem>
-        <ElFormItem label="价格" prop="price">
-          <ElInput v-model="form.price" placeholder="55" />
-        </ElFormItem>
-        <ElFormItem label="厂商" prop="name">
           <ElSelect
-            v-model="form.name"
+            v-model="form.id"
             filterable
             allow-create
-            placeholder="古雲轩"
+            placeholder="001"
           >
             <ElOption
-              v-for="({ label, value }) in names"
+              v-for="({ label, value }) in ids"
               :key="value"
               :label="label"
               :value="value"
             />
           </ElSelect>
         </ElFormItem>
-        <ElFormItem label="颜色" prop="colors">
+        <ElFormItem label="价格" prop="price">
+          <ElInput v-model="form.price" placeholder="55" />
+        </ElFormItem>
+        <ElFormItem label="颜色" prop="color">
           <ElSelect
-            v-model="form.colors"
-            multiple
+            v-model="form.color"
             filterable
             allow-create
-            placeholder="红 粉"
+            placeholder="红"
           >
             <ElOption
               v-for="({ label, value }) in colors"
@@ -139,31 +123,15 @@ function onCancel(formEl: FormInstance | undefined) {
             />
           </ElSelect>
         </ElFormItem>
-        <ElFormItem label="尺码" prop="sizes">
+        <ElFormItem label="尺码" prop="size">
           <ElSelect
-            v-model="form.sizes"
-            multiple
+            v-model="form.size"
             filterable
             allow-create
-            placeholder="35 36 37"
+            placeholder="35"
           >
             <ElOption
               v-for="({ label, value }) in sizes"
-              :key="value"
-              :label="label"
-              :value="value"
-            />
-          </ElSelect>
-        </ElFormItem>
-        <ElFormItem label="位置" prop="area">
-          <ElSelect
-            v-model="form.area"
-            filterable
-            allow-create
-            placeholder="A"
-          >
-            <ElOption
-              v-for="({ label, value }) in areas"
               :key="value"
               :label="label"
               :value="value"

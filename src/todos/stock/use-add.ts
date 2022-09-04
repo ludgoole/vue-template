@@ -13,10 +13,10 @@ export default function useAdd(g_stock: Ref<MOCK.STOCk>) {
     visible.value = false
   }
 
-  function onSubmit(data: MOCK.STOCk, editId: string) {
+  function onSubmit(data: MOCK.STOCk, id: string) {
     if (title.value === '编辑') {
-      const index = g_stock.value.findIndex((item) => item.id === editId)
-      const len = g_stock.value.filter((item) => item.id === editId).length
+      const index = g_stock.value.findIndex((item) => item.id === id)
+      const len = g_stock.value.filter((item) => item.id === id).length
       g_stock.value.splice(index, len, ...data)
     }
     else {

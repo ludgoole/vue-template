@@ -1,15 +1,22 @@
 export default function useShoe() {
-  const uniqueBy = (flat: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
+  const pickBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
     const s = new Set()
-    const tree: (string | number | undefined)[] = []
-    flat.forEach((item) => {
+    const flat: MOCK.STOCk = []
+    data.forEach((item) => {
       if (!s.has(item[key])) {
         s.add(item[key])
-        tree.push(item[key] || '')
+        flat.push(item)
       }
     })
 
-    return Array.from(new Set(tree)).sort().filter((v) => v && v !== '--')
+    console.log('🚀 ~ file: use-shoe.ts ~ line 9 ~ data.forEach ~ flat', flat)
+    return flat
+  }
+
+  const uniqueBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
+    const flat = pickBy(data, key)
+
+    return Array.from(new Set(flat.map((v) => v[key]))).sort().filter((v) => v && v !== '--')
   }
 
   const getTreeStock = (data: MOCK.STOCk) => {
@@ -56,6 +63,7 @@ export default function useShoe() {
   }
 
   return {
+    pickBy,
     uniqueBy,
     getTreeStock,
   }
