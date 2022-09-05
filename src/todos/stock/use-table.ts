@@ -12,12 +12,10 @@ export default function useTable(g_stock: Ref<MOCK.STOCk>, onShow: (title: strin
   function onEdit(index: number, row: MOCK.STOCK_TREE_ITEM) {
     onShow('编辑')
 
-    console.log(index, row)
     emitter.emit('onEdit', row)
   }
 
   function onDelete(index: number, row: MOCK.STOCk_ITEM) {
-    console.log(index, row)
     g_stock.value = g_stock.value.filter((item) => item.id !== row.id)
   }
 

@@ -41,7 +41,6 @@ function onChange(data: Event) {
   isQuery.value = true
   account.value = g_account.value.filter((item) => moment(item.time).format('YYYYMMDD') === moment(data as any as string).format('YYYYMMDD'))
   refresh(account.value)
-  console.log('🚀 ~ file: account.vue ~ line 41 ~ onChange ~ data', account.value, tableData)
 }
 
 function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, price: string) {
@@ -122,7 +121,7 @@ function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, price: string) {
           <ElButton
             size="small"
             type="danger"
-            @click="onDelete(scope.$index, scope.row)"
+            @click="onDelete(scope.$index)"
           >
             删除
           </ElButton>

@@ -9,7 +9,6 @@ export default function useShoe() {
       }
     })
 
-    console.log('🚀 ~ file: use-shoe.ts ~ line 9 ~ data.forEach ~ flat', flat)
     return flat
   }
 
@@ -58,7 +57,6 @@ export default function useShoe() {
       }
     })
 
-    console.log('🚀 ~ file: use-shoe.ts ~ line 37 ~ getTreeStock ~ treeStock', treeStock)
     return treeStock
   }
 
