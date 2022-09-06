@@ -23,7 +23,6 @@ declare module '@vue/runtime-core' {
     ElRadio: typeof import('element-plus/es')['ElRadio']
     ElRadioGroup: typeof import('element-plus/es')['ElRadioGroup']
     ElSelect: typeof import('element-plus/es')['ElSelect']
-    ElSelectV2: typeof import('element-plus/es')['ElSelectV2']
     ElSwitch: typeof import('element-plus/es')['ElSwitch']
     ElTable: typeof import('element-plus/es')['ElTable']
     ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
@@ -31,6 +30,8 @@ declare module '@vue/runtime-core' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     StockAdd: typeof import('./components/stock/StockAdd.vue')['default']
+    TheBar: typeof import('./components/TheBar.vue')['default']
     TheHeader: typeof import('./components/TheHeader.vue')['default']
+    ThePie: typeof import('./components/ThePie.vue')['default']
   }
 }

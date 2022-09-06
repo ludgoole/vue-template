@@ -31,7 +31,6 @@ function onSelect(path: string) {
     <ElMenuItem pointer-events-none index="0">
       <i text-2xl i-mdi:shoe-ballet></i>
       <p>老北京布鞋</p>
-      {{ activeIndex }}
     </ElMenuItem>
 
     <!-- <div flex-grow></div> -->

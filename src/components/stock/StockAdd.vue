@@ -40,6 +40,7 @@ const sizes = ref(['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '
 const areas = ref(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].map(mapFn))
 
 // init
+emitter.off('onEdit')
 emitter.on('onEdit', (row) => {
   form.id = row.id
   form.price = row.price
@@ -55,7 +56,8 @@ async function onSubmit(formEl: FormInstance | undefined) {
   await formEl.validate((valid, fields) => {
     if (valid) {
       emit('on-submit', getAddData(), form.id)
-      formEl.resetFields()
+      // formEl.resetFields()
+      resetFields()
       props.onClose()
       ElMessage.success('提交成功')
     }
@@ -87,14 +89,25 @@ async function onSubmit(formEl: FormInstance | undefined) {
 
 function onBeforeClose(formEl: FormInstance | undefined, done: () => void) {
   if (!formEl) return
-  formEl.resetFields()
+  // formEl.resetFields()
+  resetFields()
   done()
 }
 
 function onCancel(formEl: FormInstance | undefined) {
   if (!formEl) return
-  formEl.resetFields()
+  // formEl.resetFields()
+  resetFields()
   props.onClose()
+}
+
+function resetFields() {
+  form.id = ''
+  form.price = ''
+  form.name = ''
+  form.colors = []
+  form.sizes = []
+  form.area = ''
 }
 </script>
 

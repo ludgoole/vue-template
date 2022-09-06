@@ -20,7 +20,7 @@ export default function useAdd(g_stock: Ref<MOCK.STOCk>) {
       g_stock.value.splice(index, len, ...data)
     }
     else {
-      g_stock.value.push(...data)
+      g_stock.value = g_stock.value.concat(data)
     }
   }
 

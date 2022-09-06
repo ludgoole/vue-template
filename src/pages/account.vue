@@ -13,7 +13,7 @@ import useTable from '@/todos/account/use-table'
 const { g_account, g_stock } = toRefs(useGlobalStore())
 const account = ref<MOCK.STOCk>([])
 const { visible, title, onShow, onClose } = useAdd(g_account)
-const { tableData, currIndex, onEdit, onDelete, refresh } = useTable(g_account, onShow)
+const { tableData, currIndex, onEdit, onDelete, refresh } = useTable(g_account, g_stock, onShow)
 const { isQuery, onSave } = useForm(g_account, account, refresh)
 
 const date = ref(new Date())
@@ -43,16 +43,18 @@ function onChange(data: Event) {
   refresh(account.value)
 }
 
-function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, price: string) {
+function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, form: MOCK.STOCk_ITEM) {
   if (title.value === '编辑') {
     const index = g_account.value.findIndex((item, index) => index === currIndex.value)
     g_account.value.splice(index, 1, data)
   }
   else if (title.value === '新增' && data) {
     g_stock.value = g_stock.value.filter((item, index) => index !== addIndex)
-    g_account.value.push({
+    g_account.value = g_account.value.concat({
       ...data,
-      price,
+      price: form.price,
+      note: form.note,
+      time: Date.now(),
     })
   }
 }
@@ -113,6 +115,7 @@ function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, price: string) {
           {{ moment(scope.row.time).format('YYYY-MM-DD') }}
         </template>
       </ElTableColumn>
+      <ElTableColumn label="备注" prop="note" />
       <ElTableColumn label="操作">
         <template #default="scope">
           <ElButton size="small" @click="onEdit(scope.$index, scope.row)">

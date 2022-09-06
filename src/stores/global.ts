@@ -1,4 +1,3 @@
-import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('global-store', () => {
@@ -9,4 +8,10 @@ export const useGlobalStore = defineStore('global-store', () => {
     g_stock,
     g_account,
   }
+},
+{
+  persistedState: {
+    // persist: true,
+    // store options goes here
+  },
 })

@@ -22,6 +22,7 @@ const form = reactive<Form>({
   price: '',
   color: '',
   size: '',
+  note: '',
 })
 const rules = reactive<FormRules>({
   id: [{ required: true, message: '请输入货号', trigger: 'blur' }],
@@ -35,11 +36,13 @@ const colors = ref(['红', '粉', '橙', '黄', '绿', '青', '蓝', '紫', '黑
 const sizes = ref(['33', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45'].map(mapFn))
 
 // init
+emitter.off('onEdit')
 emitter.on('onEdit', (row) => {
   form.id = row.id
   form.price = row.price
   form.color = row.color
   form.size = row.size
+  form.note = row.note
 })
 
 watchEffect(() => {
@@ -61,8 +64,9 @@ async function onSubmit(formEl: FormInstance | undefined) {
     const adddata = g_stock.value.find((item) => [item.id, item.color, item.size].join() === [id, color, size].join())
     if (valid && adddata) {
       const addIndex = g_stock.value.findIndex((item) => [item.id, item.color, item.size].join() === [id, color, size].join())
-      emit('on-submit', adddata, addIndex, form.price)
-      formEl.resetFields()
+      emit('on-submit', adddata, addIndex, form)
+      // formEl.resetFields()
+      resetFields()
       props.onClose()
       ElMessage.success('提交成功')
     }
@@ -75,21 +79,31 @@ async function onSubmit(formEl: FormInstance | undefined) {
 
 function onBeforeClose(formEl: FormInstance | undefined, done: () => void) {
   if (!formEl) return
-  formEl.resetFields()
+  // formEl.resetFields()
+  resetFields()
   done()
 }
 
 function onCancel(formEl: FormInstance | undefined) {
   if (!formEl) return
-  formEl.resetFields()
+  // formEl.resetFields()
+  resetFields()
   props.onClose()
+}
+
+function resetFields() {
+  form.id = ''
+  form.price = ''
+  form.color = ''
+  form.size = ''
+  form.note = ''
 }
 </script>
 
 <template>
   <div class="StockAdd">
     <ElDialog v-bind="$attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
-      <ElForm ref="ruleFormRef" :model="form" :rules="rules">
+      <ElForm ref="ruleFormRef" :model="form" :rules="rules" :label-width="52">
         <ElFormItem label="货号" prop="id">
           <ElSelect
             v-model="form.id"
@@ -137,6 +151,14 @@ function onCancel(formEl: FormInstance | undefined) {
               :value="value"
             />
           </ElSelect>
+        </ElFormItem>
+        <ElFormItem label="备注" prop="note">
+          <ElInput
+            v-model="form.note"
+            type="textarea"
+            :rows="2"
+            placeholder="未付款"
+          />
         </ElFormItem>
         <ElFormItem class="!mb-0">
           <div flex="~ 1" justify-end>

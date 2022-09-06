@@ -4,8 +4,8 @@ declare namespace MOCK {
     area: string
     name: string
     price: string
-    desc?: string
-    time?: number
+    time: number
+    note?: string
   }
   interface STOCk_SUB_ITEM {
     color: string

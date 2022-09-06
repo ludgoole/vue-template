@@ -1,5 +1,5 @@
 export default function useShoe() {
-  const pickBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
+  const pickBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM): MOCK.STOCk => {
     const s = new Set()
     const flat: MOCK.STOCk = []
     data.forEach((item) => {
@@ -12,10 +12,23 @@ export default function useShoe() {
     return flat
   }
 
-  const uniqueBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM) => {
+  const uniqueBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM): (string | number | undefined)[] => {
     const flat = pickBy(data, key)
 
     return Array.from(new Set(flat.map((v) => v[key]))).sort().filter((v) => v && v !== '--')
+  }
+
+  const countBy = (data: MOCK.STOCk, key: keyof MOCK.STOCk_ITEM): [string, number][] => {
+    const m = new Map()
+    data.map((item) => item[key]).forEach((val) => {
+      if (m.has(val))
+        m.set(val, m.get(val) + 1)
+
+      else
+        m.set(val, 1)
+    })
+
+    return [...m].sort((a, b) => a[0] - b[0])
   }
 
   const getTreeStock = (data: MOCK.STOCk) => {
@@ -37,14 +50,14 @@ export default function useShoe() {
         }
       }
       else {
-        const { id, area, name, desc, price, time, color, size } = item
+        const { id, area, name, note, price, time, color, size } = item
         treeStockIDs.add(item.id)
         treeStockColors.add(`${item.id}_${item.color}`)
         treeStock.push({
           id,
           area,
           name,
-          desc,
+          note,
           price,
           time,
           children: [
@@ -63,6 +76,7 @@ export default function useShoe() {
   return {
     pickBy,
     uniqueBy,
+    countBy,
     getTreeStock,
   }
 }
