@@ -40,7 +40,6 @@ watchEffect(() => {
   colors.value = countBy(account.value, 'color')
   sizes.value = countBy(account.value, 'size')
   prices.value = countBy(account.value, 'price')
-  console.log('🚀 ~ file: index.vue ~ line 18 ~ colors', names, colors.value, sizes, prices)
 })
 
 // method

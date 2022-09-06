@@ -13,9 +13,7 @@ export const store: Plugin = (app) => {
           return await localforage.getItem(key)
         },
         setItem: async (key, value) => {
-          return await localforage.setItem(key, value).then((val) => {
-            console.log('setItem', val); return val
-          })
+          return await localforage.setItem(key, value)
         },
         removeItem: async (key) => {
           return await localforage.removeItem(key)
