@@ -14,9 +14,9 @@ export const menus = [
     path: '/account',
     icon: 'i-mdi:account',
   },
-  {
-    name: '我的',
-    path: '/mine',
-    icon: 'i-mdi:person',
-  },
+  // {
+  //   name: '我的',
+  //   path: '/mine',
+  //   icon: 'i-mdi:person',
+  // },
 ]
