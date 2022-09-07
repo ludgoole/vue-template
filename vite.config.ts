@@ -36,6 +36,7 @@ export default ({ mode }: ConfigEnv) => defineConfig({
       // mock里面的文件 =>dist/mock文件夹
       { from: 'mock', to: 'dist/mock' },
       { from: 'server.js', to: 'dist/app.js' },
+      { from: 'start.bat', to: 'dist/start.bat' },
     ]),
     vue(),
     pages(),

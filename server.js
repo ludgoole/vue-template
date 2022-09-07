@@ -1,6 +1,8 @@
 const http = require('http')
 const fs = require('fs')
 const url = require('url')
+const cp = require('child_process')
+const port = 80
 
 const server = http.createServer((req, res) => {
   const { pathname } = url.parse(req.url, true)
@@ -36,4 +38,7 @@ const server = http.createServer((req, res) => {
     }
   })
 })
-server.listen(8000, () => console.log('port 8000 is on'))
+server.listen(port, () => console.log(`port ${port} is on`))
+
+// 自动打开默认浏览器
+cp.exec(`start http://localhost:${port}/#/`)
