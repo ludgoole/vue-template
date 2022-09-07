@@ -7,6 +7,7 @@ export const store: Plugin = (app) => {
   const pinia = createPinia()
   pinia.use(
     createPersistedStatePlugin({
+      persist: false,
       storage: {
         getItem: async (key) => {
           return await localforage.getItem(key)

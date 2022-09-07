@@ -7,4 +7,9 @@ export const useHeaderStore = defineStore('header-store', () => {
   return {
     title,
   }
+}, {
+  persistedState: {
+    persist: true,
+    storage: sessionStorage,
+  },
 })
