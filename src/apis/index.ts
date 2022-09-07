@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 import { ElLoading, ElMessage } from 'element-plus'
-const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
+const baseURL = import.meta.env.VITE_APP_BASE_URL
 let loadingInstance: LoadingInstance
 
 /**
