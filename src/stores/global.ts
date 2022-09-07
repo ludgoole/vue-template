@@ -11,7 +11,7 @@ export const useGlobalStore = defineStore('global-store', () => {
 },
 {
   persistedState: {
-    // persist: true,
-    // store options goes here
+    persist: true,
+    storage: localStorage,
   },
 })
