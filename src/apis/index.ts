@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant'
-const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
+onst baseURL = import.meta.env.VITE_APP_BASE_URL
 
 /**
   * 创建axios实例
