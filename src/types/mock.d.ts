@@ -29,7 +29,34 @@ declare namespace MOCK {
     },
   }
 
+  interface HOOK {
+    id: number,
+    name: string,
+    tags: string[]
+  }
+  interface PILE {
+    id: number,
+    name: string,
+    keyword: string,
+    hooks: HOOK[]
+  }
+
+  interface IMAGE {
+    id: number,
+    name: string,
+    path: string,
+    piles: PILE[]
+  }
+
+  interface ZHI_NANG_ITEM {
+    book: string,
+      poem: string,
+      words: string,
+      images: IMAGE[]
+  }
+
   type ZHOUYI = GUA []
+  type ZHI_NANG = ZHI_NANG_ITEM []
 }
 
 
