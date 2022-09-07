@@ -36,6 +36,7 @@ const totalPrice = computed(() => {
 
 watchEffect(() => {
   onChange(date.value)
+
   names.value = countBy(account.value, 'name')
   colors.value = countBy(account.value, 'color')
   sizes.value = countBy(account.value, 'size')

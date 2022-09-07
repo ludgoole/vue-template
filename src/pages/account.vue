@@ -79,7 +79,7 @@ function onSubmit(data: MOCK.STOCk_ITEM, addIndex: number, form: MOCK.STOCk_ITEM
       <ElButton ml-4 type="primary" @click="onShow('新增')">
         添加
       </ElButton>
-      <ElButton type="primary" @click="onSave('account')">
+      <ElButton type="primary" @click="onSave(g_account, 'account')">
         保存
       </ElButton>
     </div>

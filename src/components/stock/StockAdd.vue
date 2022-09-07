@@ -15,6 +15,7 @@ interface Prop {
 const props = defineProps<Prop>()
 const emit = defineEmits(['on-submit'])
 const emitter = inject('emitter') as Emitter<{ 'onEdit': MOCK.STOCK_TREE_ITEM }>
+const attrs = useAttrs()
 const ruleFormRef = ref<FormInstance>()
 
 const form = reactive<Form>({
@@ -113,7 +114,7 @@ function resetFields() {
 
 <template>
   <div class="StockAdd">
-    <ElDialog v-bind="$attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
+    <ElDialog v-bind="attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
       <ElForm ref="ruleFormRef" :model="form" :rules="rules">
         <ElFormItem label="货号" prop="id">
           <ElInput v-model="form.id" placeholder="001" />

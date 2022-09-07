@@ -40,8 +40,8 @@ export default function useForm(g_stock: Ref<MOCK.STOCk>, stock: Ref<MOCK.STOCk>
     isQuery.value = true
   }
 
-  function onSave(filename = 'shoe') {
-    downloadFile(g_stock.value, `${filename}.json`)
+  function onSave(data: MOCK.STOCk, filename = 'shoe') {
+    downloadFile(data, `${filename}.json`)
   }
 
   return {

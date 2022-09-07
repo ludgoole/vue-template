@@ -86,7 +86,7 @@ function init(data: MOCK.STOCk) {
         <ElButton type="primary" @click="onShow('新增')">
           添加
         </ElButton>
-        <ElButton type="primary" @click="onSave('stock')">
+        <ElButton type="primary" @click="onSave(g_stock, 'stock')">
           保存
         </ElButton>
       </ElFormItem>

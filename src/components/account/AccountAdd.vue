@@ -15,6 +15,7 @@ const emit = defineEmits(['on-submit'])
 const { uniqueBy, pickBy } = useShoe()
 const { g_stock } = toRefs(useGlobalStore())
 const emitter = inject('emitter') as Emitter<{ 'onEdit': (MOCK.STOCK_TREE_ITEM & MOCK.STOCk_ITEM) }>
+const attrs = useAttrs()
 const ruleFormRef = ref<FormInstance>()
 
 const form = reactive<Form>({
@@ -53,7 +54,7 @@ watchEffect(() => {
   sizes.value = pickBy(
     (g_stock.value.filter((item) => item.id === form.id).filter((item) => item.color === form.color)),
     'size',
-  ).map((v) => v.size).map(mapFn)
+  ).map((v) => v.size).sort().map(mapFn)
 })
 
 // method
@@ -102,7 +103,7 @@ function resetFields() {
 
 <template>
   <div class="StockAdd">
-    <ElDialog v-bind="$attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
+    <ElDialog v-bind="attrs" :close-on-click-modal="false" :before-close="(done) => onBeforeClose(ruleFormRef, done)">
       <ElForm ref="ruleFormRef" :model="form" :rules="rules" :label-width="52">
         <ElFormItem label="货号" prop="id">
           <ElSelect
