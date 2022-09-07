@@ -2,8 +2,7 @@ import axios from 'axios'
 
 import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 import { ElLoading, ElMessage } from 'element-plus'
-import type { AXIOS } from '../types/axios'
-const baseURL = import.meta.env.VITE_REQUEST_BASE_URL
+const baseURL = import.meta.env.VITE_APP_BASE_URL
 let loadingInstance: LoadingInstance
 
 /**
@@ -94,8 +93,8 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance
 
-export function post(url: string, data: object, loading = true) {
-  return axiosInstance.request<unknown, AXIOS.TypeRequestApiResult>({
+export function post<T>(url: string, data: object, loading = true) {
+  return axiosInstance.request<unknown, T>({
     method: 'post',
     url,
     data,
