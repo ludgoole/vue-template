@@ -28,14 +28,14 @@ const names = ref<[string, number][]>()
 const colors = ref<[string, number][]>()
 const sizes = ref<[string, number][]>()
 const prices = ref<[string, number][]>()
-const date = ref([new Date(), new Date()])
+const date = ref('')
 
 const totalPrice = computed(() => {
   return account.value.reduce((a, c) => a + Number(c.price), 0)
 })
 
 watchEffect(() => {
-  onChange(date.value)
+  onChange([new Date(), new Date()])
 
   names.value = countBy(account.value, 'name')
   colors.value = countBy(account.value, 'color')
