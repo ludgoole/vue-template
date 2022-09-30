@@ -7,6 +7,8 @@ meta:
 import { getPicture, readFile, writeFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
 import { getTestData } from '@/apis/test'
+import TEST from '@/mock/test'
+console.log('🚀 ~ file: index.vue ~ line 11 ~ TEST', TEST)
 
 const { count } = toRefs(useCounterStore())
 
