@@ -1,3 +1,19 @@
+// !export default []  (默认导出)
+declare module '@/mock/test' {
+  const TEST: MOCK.ZHI_NANG_ITEM
+  export = TEST
+}
+
+// !export const TEST = []  (模块导出)
+// declare module '@/mock/test' {
+//   export const LUNYU: MOCK.ZHOUYI
+// }
+
+// !export default []  (默认导出批量处理)
+// declare module '@/mock/*' {
+
+// }
+
 declare namespace MOCK {
   interface YILI_ITEM {
     situation: string,
@@ -50,9 +66,9 @@ declare namespace MOCK {
 
   interface ZHI_NANG_ITEM {
     book: string,
-      poem: string,
-      words: string,
-      images: IMAGE[]
+    poem: string,
+    words: string,
+    images: IMAGE[]
   }
 
   type ZHOUYI = GUA []
