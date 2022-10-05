@@ -9,6 +9,9 @@ declare module '@/mock/*' {
 }
 
 declare namespace MOCK {
+  interface PINYIN {
+    [key: string]: string
+  }
   interface PILE {
     id: string
     name: string

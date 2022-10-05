@@ -5,8 +5,13 @@ export const menus = [
     icon: 'home-o',
   },
   {
-    name: '我的',
-    path: '/mine',
-    icon: 'user-circle-o',
+    name: '查询',
+    path: '/query',
+    icon: 'search',
+  },
+  {
+    name: '备忘',
+    path: '/note',
+    icon: 'notes-o',
   },
 ]

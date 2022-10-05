@@ -36,14 +36,12 @@ onUnmounted(() => {
 
 // method
 function getMemory() {
-  let memory = {}
-  readFile<STROE.MEMORY>('fs://memory.json').then((res) => {
-    console.log('writeFile', res)
-    memory = res
-  })
-
-  return memory
+  return readFile<STROE.MEMORY>('fs://memory.json')
+    .catch(() => {
+      return {}
+    })
 }
+
 function onClickRight() {
   const notes = piles.map((v) => v.note)
   memory[key] = notes
@@ -63,7 +61,7 @@ function onClickRight() {
     <VanCellGroup>
       <VanCell v-for="pile in piles" :key="pile.id" :title="`${pile.name} ${pile.sentence}`">
         <template #label>
-          <input v-model="pile.note" :placeholder="key" w-full />
+          <input v-model="pile.note" :placeholder="key" clearable w-full />
         </template>
       </VanCell>
     </VanCellGroup>
