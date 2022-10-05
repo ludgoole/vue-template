@@ -1,4 +1,4 @@
-export function readFile(path = 'fs://meihua.json') {
+export function readFile<T>(path = 'fs://meihua.json'): Promise<T> {
   return new Promise((resolve, reject) => {
     try {
       window.api.readFile(
@@ -6,7 +6,7 @@ export function readFile(path = 'fs://meihua.json') {
           path,
         },
         (ret: Util.FileResult, err: any) => {
-          ret.status ? resolve(JSON.parse(ret.data || '[]')) : reject(err)
+          ret.status && ret.data ? resolve(JSON.parse(ret.data)) : reject(err)
         },
       )
     }
@@ -16,7 +16,7 @@ export function readFile(path = 'fs://meihua.json') {
   })
 }
 
-export function writeFile(path = 'fs://meihua.json', data: Object[]) {
+export function writeFile<T>(path = 'fs://meihua.json', data: T) {
   return new Promise((resolve, reject) => {
     try {
       window.api.writeFile(
