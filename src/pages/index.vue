@@ -4,34 +4,33 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { getPicture, readFile, writeFile } from '@/utils'
-import { useCounterStore } from '@/stores/counter'
-import { getTestData } from '@/apis/test'
-import ZHOUYI from '@/mock/zhouyi'
-console.log('🚀 ~ file: index.vue ~ line 11 ~ ZHOUYI', ZHOUYI)
+import ZY from '@/mock/zhouyi'
+import DDJ from '@/mock/daodejing'
+const router = useRouter()
 
-const { count } = toRefs(useCounterStore())
+const zhouyi = ZY as MOCK.BOOK
+const daodejing = DDJ as MOCK.BOOK
+const books = [zhouyi, daodejing]
 
-writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
-  console.log('writeFile', res)
-})
-readFile('fs://test.json').then((res) => {
-  console.log('readFile', res)
-})
-getPicture().then((res) => {
-  console.log('getPicture', res)
-})
-
-getTestData({ id: 1 }).then((data) => {
-  console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data)
-})
+// method
+function onClick(book: MOCK.BOOK) {
+  console.log(book)
+  router.push({
+    path: '/book',
+    query: {
+      book: JSON.stringify(book),
+    },
+  })
+}
 </script>
 
 <template>
   <div class="Home">
-    <p>this is home page</p>
-    <VanButton @click="count++">
-      count is: {{ count }}
-    </VanButton>
+    <VanGrid :border="false" :column-num="3">
+      <VanGridItem v-for="book in books" :key="book.book" @click="onClick(book)">
+        <i class="i-material-symbols:book" text-size-20 color-yellow-5></i>
+        {{ book.book }}
+      </VanGridItem>
+    </VanGrid>
   </div>
 </template>

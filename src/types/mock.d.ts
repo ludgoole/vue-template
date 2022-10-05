@@ -1,7 +1,7 @@
 // !export default ZHOUYI：默认导出
-declare module '@/mock/ZHOUYI' {
-  const ZHOUYI: MOCK.ZHOUYI
-  export = ZHOUYI
+declare module '@/mock/*/index' {
+  // const ZHOUYI: MOCK.BOOK
+  // export = ZHOUYI
 }
 
 declare module '@/mock/*' {
@@ -10,18 +10,19 @@ declare module '@/mock/*' {
 
 declare namespace MOCK {
   interface PILE {
-    id: number
+    id: string
     name: string
     sentence: string
+    note: string
   }
   interface IMAGE {
-    id: number
+    id: string
     name: string
     path: string
     piles: PILE[]
   }
 
-  interface ZHOUYI {
+  interface BOOK {
     book: string
     poem: string
     words: string

@@ -1,6 +1,5 @@
 import book from './book'
 import images from './images'
-import piles from './piles'
 
 export default {
   book: '周易',
@@ -16,14 +15,15 @@ export default {
   `,
   images: images.map((image, i) => {
     return {
-      id: i,
+      id: `周易_${book[i].guaMing}`,
       name: book[i].guaMing,
       path: image,
-      piles: piles[i].map((pile, j) => {
+      piles: Array(10).fill(1).map((v, j) => {
         return {
-          id: j,
-          name: pile,
-          sentence: book[i].yaoCi[j] || '',
+          id: `周易_${book[i].guaMing}_${j}`,
+          name: j + 1,
+          sentence: (book[i].yaoCi[j] || '').slice(3, -1),
+          note: '',
         }
       }),
     }
