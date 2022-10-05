@@ -6,12 +6,15 @@ const { title } = toRefs(useHeaderStore())
 const router = useRouter()
 const route = useRoute()
 const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
-const { leftArrow, rightText } = route.meta as { leftArrow: boolean; rightText: string }
+const leftArrow = ref(false)
+const rightText = ref('')
 
 useHead({ title })
 
 watch(() => route.meta, (meta) => {
   title.value = meta.title as string
+  leftArrow.value = meta.leftArrow as boolean
+  rightText.value = meta.rightText as string
 })
 
 function onClickRight() {

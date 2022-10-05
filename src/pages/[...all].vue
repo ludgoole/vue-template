@@ -18,6 +18,11 @@ const router = useRouter()
 title.value = '404'
 emitter.on('on-click-right', onClickRight)
 
+// destroyed
+onUnmounted(() => {
+  emitter.off('on-click-right', onClickRight)
+})
+
 // method
 function onClickRight() {
   Toast({

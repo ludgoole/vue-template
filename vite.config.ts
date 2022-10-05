@@ -35,9 +35,9 @@ export default ({ mode }: ConfigEnv) => defineConfig({
     CopyPlugin([
       { from: 'config.xml.bak', to: 'dist/config.xml' },
       // mock里面的文件 =>dist/mock文件夹
-      { from: 'mock', to: 'dist/mock' },
-      { from: 'server.js', to: 'dist/app.js' },
-      { from: 'start.bat', to: 'dist/start.bat' },
+      // { from: 'mock', to: 'dist/mock' },
+      // { from: 'server.js', to: 'dist/app.js' },
+      // { from: 'start.bat', to: 'dist/start.bat' },
     ]),
     vue(),
     pages(),
