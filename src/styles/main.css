@@ -6,6 +6,11 @@ html {
   overflow-y: overlay;
 }
 
+body {
+  min-width: 320px;
+  max-width: 400px;
+}
+
 * {
   scrollbar-width: thin;
 }
