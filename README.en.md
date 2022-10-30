@@ -8,8 +8,15 @@ Software architecture description
 
 #### Installation
 
-1. pnpm i
-2. pnpm dev
+1.  xxxx
+2.  xxxx
+3.  xxxx
+
+#### Instructions
+
+1.  xxxx
+2.  xxxx
+3.  xxxx
 
 #### Contribution
 
@@ -27,4 +34,3 @@ Software architecture description
 4.  The most valuable open source project [GVP](https://gitee.com/gvp)
 5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
 6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
-
