@@ -4,7 +4,7 @@ export function getItem(key = 'MEIHUA') {
   return LocalForage.getItem(key)
 }
 
-export function setItem(key = 'MEIHUA', value: object[]) {
+export function setItem<T>(key = 'MEIHUA', value: T) {
   return LocalForage.setItem(key, value)
 }
 

@@ -9,7 +9,6 @@ import pages from 'vite-plugin-pages'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { viteSingleFile } from 'vite-plugin-singlefile'
 import CopyPlugin from 'vite-copy-plugin'
 import viteMock from 'vite-plugin-easy-mock'
 import build from './vite.build'
@@ -41,7 +40,6 @@ export default ({ mode }: ConfigEnv) => defineConfig({
     vue(),
     pages(),
     unocss(),
-    viteSingleFile(),
     viteMock(),
   ],
   build,

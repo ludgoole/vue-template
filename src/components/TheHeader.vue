@@ -27,11 +27,10 @@ const handleSelect = (path: string) => {
     @select="handleSelect"
   >
     <ElMenuItem pointer-events-none index="0">
-      <i text-2xl i-mdi:shoe-ballet></i>
-      <p>老北京布鞋</p>
+      <i mr-1 text-xl i-icon-park-outline:palace></i>
+      <p>记忆宫殿</p>
     </ElMenuItem>
 
-    <!-- <div flex-grow></div> -->
     <ElMenuItem
       v-for="item in menus"
       :key="item.icon"

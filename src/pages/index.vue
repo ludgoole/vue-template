@@ -4,22 +4,33 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { downloadFile } from '@/utils'
-import { useCounterStore } from '@/stores/counter'
-import { getTestData } from '@/apis/test'
-const { count } = toRefs(useCounterStore())
+import ZY from '@/mock/zhouyi'
+import DDJ from '@/mock/daodejing'
+const router = useRouter()
 
-getTestData({ id: 1 }).then((data) => {
-  console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data, downloadFile)
-  // downloadFile(data, 'text.json')
-})
+const zhouyi = ZY as MOCK.BOOK
+const daodejing = DDJ as MOCK.BOOK
+const books = [zhouyi, daodejing]
+
+// method
+function onClick(book: MOCK.BOOK) {
+  console.log(book)
+  router.push({
+    path: '/book',
+    query: {
+      book: JSON.stringify(book),
+    },
+  })
+}
 </script>
 
 <template>
   <div class="Home">
-    <p>this is home page</p>
-    <ElButton @click="count++">
-      count is: {{ count }}
-    </ElButton>
+    <ul flex mt-4>
+      <li v-for="book in books" :key="book.book" @click="onClick(book)">
+        <i class="i-material-symbols:book" text-size-20 color-yellow-5></i>
+        <p>{{ book.book }}</p>
+      </li>
+    </ul>
   </div>
 </template>

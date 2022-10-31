@@ -1,0 +1,31 @@
+import book from './book'
+import images from './images'
+
+export default {
+  book: '周易',
+  poem: '卦名次序歌',
+  words: `
+    乾坤屯蒙需讼师， 比小畜兮履泰否，
+    同人大有谦豫随， 蛊临观兮噬嗑贲，
+    剥复无妄大畜颐， 大过坎离三十备。
+    咸恒遁兮及大壮， 晋与明夷家人睽，
+    蹇解损益夬姤萃， 升困井革鼎震继，
+    艮渐归妹丰旅巽， 兑涣节兮中孚至，
+    小过既济兼未济， 是为下经三十四。
+  `,
+  images: images.map((image, i) => {
+    return {
+      id: `周易_${book[i].guaMing}`,
+      name: book[i].guaMing,
+      path: image,
+      piles: Array(10).fill(1).map((v, j) => {
+        return {
+          id: `周易_${book[i].guaMing}_${j}`,
+          name: j + 1,
+          sentence: (book[i].yaoCi[j] || '').slice(3, -1),
+          note: '',
+        }
+      }),
+    }
+  }),
+}
