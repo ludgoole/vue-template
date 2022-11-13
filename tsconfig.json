@@ -29,7 +29,8 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "src/utils/reduce.js", "src/utils/reduce.js"
   ],
   "exclude": ["node_modules", "dist"],
   "references": [
