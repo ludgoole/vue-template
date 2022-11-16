@@ -19,26 +19,29 @@ const handleSelect = (path: string) => {
 </script>
 
 <template>
-  <ElMenu
-    :default-active="activeIndex"
-    class="el-menu-demo"
-    mode="horizontal"
-    :ellipsis="false"
-    @select="handleSelect"
-  >
-    <ElMenuItem pointer-events-none index="0">
-      <i text-2xl i-mdi:shoe-ballet></i>
-      <p>老北京布鞋</p>
-    </ElMenuItem>
-
-    <!-- <div flex-grow></div> -->
-    <ElMenuItem
-      v-for="item in menus"
-      :key="item.icon"
-      :index="item.path"
+  <header class="TheHeader">
+    <ElMenu
+      :default-active="activeIndex"
+      class="el-menu-demo"
+      mode="horizontal"
+      :ellipsis="false"
+      @select="handleSelect"
     >
-      <i :class="item.icon"></i>
-      {{ item.name }}
-    </ElMenuItem>
-  </ElMenu>
+      <ElMenuItem pointer-events-none index="0">
+        <i text-2xl i-carbon:sun></i>
+        <p ml-2>
+          Ludgoole
+        </p>
+      </ElMenuItem>
+
+      <ElMenuItem
+        v-for="item in menus"
+        :key="item.icon"
+        :index="item.path"
+      >
+        <i :class="item.icon"></i>
+        {{ item.name }}
+      </ElMenuItem>
+    </ElMenu>
+  </header>
 </template>
