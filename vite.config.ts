@@ -15,34 +15,38 @@ import viteMock from 'vite-plugin-easy-mock'
 import build from './vite.build'
 
 // https://vitejs.dev/config/
-export default ({ mode }: ConfigEnv) => defineConfig({
-  base: loadEnv(mode, process.cwd()).VITE_APP_BASE_URL,
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
+export default ({ mode }: ConfigEnv) => {
+  const isProd = mode === 'production'
+  const env = loadEnv(mode, process.cwd())
+  const { VITE_APP_BASE_URL } = env
+
+  return defineConfig({
+    base: VITE_APP_BASE_URL,
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
+      },
     },
-  },
-  plugins: [
-    autoImport({
-      imports: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
-      dts: './src/auto-imports.d.ts',
-    }),
-    Components({
-      dts: './src/components.d.ts',
-      resolvers: [ElementPlusResolver()],
-    }),
-    // https://www.npmjs.com/package/vite-copy-plugin
-    CopyPlugin([
-      // mock里面的文件 =>dist/mock文件夹
-      { from: 'mock', to: 'dist/mock' },
-      { from: 'server.js', to: 'dist/app.js' },
-      { from: 'start.bat', to: 'dist/start.bat' },
-    ]),
-    vue(),
-    pages(),
-    unocss(),
-    viteSingleFile(),
-    viteMock(),
-  ],
-  build,
-})
+    plugins: [
+      autoImport({
+        imports: ['vue', 'vue-router', '@vueuse/core', '@vueuse/head'],
+        dts: './src/auto-imports.d.ts',
+      }),
+      Components({
+        dts: './src/components.d.ts',
+        resolvers: [ElementPlusResolver()],
+      }),
+      // https://www.npmjs.com/package/vite-copy-plugin
+      CopyPlugin([
+        // mock里面的文件 =>dist/mock文件夹
+        { from: 'mock', to: 'dist/mock' },
+      ]),
+      vue(),
+      pages(),
+      unocss(),
+      isProd && viteSingleFile(),
+      viteMock(),
+    ],
+    build,
+  })
+}
