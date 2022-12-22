@@ -1,6 +1,6 @@
 import LocalForage from 'localforage'
 
-export function getItem(key = 'LUDGOOLE') {
+export function getItem<T>(key = 'LUDGOOLE'): Promise<T | null> {
   return LocalForage.getItem(key)
 }
 

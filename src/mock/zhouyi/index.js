@@ -21,7 +21,8 @@ export default {
       piles: Array(10).fill(1).map((v, j) => {
         return {
           id: `周易_${book[i].guaMing}_${j}`,
-          name: j + 1,
+          order: j + 1,
+          name: '',
           sentence: (book[i].yaoCi[j] || '').slice(3, -1),
           note: '',
         }

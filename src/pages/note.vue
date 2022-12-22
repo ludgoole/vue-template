@@ -16,7 +16,7 @@ onMounted(async () => {
 
 // method
 function getMemory() {
-  return getItem('ZHOUYI')
+  return getItem('MEMORY')
     .catch(() => {
       return {
         1: Array(20).fill(1).map((v, i) => `1_${i + 1}`),
