@@ -30,7 +30,7 @@ function onClick(key: string | number) {
       @change="onSearch"
       @clear="onSearch"
     />
-    <img v-if="imgSrc" :src="imgSrc" />
+    <img v-if="imgSrc" :src="imgSrc" width="200" />
     <ul v-else flex="~ 1 wrap" overflow="auto">
       <li v-for="(image, key) in pinyin" :key="image" class="w-10%" @click="onClick(key)">
         <img :src="image" />
