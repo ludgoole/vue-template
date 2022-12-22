@@ -1,7 +1,6 @@
 <route lang="yaml">
 meta:
   title: 查询
-  rightText: 刷新
 </route>
 
 <script lang="ts" setup>

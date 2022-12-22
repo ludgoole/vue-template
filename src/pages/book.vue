@@ -1,7 +1,6 @@
 <route lang="yaml">
 meta:
   title: 书本
-  leftArrow: true
 </route>
 
 <script lang="ts" setup>
