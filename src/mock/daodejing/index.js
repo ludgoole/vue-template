@@ -13,7 +13,7 @@ export default {
       piles: Array(10).fill(1).map((v, j) => {
         return {
           id: `道德经_${book[i].name}_${j}`,
-          name: j + 1,
+          order: j + 1,
           sentence: book[i].sentences[j] || '',
           note: '',
         }
