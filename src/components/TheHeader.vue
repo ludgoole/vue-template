@@ -14,6 +14,8 @@ watch(() => route.meta, (meta) => {
 
 const activeIndex = ref('/')
 const handleSelect = (path: string) => {
+  console.log("🚀 ~ file: TheHeader.vue:17 ~ handleSelect ~ path", path)
+  activeIndex.value = path
   router.push(path)
 }
 </script>
