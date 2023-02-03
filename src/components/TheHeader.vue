@@ -11,6 +11,9 @@ useHead({ title })
 watch(() => route.meta, (meta) => {
   title.value = meta.title as string
 })
+watch(() => route.path, (path) => {
+  activeIndex.value = path
+})
 
 const activeIndex = ref('/')
 const handleSelect = (path: string) => {

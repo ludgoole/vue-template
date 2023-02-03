@@ -8,6 +8,8 @@ import moment from 'moment'
 import { downloadFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
 import { getTestData } from '@/apis/test'
+import ZSBY from '../../book/zsby'
+const router = useRouter()
 const { count } = toRefs(useCounterStore())
 const file = ref()
 const time = ref(moment().format('YYYY-MM-DD hh:mm:ss'))
@@ -24,6 +26,14 @@ setInterval(() => {
 
 // method
 const download = () => downloadFile(file, 'text.json')
+const toGua = (卦: MOCK.BUGUA) => {
+  router.push({
+    path: '/gua',
+    query: {
+      ...卦
+    }
+  })
+}
 </script>
 
 <template>
@@ -40,5 +50,10 @@ const download = () => downloadFile(file, 'text.json')
         下载
       </ElButton>
     </p>
+    <ul>
+      <li v-for="卦 in ZSBY" :key="卦.占问" @click="toGua(卦)">
+        {{ 卦.占问 }}
+      </li>
+    </ul>
   </div>
 </template>

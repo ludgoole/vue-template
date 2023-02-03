@@ -9,13 +9,15 @@ interface Props {
   size?: number
   主卦?: boolean
   天干?: MOCK.TIANGAN
+  主象?: number[]
   卦象: number[]
 }
 const props = withDefaults(defineProps<Props>(), {
   size: 200,
   主卦: true,
   天干: '甲',
-  卦象: () => [1, 1, 1, 1, 1, 1],
+  主象: () =>[7, 7, 7, 9, 7, 7],
+  卦象: () => [7, 7, 7, 6, 7, 7],
 })
 
 const emit = defineEmits(['onChange'])
@@ -89,8 +91,9 @@ function getNajia(卦象: number[], 自己: MOCK.WUXING) {
   return 六亲.map((v, i) => `${v}${地支[i]}${五行[i]}`)
 }
 
+const _主象 = props.主象.map((v) => v % 2)
 const _卦象 = props.卦象.map((v) => v % 2)
-const 自己 = getSelf(_卦象) as MOCK.WUXING
+const 自己 = getSelf(_主象 || _卦象) as MOCK.WUXING
 const 纳甲 = getNajia(_卦象, 自己)
 const 世应 = getShiyin(_卦象)
 const 六神 = getLiushen(props.天干)
