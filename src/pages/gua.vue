@@ -25,6 +25,8 @@ const 变卦 = 主卦.map(v => v === 6 ? 9 : v === 9 ? 6 : v)
 const 月建 = query.月建 || lunar.getMonthZhi()
 const 日辰 = query.日辰 || lunar.getDayInGanZhi()
 const 旬空 = query.旬空 || lunar.getDayXunKong()
+const 月支:MOCK.DIHZI = 月建
+const 日支:MOCK.DIHZI = 日辰.slice(-1)
 
 // 辅助
 // const 用神 = ref('')
@@ -92,14 +94,33 @@ const 启示 = ref(query.启示 as string || '')
         :主卦="false"
         ></BaseGua>
       </section>
-      <footer mt-4 text-size-10px w-300px color-gray-4>
-        <p>用神：{{用神}}</p>
-        <p>元神：{{元神}}</p>
-        <p>忌神：{{忌神}}</p>
-        <p>六冲：{{六冲}}</p>
-        <p>六合：{{六合}}</p>
-        <p>三合：{{三合}}</p>
-        <p>墓库：{{墓库}}</p>
+      <footer mt-4 flex text-size-10px w-300px color-gray-4>
+        <section whitespace-nowrap>
+          <p>1.选取用神</p>
+          <p>2.月建日辰</p>
+          <p>3.元生忌神</p>
+          <p>4.暗动旬空</p>
+          <p>5.六亲六神</p>
+        </section>
+        <section ml-8>
+          <p>月建：{{月建}}</p>
+          <p>六冲：{{DIZHI[月支].六冲}}</p>
+          <p>六合：{{DIZHI[月支].六合}}</p>
+        </section>
+        <section ml-8>
+          <p>日辰：{{日辰.slice(-1)}}</p>
+          <p>六冲：{{DIZHI[日支].六冲}}</p>
+          <p>六合：{{DIZHI[日支].六合}}</p>
+        </section>
+        <section ml-8>
+          <p>用神：{{用神}}</p>
+          <p>元神：{{元神}}</p>
+          <p>忌神：{{忌神}}</p>
+          <p>六冲：{{六冲}}</p>
+          <p>六合：{{六合}}</p>
+          <p>三合：{{三合}}</p>
+          <p>墓库：{{墓库}}</p>
+        </section>
       </footer>
     </section>
     <article flex-1 ml-8>
@@ -110,7 +131,7 @@ const 启示 = ref(query.启示 as string || '')
       <section mt-4>
         <h2 font-900>吉凶</h2>
         <el-input
-          v-model="吉凶"
+          v-model.trim="吉凶"
           :autosize="{ minRows: 2, maxRows: 5 }"
           type="textarea"
         />
@@ -118,7 +139,7 @@ const 启示 = ref(query.启示 as string || '')
       <section mt-4>
         <h2 font-900>应期</h2>
         <el-input
-          v-model="应期"
+          v-model.trim="应期"
           :autosize="{ minRows: 2, maxRows: 5 }"
           type="textarea"
         />
