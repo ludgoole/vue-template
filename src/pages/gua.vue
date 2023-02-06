@@ -27,6 +27,7 @@ const 日辰 = query.日辰 || lunar.getDayInGanZhi()
 const 旬空 = query.旬空 || lunar.getDayXunKong()
 const 月支:MOCK.DIHZI = 月建
 const 日支:MOCK.DIHZI = 日辰.slice(-1)
+const 日干:MOCK.TIANGAN = 日辰.slice(0, 1)
 
 // 辅助
 // const 用神 = ref('')
@@ -87,6 +88,7 @@ const 启示 = ref(query.启示 as string || '')
       <section w-700px flex mt-8 justify="between">
         <BaseGua
         :卦象="主卦"
+        :日干="日干"
         @on-change="onChange"
         ></BaseGua>
         <BaseGua

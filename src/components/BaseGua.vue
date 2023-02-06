@@ -8,14 +8,14 @@ import LIUYAO from '../../mock/liuyao'
 interface Props {
   size?: number
   主卦?: boolean
-  天干?: MOCK.TIANGAN
+  日干?: MOCK.TIANGAN
   主象?: number[]
   卦象: number[]
 }
 const props = withDefaults(defineProps<Props>(), {
   size: 200,
   主卦: true,
-  天干: '甲',
+  日干: '甲',
   主象: () =>[7, 7, 7, 9, 7, 7],
   卦象: () => [7, 7, 7, 6, 7, 7],
 })
@@ -54,8 +54,8 @@ function getLiuqin(自己: MOCK.WUXING, 五行: MOCK.WUXING[]) {
   return 五行.map((v) => WUXING[自己][v])
 }
 
-function getLiushen(天干: MOCK.TIANGAN) {
-  return TIANGAN[天干].六神
+function getLiushen(日干: MOCK.TIANGAN) {
+  return TIANGAN[日干].六神
 }
 
 function getShiyin(卦象: number[]) {
@@ -96,7 +96,7 @@ const _卦象 = props.卦象.map((v) => v % 2)
 const 自己 = getSelf(_主象 || _卦象) as MOCK.WUXING
 const 纳甲 = getNajia(_卦象, 自己)
 const 世应 = getShiyin(_卦象)
-const 六神 = getLiushen(props.天干)
+const 六神 = getLiushen(props.日干)
 const 卦名 = (ZHOUYI.find((卦) => 卦.卦象.toString() === _卦象.toString()) || {}).卦名 || ''
 const 冲合归游 = getCHGY(_卦象)
 
