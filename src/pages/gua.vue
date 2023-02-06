@@ -45,7 +45,7 @@ const onChange = (val:string) => {
   用神.value = val
   元神.value = WUXING[五行].元神
   忌神.value = WUXING[五行].忌神
-  墓库.value = WUXING[五行].墓
+  墓库.value = WUXING[五行].生 + WUXING[五行].旺 + WUXING[五行].墓 + WUXING[五行].绝
 
   六冲.value = DIZHI[地支].六冲
   六合.value = DIZHI[地支].六合
@@ -94,8 +94,8 @@ const 启示 = ref(query.启示 as string || '')
         :主卦="false"
         ></BaseGua>
       </section>
-      <footer mt-4 flex text-size-10px w-300px color-gray-4>
-        <section whitespace-nowrap>
+      <footer mt-4 flex text-size-10px w-300px color-gray-4 whitespace-nowrap>
+        <section>
           <p>1.选取用神</p>
           <p>2.月建日辰</p>
           <p>3.元生忌神</p>
