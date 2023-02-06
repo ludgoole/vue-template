@@ -26,7 +26,7 @@ setInterval(() => {
 
 // method
 const download = () => downloadFile(file, 'text.json')
-const toGua = (卦: MOCK.BUGUA) => {
+const toGua = (卦: MOCK.BUGUA, i:number) => {
   router.push({
     path: '/gua',
     query: {
@@ -51,7 +51,7 @@ const toGua = (卦: MOCK.BUGUA) => {
       </ElButton>
     </p>
     <ul>
-      <li v-for="卦 in ZSBY" :key="卦.占问" @click="toGua(卦)">
+      <li my-4 v-for="(卦, i) in ZSBY" :key="卦.占问 + i" @click="toGua(卦, i)" :title="卦.占问">
         {{ 卦.占问 }}
       </li>
     </ul>
