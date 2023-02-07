@@ -68,7 +68,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="Gua" flex p-8 text-left>
+  <div class="Gua" flex py-4 px-8 text-left>
     <section>
       <header>
         <p>

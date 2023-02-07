@@ -5,10 +5,10 @@ meta:
 
 <script lang="ts" setup>
 import moment from 'moment'
+import ZSBY from '../../book/zsby'
 import { downloadFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
 import { getTestData } from '@/apis/test'
-import ZSBY from '../../book/zsby'
 const router = useRouter()
 const { count } = toRefs(useCounterStore())
 const file = ref()
@@ -26,12 +26,13 @@ setInterval(() => {
 
 // method
 const download = () => downloadFile(file, 'text.json')
-const toGua = (卦: MOCK.BUGUA, i:number) => {
+const toGua = (卦: MOCK.BUGUA, i: number) => {
+  console.log('🚀 ~ file: index.vue:30 ~ toGua ~ i', i)
   router.push({
     path: '/gua',
     query: {
-      ...卦
-    }
+      ...卦,
+    },
   })
 }
 </script>
@@ -51,7 +52,7 @@ const toGua = (卦: MOCK.BUGUA, i:number) => {
       </ElButton>
     </p>
     <ul>
-      <li my-4 v-for="(卦, i) in ZSBY" :key="卦.占问 + i" @click="toGua(卦, i)" :title="卦.占问">
+      <li v-for="(卦, i) in ZSBY" :key="卦.占问 + i" my-4 :title="卦.占问" @click="toGua(卦, i)">
         {{ 卦.占问 }}
       </li>
     </ul>
