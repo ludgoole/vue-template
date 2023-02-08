@@ -97,6 +97,7 @@ onMounted(() => {
           @on-change="onChange"
         />
         <BaseGua
+          :主象="主卦"
           :卦象="变卦"
           :主卦="false"
         />

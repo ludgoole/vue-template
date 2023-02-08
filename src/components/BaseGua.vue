@@ -16,7 +16,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 200,
   主卦: true,
   日干: '甲',
-  主象: () =>[7, 7, 7, 9, 7, 7],
+  主象: () => [7, 7, 7, 9, 7, 7],
   卦象: () => [7, 7, 7, 6, 7, 7],
 })
 
@@ -44,7 +44,7 @@ function getCHGY(卦象: number[]) {
   const 卦 = ZHOUYI.find((卦) => 卦.卦象.toString() === 卦象.toString())
   if (!卦) return ''
 
-  const liuyao = LIUYAO[卦.卦序-1]
+  const liuyao = LIUYAO[卦.卦序 - 1]
   const 冲合 = liuyao.chongHe || ''
   const 归游 = liuyao.baGongOrder % 10 > 7 ? liuyao.baGong.slice(-2) : ''
   return 冲合 || 归游
@@ -87,13 +87,12 @@ function getNajia(卦象: number[], 自己: MOCK.WUXING) {
   const 五行 = getWuxing(地支) as MOCK.WUXING[]
   const 六亲 = getLiuqin(自己, 五行)
 
-
   return 六亲.map((v, i) => `${v}${地支[i]}${五行[i]}`)
 }
 
 const _主象 = props.主象.map((v) => v % 2)
 const _卦象 = props.卦象.map((v) => v % 2)
-const 自己 = getSelf(_主象 || _卦象) as MOCK.WUXING
+const 自己 = getSelf(props.主卦 ? _卦象 : _主象) as MOCK.WUXING
 const 纳甲 = getNajia(_卦象, 自己)
 const 世应 = getShiyin(_卦象)
 const 六神 = getLiushen(props.日干)
@@ -111,7 +110,9 @@ const style = computed(() => {
 
 <template>
   <div class="BaseGua" flex flex-col items-center>
-    <h3 pl-16>{{ 卦名 }} <span v-if="冲合归游">({{ 冲合归游 }})</span></h3>
+    <h3 pl-16>
+      {{ 卦名 }} <span v-if="冲合归游">({{ 冲合归游 }})</span>
+    </h3>
     <ul flex flex-col-reverse>
       <li
         v-for="(爻, index) in 卦象"
@@ -127,11 +128,9 @@ const style = computed(() => {
         </p>
         <p
           :style="style"
-          :class="{
+          class="text-center color-white" :class="{
             'bg-black': 爻 % 2 === 0,
             'bg-red-600': 爻 % 2 === 1,
-            'text-center': true,
-            'color-white': true
           }"
         >
           <span v-if="爻 % 2 === 0" bg-white inline-block>111</span>
