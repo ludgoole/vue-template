@@ -7,22 +7,23 @@ import TIANGAN from '../../mock/tiangan'
 import LIUYAO from '../../mock/liuyao'
 interface Props {
   size?: number
-  主卦?: boolean
   日干?: MOCK.TIANGAN
   日支?: MOCK.DIZHI
+  用神?: string
   主象?: number[]
   卦象: number[]
 }
 const props = withDefaults(defineProps<Props>(), {
   size: 200,
-  主卦: true,
   日干: '甲',
   日支: '子',
-  主象: () => [7, 7, 7, 9, 7, 7],
+  // 主象: () => [7, 7, 7, 9, 7, 7],
   卦象: () => [7, 7, 7, 6, 7, 7],
 })
-
 const emit = defineEmits(['onChange'])
+const 主象 = computed(() => props.主象 ?? props.卦象)
+const 主卦 = computed(() => !props.主象)
+console.log('🚀 ~ file: BaseGua.vue:27 ~ 主象', 主象, 主卦)
 
 function getDizhi(卦象: number[]) {
   const getGua = (卦象: number[]) => BAGUA.find((v) => v.卦象.toString() === 卦象.toString())
@@ -92,9 +93,9 @@ function getNajia(卦象: number[], 自己: MOCK.WUXING) {
   return 六亲.map((v, i) => `${v}${地支[i]}${五行[i]}`)
 }
 
-const _主象 = props.主象.map((v) => v % 2)
+const _主象 = 主象.value.map((v) => v % 2)
 const _卦象 = props.卦象.map((v) => v % 2)
-const 自己 = getSelf(props.主卦 ? _卦象 : _主象) as MOCK.WUXING
+const 自己 = getSelf(_主象) as MOCK.WUXING
 const 纳甲 = getNajia(_卦象, 自己)
 const 世应 = getShiyin(_卦象)
 const 六神 = getLiushen(props.日干)
@@ -125,7 +126,11 @@ const style = computed(() => {
         <p v-if="主卦" class="text-size-10px mr-4">
           {{ 六神[index] }}
         </p>
-        <p class="text-size-10px">
+        <p
+          class="text-size-10px" :class="{
+            'text-red-600 font-bold': 用神 === 纳甲[index],
+          }"
+        >
           {{ 纳甲[index] }}
         </p>
         <p
@@ -133,7 +138,7 @@ const style = computed(() => {
           class="text-center color-white" :class="{
             'bg-black': 爻 % 2 === 0,
             'bg-red-600': 爻 % 2 === 1,
-            '!bg-red-300': DIZHI[日支].六冲 === 纳甲[index].slice(2, 3),
+            '!bg-red-300': 主卦 && DIZHI[日支].六冲 === 纳甲[index].slice(2, 3),
           }"
         >
           <span v-if="爻 % 2 === 0" bg-white inline-block>111</span>

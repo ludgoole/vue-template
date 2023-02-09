@@ -94,15 +94,15 @@ onMounted(() => {
         <BaseGua
           :日干="日干"
           :日支="日支"
+          :用神="用神"
           :卦象="主卦"
           @on-change="onChange"
         />
         <BaseGua
-          :日干="日干"
           :日支="日支"
+          :用神="用神"
           :主象="主卦"
           :卦象="变卦"
-          :主卦="false"
         />
       </section>
       <footer mt-4 flex text-size-10px w-300px color-gray-4 whitespace-nowrap>
