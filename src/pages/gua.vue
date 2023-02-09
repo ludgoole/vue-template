@@ -25,8 +25,8 @@ const 变卦 = 主卦.map((v) => v === 6 ? 9 : v === 9 ? 6 : v)
 const 月建 = query.月建 || lunar.getMonthZhi()
 const 日辰 = query.日辰 || lunar.getDayInGanZhi()
 const 旬空 = query.旬空 || lunar.getDayXunKong()
-const 月支: MOCK.DIHZI = 月建
-const 日支: MOCK.DIHZI = 日辰.slice(-1)
+const 月支: MOCK.DIZHI = 月建
+const 日支: MOCK.DIZHI = 日辰.slice(-1)
 const 日干: MOCK.TIANGAN = 日辰.slice(0, 1)
 
 // 辅助
@@ -49,7 +49,7 @@ const onChange = (val: string) => {
   if (!val) return
 
   const 五行 = val.slice(-1) as MOCK.WUXING
-  const 地支 = val.slice(-2, -1) as MOCK.DIHZI
+  const 地支 = val.slice(-2, -1) as MOCK.DIZHI
 
   用神.value = val
   元神.value = WUXING[五行].元神
@@ -92,11 +92,14 @@ onMounted(() => {
       </header>
       <section w-700px flex mt-8 justify="between">
         <BaseGua
-          :卦象="主卦"
           :日干="日干"
+          :日支="日支"
+          :卦象="主卦"
           @on-change="onChange"
         />
         <BaseGua
+          :日干="日干"
+          :日支="日支"
           :主象="主卦"
           :卦象="变卦"
           :主卦="false"

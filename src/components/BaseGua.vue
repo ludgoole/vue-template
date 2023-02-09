@@ -9,6 +9,7 @@ interface Props {
   size?: number
   主卦?: boolean
   日干?: MOCK.TIANGAN
+  日支?: MOCK.DIZHI
   主象?: number[]
   卦象: number[]
 }
@@ -16,6 +17,7 @@ const props = withDefaults(defineProps<Props>(), {
   size: 200,
   主卦: true,
   日干: '甲',
+  日支: '子',
   主象: () => [7, 7, 7, 9, 7, 7],
   卦象: () => [7, 7, 7, 6, 7, 7],
 })
@@ -29,7 +31,7 @@ function getDizhi(卦象: number[]) {
   return [...下卦, ...上卦]
 }
 
-function getWuxing(地支: MOCK.DIHZI[]) {
+function getWuxing(地支: MOCK.DIZHI[]) {
   return 地支.map((v) => DIZHI[v].五行)
 }
 
@@ -55,7 +57,7 @@ function getLiuqin(自己: MOCK.WUXING, 五行: MOCK.WUXING[]) {
 }
 
 function getLiushen(日干: MOCK.TIANGAN) {
-  return TIANGAN[日干].六神
+  return TIANGAN[日干]?.六神
 }
 
 function getShiyin(卦象: number[]) {
@@ -83,7 +85,7 @@ function getShiyin(卦象: number[]) {
 }
 
 function getNajia(卦象: number[], 自己: MOCK.WUXING) {
-  const 地支 = getDizhi(卦象) as MOCK.DIHZI[]
+  const 地支 = getDizhi(卦象) as MOCK.DIZHI[]
   const 五行 = getWuxing(地支) as MOCK.WUXING[]
   const 六亲 = getLiuqin(自己, 五行)
 
@@ -131,6 +133,7 @@ const style = computed(() => {
           class="text-center color-white" :class="{
             'bg-black': 爻 % 2 === 0,
             'bg-red-600': 爻 % 2 === 1,
+            '!bg-red-300': DIZHI[日支].六冲 === 纳甲[index].slice(2, 3),
           }"
         >
           <span v-if="爻 % 2 === 0" bg-white inline-block>111</span>
