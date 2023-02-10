@@ -3,8 +3,8 @@
   "packageManager": "pnpm@7.0.0",
   "scripts": {
     "build": "vite build",
-    "preview": "vite preview --port 80",
-    "dev": "vite --port 80",
+    "preview": "vite preview --port 1916",
+    "dev": "vite --port 1916",
     "dev:test": "vite serve --mode test",
     "lint": "eslint .",
     "lintf": "eslint . --fix",

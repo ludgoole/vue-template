@@ -23,7 +23,6 @@ const props = withDefaults(defineProps<Props>(), {
 const emit = defineEmits(['onChange'])
 const 主象 = computed(() => props.主象 ?? props.卦象)
 const 主卦 = computed(() => !props.主象)
-console.log('🚀 ~ file: BaseGua.vue:27 ~ 主象', 主象, 主卦)
 
 function getDizhi(卦象: number[]) {
   const getGua = (卦象: number[]) => BAGUA.find((v) => v.卦象.toString() === 卦象.toString())

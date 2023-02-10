@@ -6,12 +6,14 @@ meta:
 <script lang="ts" setup>
 import moment from 'moment'
 import { Lunar } from 'lunar-javascript'
+import TIANGAN from '../../mock/tiangan'
 import DIZHI from '../../mock/dizhi'
 import WUXING from '../../mock/wuxing'
 
 const route = useRoute()
 const { query } = route
 const lunar = Lunar.fromDate(new Date())
+console.log('🚀 ~ file: gua.vue:15 ~ lunar', lunar)
 
 // 卜卦
 const 占问 = query.占问 || '今日天气如何？'
@@ -28,6 +30,10 @@ const 旬空 = query.旬空 || lunar.getDayXunKong()
 const 月支: MOCK.DIZHI = 月建
 const 日支: MOCK.DIZHI = 日辰.slice(-1)
 const 日干: MOCK.TIANGAN = 日辰.slice(0, 1)
+const 驿马 = DIZHI[日支].驿马
+const 桃花 = DIZHI[日支].桃花
+const 日禄 = TIANGAN[日干].日禄
+const 贵人 = TIANGAN[日干].贵人
 
 // 辅助
 // const 用神 = ref('')
@@ -88,6 +94,9 @@ onMounted(() => {
         <p>
           干支：{{ 月建 }}月 {{ 日辰 }}日
           <span ml-4>(旬空：{{ 旬空 }})</span>
+        </p>
+        <p>
+          神煞：驿马-{{ 驿马 }}&nbsp;&nbsp;桃花-{{ 桃花 }}&nbsp;&nbsp;日禄-{{ 日禄 }}&nbsp;&nbsp;贵人-{{ 贵人 }}
         </p>
       </header>
       <section w-700px flex mt-8 justify="between">
