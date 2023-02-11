@@ -108,6 +108,7 @@ onMounted(() => {
           @on-change="onChange"
         />
         <BaseGua
+          v-if="主卦.join() !== 变卦.join()"
           :日支="日支"
           :用神="用神"
           :主象="主卦"
