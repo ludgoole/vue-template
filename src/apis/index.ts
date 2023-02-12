@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { Toast } from 'vant'
 const baseURL = import.meta.env.VITE_APP_BASE_URL
+const AppID = import.meta.env.VITE_APP_AppID
+const AppKey = import.meta.env.VITE_APP_AppKey
 
 /**
   * 创建axios实例
@@ -22,6 +24,12 @@ axiosInstance.interceptors.request.use(
         forbidClick: true,
         duration: 0,
       })
+    }
+
+    config.headers = {
+      ...config.headers,
+      'X-LC-Id': AppID,
+      'X-LC-Key': AppKey,
     }
 
     return config
@@ -95,11 +103,37 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance
 
-export function post<T>(url: string, data: object, loading = true) {
+export function GET<T>(url: string, data: object, loading = true) {
   return axiosInstance.request<unknown, T>({
-    method: 'post',
+    method: 'GET',
     url,
     data,
+    loading,
+  })
+}
+
+export function POSt<T>(url: string, data: object, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'POSt',
+    url,
+    data,
+    loading,
+  })
+}
+
+export function PUT<T>(url: string, objectId: string, data: object, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'PUT',
+    url: `${url}/${objectId}`,
+    data,
+    loading,
+  })
+}
+
+export function DELETE<T>(url: string, objectId: string, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'DELETE',
+    url: `${url}/${objectId}`,
     loading,
   })
 }

@@ -6,7 +6,7 @@ meta:
 <script lang="ts" setup>
 import { getPicture, readFile, writeFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
-import { getTestData } from '@/apis/test'
+import { getMockData, getTestData } from '@/apis/test'
 import TEST from '@/mock/test'
 console.log('🚀 ~ file: index.vue ~ line 11 ~ TEST', TEST)
 
@@ -24,6 +24,10 @@ getPicture().then((res) => {
 
 getTestData({ id: 1 }).then((data) => {
   console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data)
+})
+
+getMockData({ id: 1 }).then((data) => {
+  console.log('🚀 ~ file: index.vue ~ line 17 ~ getTestData ~ data', data)
 })
 </script>
 

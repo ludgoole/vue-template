@@ -1,3 +1,4 @@
-import { post } from './index'
+import { GET, POSt } from './index'
 
-export const getTestData = (params = {}) => post<MOCK.ZHI_NANG>('mock/test.json', params)
+export const getTestData = (params = {}) => GET<MOCK.ZHI_NANG>('/1.1/classes/test', params)
+export const getMockData = (params = {}) => POSt<MOCK.ZHI_NANG>('/mock/test.json', params)
