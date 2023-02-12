@@ -48,5 +48,10 @@ export default ({ mode }: ConfigEnv) => {
       viteMock(),
     ],
     build,
+    server: {
+      proxy: {
+        '/1.1/classes': 'https://njr7h2zt.lc-cn-n1-shared.com',
+      },
+    },
   })
 }

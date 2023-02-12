@@ -3,6 +3,8 @@ import axios from 'axios'
 import type { LoadingInstance } from 'element-plus/lib/components/loading/src/loading'
 import { ElLoading, ElMessage } from 'element-plus'
 const baseURL = import.meta.env.VITE_APP_BASE_URL
+const AppID = import.meta.env.VITE_APP_AppID
+const AppKey = import.meta.env.VITE_APP_AppKey
 let loadingInstance: LoadingInstance
 
 /**
@@ -21,6 +23,13 @@ axiosInstance.interceptors.request.use(
     // 打开 loading
     if (config.loading)
       loadingInstance = ElLoading.service({ fullscreen: true })
+
+    config.headers = {
+      ...config.headers,
+      'X-LC-Id': AppID,
+      'X-LC-Key': AppKey,
+    }
+
     return config
   },
   (error) => {
@@ -93,11 +102,37 @@ axiosInstance.interceptors.response.use(
 
 export default axiosInstance
 
-export function post<T>(url: string, data: object, loading = true) {
+export function GET<T>(url: string, data: object, loading = true) {
   return axiosInstance.request<unknown, T>({
-    method: 'post',
+    method: 'GET',
     url,
     data,
+    loading,
+  })
+}
+
+export function POSt<T>(url: string, data: object, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'POSt',
+    url,
+    data,
+    loading,
+  })
+}
+
+export function PUT<T>(url: string, objectId: string, data: object, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'PUT',
+    url: `${url}/${objectId}`,
+    data,
+    loading,
+  })
+}
+
+export function DELETE<T>(url: string, objectId: string, loading = true) {
+  return axiosInstance.request<unknown, T>({
+    method: 'DELETE',
+    url: `${url}/${objectId}`,
     loading,
   })
 }

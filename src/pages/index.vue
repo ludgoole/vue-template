@@ -8,7 +8,7 @@ import moment from 'moment'
 import ZSBY from '../../book/zsby'
 import { downloadFile } from '@/utils'
 import { useCounterStore } from '@/stores/counter'
-import { getTestData } from '@/apis/test'
+import { getMockData, getTestData } from '@/apis/test'
 const router = useRouter()
 const { count } = toRefs(useCounterStore())
 const file = ref()
@@ -18,6 +18,10 @@ const time = ref(moment().format('YYYY-MM-DD hh:mm:ss'))
 getTestData({ id: 1 }).then((data) => {
   console.log('🚀 ~ file: index.vue ~ line 17 ~ getTestData ~ data', data)
   file.value = data
+})
+
+getMockData({ id: 1 }).then((data) => {
+  console.log('🚀 ~ file: index.vue ~ line 17 ~ getTestData ~ data', data)
 })
 
 setInterval(() => {
