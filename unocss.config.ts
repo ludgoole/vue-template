@@ -14,12 +14,15 @@ function resolveColor(name: string, no: number, prefix?: string) {
 export default defineConfig({
   theme: {
     colors: {
-      vue: '#42b983',
+      pramiry: '#42b983',
     },
   },
   shortcuts: [
+    // layout
+    ['flex-center', 'flex justify-between items-center'],
+
     // base
-    ['border-base', 'border-gray-200 dark:border-dark-200'],
+    ['border-base', 'border-1 border-solid border-current'],
     ['bg-base', 'bg-white dark:bg-dark-800'],
     [/^(color|text)-base$/, () => 'text-gray-700 dark:text-light-700'],
 

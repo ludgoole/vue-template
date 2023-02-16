@@ -2,7 +2,6 @@
 meta:
   title: 登录
   hideHeader: true
-  hideFooter: true
 </route>
 
 <script setup lang="ts">
