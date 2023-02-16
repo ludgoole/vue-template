@@ -1,16 +1,18 @@
 <script lang="ts" setup>
 const route = useRoute()
-const isLogin = ref(false)
+const isShowHeader = ref(true)
+const isShowFooter = ref(true)
 
-watch(() => route.path, (path) => {
-  isLogin.value = path === '/login'
+watch(() => route.meta, (meta) => {
+  isShowHeader.value = !meta.hideHeader as boolean
+  isShowFooter.value = !meta.hideFooter as boolean
 })
 </script>
 
 <template>
   <div flex="~ col" justify-between pt-6 h-100vh>
-    <AppHeader v-if="!isLogin" />
+    <AppHeader v-if="isShowHeader" />
     <RouterView flex-1 overflow-auto text-center />
-    <AppFooter v-if="!isLogin" />
+    <AppFooter v-if="isShowFooter" />
   </div>
 </template>
