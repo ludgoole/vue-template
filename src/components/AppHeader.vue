@@ -15,7 +15,7 @@ watch(() => route.meta, (meta) => {
   title.value = meta.title as string
   leftArrow.value = meta.leftArrow as boolean
   rightText.value = meta.rightText as string
-})
+}, { immediate: true })
 
 function onClickRight() {
   emitter.emit('on-click-right')
