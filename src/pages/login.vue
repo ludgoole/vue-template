@@ -6,6 +6,7 @@ meta:
 </route>
 
 <script setup lang="ts">
+import localforage from 'localforage'
 const router = useRouter()
 
 // ts
@@ -23,11 +24,16 @@ const password = ref('')
 const onSubmit = (values: Login) => {
   console.log('submit', values)
   router.push('/')
+  localforage.setItem('Authorization', 'token')
+  localforage.setItem('userInfo', {
+    ...values,
+    role: 'V3',
+  })
 }
 </script>
 
 <template>
-  <div>
+  <div class="Login" text-center>
     <div class="logo" mt-32>
       <i text-6xl class="i-carbon:apple"></i>
     </div>
