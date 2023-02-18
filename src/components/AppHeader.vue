@@ -6,6 +6,7 @@ const { title } = toRefs(useHeaderStore())
 const router = useRouter()
 const route = useRoute()
 const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
+const toPath = ref('')
 const leftArrow = ref(false)
 const rightText = ref('')
 const isPlain = ref(false)
@@ -13,6 +14,7 @@ const isPlain = ref(false)
 useHead({ title })
 
 watch(() => route.meta, (meta) => {
+  toPath.value = meta.toPath as string
   title.value = meta.title as string
   leftArrow.value = meta.leftArrow as boolean
   rightText.value = meta.rightText as string
@@ -30,7 +32,7 @@ function onClickRight() {
     :title="title"
     :left-arrow="leftArrow"
     @click-right="onClickRight"
-    @click-left="router.go(-1)"
+    @click-left="toPath ? router.push(toPath) : router.go(-1)"
   >
     <template v-if="rightText" #right>
       <p v-if="isPlain">
