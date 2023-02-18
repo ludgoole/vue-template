@@ -15,6 +15,7 @@ const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 
 // data
 const { title } = toRefs(useHeaderStore())
+const prevTitle = title.value
 const router = useRouter()
 const route = useRoute()
 const step = ref(1)
@@ -57,7 +58,10 @@ const reLearning = () => {
   step.value = 1
 }
 const toIntroduction = () => {
-  router.push('/introduction')
+  router.push({
+    path: '/introduction',
+    query: { title: prevTitle },
+  })
 }
 const prev = () => {
   step.value = step.value - 1
@@ -181,7 +185,7 @@ onUnmounted(() => {
         </p>
       </div>
     </section>
-    <footer p-6 fixed bottom-0 w-full flex>
+    <footer p-6 fixed bottom-0 w-full flex max-w-540px>
       <VanButton type="primary" size="small" round block :disabled="step === 1" @click="prev">
         上一步
       </VanButton>

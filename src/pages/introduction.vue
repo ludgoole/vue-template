@@ -3,6 +3,7 @@ meta:
   title: 记忆法入门
   leftArrow: true
   rightText: 我的成绩
+  toPath: /
 </route>
 
 <script lang="ts" setup>
