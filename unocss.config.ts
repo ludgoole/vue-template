@@ -20,6 +20,12 @@ export default defineConfig({
   shortcuts: [
     // layout
     ['flex-center', 'flex justify-between items-center'],
+    ['center-middle', 'text-center leading-normal'],
+
+    // common
+    ['gap', 'border-8 border-solid border-gray-1'],
+    ['circle', 'border-1 border-solid border-gray-8 rounded-full text-center leading-normal'],
+    ['active', 'bg-pramiry border-pramiry color-white'],
 
     // base
     ['border-base', 'border-1 border-solid border-current'],

@@ -1,8 +1,8 @@
 <route lang="yaml">
 meta:
   title: Page Not Found
-  leftArrow: true
-  rightText: 刷新
+  # leftArrow: true
+  # rightText: 刷新
 </route>
 
 <script setup lang="ts">
@@ -35,7 +35,8 @@ function onClickRight() {
   <div absolute min-w-full min-h-full bg-base flex justify-center items-center select-none>
     <div px-5 py-10 flex="~ col gap-4" justify-center items-center>
       <i text-8xl i-twemoji-crying-face></i>
-      <span text-4xl>Page Not Found</span>
+      <!-- <span text-4xl>Page Not Found</span> -->
+      <span text-2xl>暂无权限访问，请联系管理员</span>
 
       <button btn="~ base" @click="router.replace({ path: '/' })">
         Back

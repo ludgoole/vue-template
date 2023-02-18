@@ -5,8 +5,12 @@ meta:
 </route>
 
 <script lang="ts" setup>
+import type { Emitter } from 'mitt'
+const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 // import { getPicture, readFile, writeFile } from '@/utils'
-// import { useCounterStore } from '@/stores/counter'
+// import { useLoginStore } from '@/stores/counter'
+// const { token } = toRefs(useLoginStore())
+
 // import { getMockData, getTestData } from '@/apis/test'
 // import TEST from '@/mock/test'
 // console.log('🚀 ~ file: index.vue ~ line 11 ~ TEST', TEST)
@@ -34,7 +38,20 @@ const list = [
   },
 ]
 
-// const { count } = toRefs(useCounterStore())
+// method
+const toRecord = () => router.push({
+  path: '/record',
+})
+
+// mounted
+onMounted(() => {
+  emitter.on('on-click-right', toRecord)
+})
+
+// destroyed
+onUnmounted(() => {
+  emitter.off('on-click-right', toRecord)
+})
 
 // writeFile('fs://test.json', [{ a: 1 }]).then((res) => {
 //   console.log('writeFile', res)
@@ -60,7 +77,7 @@ const list = [
     <ul mt-8>
       <li v-for="item in list" :key="item.text" flex-center rounded-5 border-base border-pramiry p-4 my-4>
         <p>{{ item.text }}</p>
-        <p color-pramiry font-800 @click="router.push(item.path)">
+        <p color-pramiry font-800 @click="router.push({ path: item.path, query: { title: item.text } })">
           训练
         </p>
       </li>
