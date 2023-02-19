@@ -186,14 +186,14 @@ onUnmounted(() => {
       </div>
     </section>
     <footer p-6 fixed bottom-0 w-full flex max-w-540px>
-      <VanButton type="primary" size="small" round block :disabled="step === 1" @click="prev">
+      <VanButton type="primary" round block :disabled="step === 1" @click="prev">
         上一步
       </VanButton>
       <div w-8></div>
-      <VanButton v-if="step === end" type="primary" size="small" round block @click="toIntroduction">
+      <VanButton v-if="step === end" type="primary" round block @click="toIntroduction">
         返回
       </VanButton>
-      <VanButton v-else type="primary" size="small" round block @click="next">
+      <VanButton v-else type="primary" round block @click="next">
         下一步
       </VanButton>
     </footer>
