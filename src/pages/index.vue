@@ -6,7 +6,6 @@ meta:
 
 <script lang="ts" setup>
 import type { Emitter } from 'mitt'
-const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 // import { getPicture, readFile, writeFile } from '@/utils'
 // import { useLoginStore } from '@/stores/counter'
 // const { token } = toRefs(useLoginStore())
@@ -14,6 +13,8 @@ const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 // import { getMockData, getTestData } from '@/apis/test'
 // import TEST from '@/mock/test'
 // console.log('🚀 ~ file: index.vue ~ line 11 ~ TEST', TEST)
+import { getList } from '@/apis/test'
+const emitter = inject('emitter') as Emitter<{ 'on-click-right': unknown }>
 const router = useRouter()
 const list = [
   {
@@ -37,6 +38,10 @@ const list = [
     path: '/introduction',
   },
 ]
+
+getList({ id: 1 }).then((data) => {
+  console.log('🚀 ~ file: index.vue:43 ~ getList ~ data:', data)
+})
 
 // method
 const toRecord = () => router.push({

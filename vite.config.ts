@@ -11,7 +11,7 @@ import Components from 'unplugin-vue-components/vite'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 import CopyPlugin from 'vite-copy-plugin'
-import viteMock from 'vite-plugin-easy-mock'
+// import viteMock from 'vite-plugin-easy-mock'
 import build from './vite.build'
 
 // https://vitejs.dev/config/
@@ -33,9 +33,9 @@ export default ({ mode }: ConfigEnv) => defineConfig({
     }),
     // https://www.npmjs.com/package/vite-copy-plugin
     CopyPlugin([
-      { from: 'config.xml.bak', to: 'dist/config.xml' },
+      // { from: 'config.xml.bak', to: 'dist/config.xml' },
       // mock里面的文件 =>dist/mock文件夹
-      // { from: 'mock', to: 'dist/mock' },
+      { from: 'php', to: 'dist/api' },
       // { from: 'server.js', to: 'dist/app.js' },
       // { from: 'start.bat', to: 'dist/start.bat' },
     ]),
@@ -43,7 +43,7 @@ export default ({ mode }: ConfigEnv) => defineConfig({
     pages(),
     unocss(),
     viteSingleFile(),
-    viteMock(),
+    // viteMock(),
   ],
   build,
   server: {
