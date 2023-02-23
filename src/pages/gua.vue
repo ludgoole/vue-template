@@ -49,6 +49,7 @@ const 三刑 = ref('')
 const 用神 = ref(query.用神 as string || '')
 const 吉凶 = ref(query.吉凶 as string || '')
 const 应期 = ref(query.应期 as string || '')
+const 细节 = ref(query.细节 as string || '')
 const 启示 = ref(query.启示 as string || '')
 
 const onChange = (val: string) => {
@@ -170,6 +171,16 @@ onMounted(() => {
         </h2>
         <ElInput
           v-model.trim="应期"
+          :autosize="{ minRows: 2, maxRows: 5 }"
+          type="textarea"
+        />
+      </section>
+      <section mt-4>
+        <h2 font-900>
+          细节
+        </h2>
+        <ElInput
+          v-model.trim="细节"
           :autosize="{ minRows: 2, maxRows: 5 }"
           type="textarea"
         />
