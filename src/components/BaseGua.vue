@@ -92,6 +92,18 @@ function getNajia(卦象: number[], 自己: MOCK.WUXING) {
   return 六亲.map((v, i) => `${v}${地支[i]}${五行[i]}`)
 }
 
+function isYongshen(爻纳甲: string) {
+  return props.用神 === 爻纳甲
+}
+function isYuanshen(爻纳甲: string) {
+  const 五行 = props.用神?.slice(-1) as MOCK.WUXING
+  return WUXING[五行].元神 === 爻纳甲.slice(-1)
+}
+function isJishen(爻纳甲: string) {
+  const 五行 = props.用神?.slice(-1) as MOCK.WUXING
+  return WUXING[五行].忌神 === 爻纳甲.slice(-1)
+}
+
 const _主象 = 主象.value.map((v) => v % 2)
 const _卦象 = props.卦象.map((v) => v % 2)
 const 自己 = getSelf(_主象) as MOCK.WUXING
@@ -127,7 +139,9 @@ const style = computed(() => {
         </p>
         <p
           class="text-size-10px" :class="{
-            'text-red-600 font-bold': 用神 === 纳甲[index],
+            'text-red-600 font-bold': isYongshen(纳甲[index]),
+            'text-fuchsia-500 font-bold': isYuanshen(纳甲[index]),
+            'text-green-600 font-bold': isJishen(纳甲[index]),
           }"
         >
           {{ 纳甲[index] }}
