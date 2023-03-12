@@ -1,0 +1,34 @@
+### GET 查询
+GET  https://njr7h2zt.lc-cn-n1-shared.com/1.1/classes/test
+Content-Type:application/json;charset=UTF-8
+Accept:application/json;charset=UTF-8
+X-LC-Id: FZk43MvrS28I6nsu8LIvdmju-gzGzoHsz
+X-LC-Key: OMg1uIRHNOCVbGzdhImqw1uD
+
+### POST 新增
+POST https://njr7h2zt.lc-cn-n1-shared.com/1.1/classes/test
+Content-Type: application/json
+X-LC-Id: FZk43MvrS28I6nsu8LIvdmju-gzGzoHsz
+X-LC-Key: OMg1uIRHNOCVbGzdhImqw1uD
+
+{
+  "a": 1
+}
+
+
+### PUT 更改
+PUT https://njr7h2zt.lc-cn-n1-shared.com/1.1/classes/test/640d8b05f11d5e1b0337d05c
+Content-Type: application/json
+X-LC-Id: FZk43MvrS28I6nsu8LIvdmju-gzGzoHsz
+X-LC-Key: OMg1uIRHNOCVbGzdhImqw1uD
+
+{
+  "a": 11
+}
+
+
+### DELETE 删除
+DELETE https://njr7h2zt.lc-cn-n1-shared.com/1.1/classes/test/640d7f5cf11d5e1b0337bfe6
+Content-Type: application/json
+X-LC-Id: FZk43MvrS28I6nsu8LIvdmju-gzGzoHsz
+X-LC-Key: OMg1uIRHNOCVbGzdhImqw1uD
