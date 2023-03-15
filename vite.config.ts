@@ -10,15 +10,17 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+import vitePrerender from 'vite-plugin-prerender'
 import CopyPlugin from 'vite-copy-plugin'
 import viteMock from 'vite-plugin-easy-mock'
-import build from './vite.build'
+import getBuild from './vite.build'
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
-  const isProd = mode === 'production'
   const env = loadEnv(mode, process.cwd())
-  const { VITE_APP_BASE_URL } = env
+  const { VITE_APP_BASE_URL, VITE_APP_DIST } = env
 
   return defineConfig({
     base: VITE_APP_BASE_URL,
@@ -44,10 +46,14 @@ export default ({ mode }: ConfigEnv) => {
       vue(),
       pages(),
       unocss(),
-      isProd && viteSingleFile(),
+      VITE_APP_DIST === 'SSF' && viteSingleFile(),
+      VITE_APP_DIST === 'SSG' && vitePrerender({
+        staticDir: resolve(__dirname, 'dist'),
+        routes: ['/', '/gua'],
+      }),
       viteMock(),
     ],
-    build,
+    build: getBuild(VITE_APP_DIST),
     server: {
       proxy: {
         '/1.1/classes': 'https://njr7h2zt.lc-cn-n1-shared.com',
