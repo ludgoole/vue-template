@@ -18,6 +18,14 @@ const buildOptions: BuildOptions = {
         if (nameREG.test(info.name)) return replace(template, info.name)
         return template
       },
+      manualChunks: (id) => {
+        if (id.includes('element'))
+          return 'element-vendor'
+        else if (id.includes('lunar'))
+          return 'lunar-vendor'
+        else if (id.includes('node_modules'))
+          return 'vendor'
+      },
     },
   },
 }
