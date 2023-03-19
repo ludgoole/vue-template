@@ -50,7 +50,7 @@ export default ({ mode }: ConfigEnv) => {
       VITE_APP_DIST === 'SSF' && viteSingleFile(),
       VITE_APP_DIST === 'SSG' && vitePrerender({
         staticDir: resolve(__dirname, 'dist'),
-        routes: ['/', '/gua'],
+        routes: ['/', '/login'],
       }),
       viteMock(),
     ],
