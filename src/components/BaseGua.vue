@@ -139,9 +139,9 @@ const style = computed(() => {
         </p>
         <p
           class="text-size-10px" :class="{
-            'text-red-600 font-bold': isYongshen(纳甲[index]),
-            'text-fuchsia-500 font-bold': isYuanshen(纳甲[index]),
-            'text-green-600 font-bold': isJishen(纳甲[index]),
+            'text-red-600': isYongshen(纳甲[index]),
+            'font-bold': isYuanshen(纳甲[index]),
+            'text-green-600': isJishen(纳甲[index]),
           }"
         >
           {{ 纳甲[index] }}
