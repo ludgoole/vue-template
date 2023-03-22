@@ -17,7 +17,7 @@
     "@vueuse/core": "^9.0.2",
     "@vueuse/head": "^0.7.8",
     "axios": "^0.27.2",
-    "cnchar": "^3.2.2",
+    "dexie": "^3.2.3",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
@@ -26,7 +26,6 @@
     "pinia": "^2.0.21",
     "pinia-plugin-persistedstate-2": "^2.0.1",
     "vant": "^3.5.4",
-    "vconsole": "^3.14.6",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

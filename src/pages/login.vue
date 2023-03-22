@@ -7,6 +7,7 @@ meta:
 
 <script setup lang="ts">
 import localforage from 'localforage'
+import { Toast } from 'vant'
 const router = useRouter()
 
 // ts
@@ -16,18 +17,23 @@ interface Login {
 }
 
 // created
-const title = '育知道 训练营'
+const title = 'ONE DAY ONE APPLE'
 const username = ref('')
 const password = ref('')
 
 // method
 const onSubmit = (values: Login) => {
-  console.log('submit', values)
+  if (values.password !== '123456') {
+    return Toast({
+      message: '用户名或密码不正确',
+    })
+  }
+
   router.push('/')
   localforage.setItem('Authorization', 'token')
   localforage.setItem('userInfo', {
     ...values,
-    role: 'V3',
+    role: values.username === 'admin' ? 'ADMIN' : '',
   })
 }
 </script>

@@ -21,5 +21,3 @@ createApp(App)
   .use(store)
   .provide('emitter', emitter)
   .mount('#app')
-
-// const vConsole = new VConsole()
