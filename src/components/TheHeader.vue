@@ -8,8 +8,9 @@ const route = useRoute()
 
 useHead({ title })
 
-watch(() => route.meta, (meta) => {
+watch(route, ({ meta, query }) => {
   title.value = meta.title as string
+  console.log('🚀 ~ file: TheHeader.vue:12 ~ watch ~ path:', meta, query)
 })
 
 const activeIndex = ref('/')

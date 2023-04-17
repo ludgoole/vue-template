@@ -9,14 +9,12 @@ import pages from 'vite-plugin-pages'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import { viteSingleFile } from 'vite-plugin-singlefile'
 import CopyPlugin from 'vite-copy-plugin'
 import viteMock from 'vite-plugin-easy-mock'
 import build from './vite.build'
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
-  const isProd = mode === 'production'
   const env = loadEnv(mode, process.cwd())
   const { VITE_APP_BASE_URL } = env
 
@@ -44,7 +42,6 @@ export default ({ mode }: ConfigEnv) => {
       vue(),
       pages(),
       unocss(),
-      isProd && viteSingleFile(),
       viteMock(),
     ],
     build,

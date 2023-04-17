@@ -1,17 +1,13 @@
 import Dexie from 'dexie'
 
 export class LudgooleDatabase extends Dexie {
-  contacts!: Dexie.Table<DATABASE.Contact, number>
-  emails!: Dexie.Table<DATABASE.Email, number>
-  phones!: Dexie.Table<DATABASE.Phone, number>
+  zhouyi!: Dexie.Table<DATABASE.Zhouyi, number>
 
   constructor() {
     super('LudgooleDatabase')
 
     this.version(1).stores({
-      contacts: '++id, first, last',
-      emails: '++id, contactId, type, email',
-      phones: '++id, contactId, type, phone',
+      zhouyi: '&卦序, 卦名, 卦象, 卦辞, 爻辞',
     })
   }
 }

@@ -4,20 +4,35 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import PY from '@/mock/pinyin'
-const pinyin = PY as MOCK.PINYIN
-const search = ref<string | number>('')
-const imgSrc = ref('')
+import PINYIN from '@/mock/pinyin'
+const route = useRoute()
+const imgList = ref<string[]>(Object.values(PINYIN))
+const search = ref<string>('')
 
 // method
-function onSearch() {
-  imgSrc.value = pinyin[search.value]
+const onSearch = () => {
+  if (search.value) {
+    let arr = []
+    if (/[a-z]/.test(search.value))
+      arr = search.value.split(' ')
+    else
+      arr = window.cnchar.spell(search.value.split('').join(' '), 'low').split(' ')
+
+    imgList.value = arr.reduce((a: string[], key = '') => {
+      PINYIN[key] && a.push(PINYIN[key])
+      return a
+    }, [])
+  }
+  else {
+    imgList.value = Object.values(PINYIN)
+  }
 }
 
-function onClick(key: string | number) {
-  search.value = key
+// mounted
+onMounted(() => {
+  search.value = route.query.记忆 as string
   onSearch()
-}
+})
 </script>
 
 <template>
@@ -30,9 +45,8 @@ function onClick(key: string | number) {
       @change="onSearch"
       @clear="onSearch"
     />
-    <img v-if="imgSrc" :src="imgSrc" width="200" />
-    <ul v-else flex="~ 1 wrap" overflow="auto">
-      <li v-for="(image, key) in pinyin" :key="image" class="w-10%" @click="onClick(key)">
+    <ul flex="~ 1 wrap" overflow="auto">
+      <li v-for="(image) in imgList" :key="image" class="w-10%">
         <img :src="image" />
       </li>
     </ul>

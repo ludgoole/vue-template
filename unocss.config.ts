@@ -18,10 +18,14 @@ export default defineConfig({
     },
   },
   shortcuts: [
+    // layer
+    ['flex-justify', 'flex justify-between'],
+    ['flex-center', 'flex justify-center items-center'],
+
     // base
-    ['border-base', 'border-gray-200 dark:border-dark-200'],
-    ['bg-base', 'bg-white dark:bg-dark-800'],
-    [/^(color|text)-base$/, () => 'text-gray-700 dark:text-light-700'],
+    ['border-base', 'border-solid border-1 border-gray-200'],
+    ['bg-base', 'p-4 bg-orange-1 border-rounded-2 color-gray-4'],
+    ['ellipsis', 'text-ellipsis overflow-hidden whitespace-nowrap'],
 
     // button
     ['btn', 'px-4 py-1 rounded transition duration-100 cursor-pointer select-none outline-none disabled:cursor-default disabled:pointer-events-none'],

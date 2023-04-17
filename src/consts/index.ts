@@ -20,3 +20,14 @@ export const menus = [
     icon: 'i-mdi:person',
   },
 ]
+
+export const books = [
+  {
+    name: '周易',
+    path: '/zhouyi',
+  },
+  {
+    name: '道德经',
+    path: '/daodejing',
+  },
+]

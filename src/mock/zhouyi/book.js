@@ -2,7 +2,14 @@ export default [
   {
     guaXu: 1,
     guaMing: '乾',
-    guaXiang: [1, 1, 1, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天行，健；君子以自强不息。',
     guaCi: '元亨，利贞。',
     yaoCi: [
@@ -18,10 +25,16 @@ export default [
   {
     guaXu: 2,
     guaMing: '坤',
-    guaXiang: [0, 0, 0, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+    ],
     daXiang: '地势，坤；君子以厚德载物。',
-    guaCi:
-      '元亨，利牝马之贞。君子有攸往，先迷后得主，利；西南得朋，东北丧朋，安贞吉。',
+    guaCi: '元亨，利牝马之贞。君子有攸往，先迷后得主，利；西南得朋，东北丧朋，安贞吉。',
     yaoCi: [
       '初六：履霜，坚冰至。',
       '六二：直，方，大；不习，无不利。',
@@ -35,7 +48,14 @@ export default [
   {
     guaXu: 3,
     guaMing: '屯',
-    guaXiang: [0, 1, 0, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+    ],
     daXiang: '云雷，屯；君子以经纶。',
     guaCi: '元亨，利贞。勿用有攸往。利建侯。',
     yaoCi: [
@@ -50,7 +70,14 @@ export default [
   {
     guaXu: 4,
     guaMing: '蒙',
-    guaXiang: [1, 0, 0, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山下出泉，蒙；君子以果行育德。',
     guaCi: '亨。匪我求童蒙，童蒙求我；初筮告，再三渎，渎则不告。利贞。',
     yaoCi: [
@@ -65,7 +92,14 @@ export default [
   {
     guaXu: 5,
     guaMing: '需',
-    guaXiang: [0, 1, 0, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      0,
+      1,
+      0,
+    ],
     daXiang: '云上于天，需；君子以饮食宴乐。',
     guaCi: '有孚，光亨，贞吉。利涉大川。',
     yaoCi: [
@@ -80,7 +114,14 @@ export default [
   {
     guaXu: 6,
     guaMing: '讼',
-    guaXiang: [1, 1, 1, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天与水违行，讼；君子以作事谋始。',
     guaCi: '有孚窒惕，中吉；终凶，利见大人，不利涉大川。',
     yaoCi: [
@@ -95,7 +136,14 @@ export default [
   {
     guaXu: 7,
     guaMing: '师',
-    guaXiang: [0, 0, 0, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+    ],
     daXiang: '地中有水，师；君子以容民畜众。',
     guaCi: '贞，丈人吉，无咎。',
     yaoCi: [
@@ -110,7 +158,14 @@ export default [
   {
     guaXu: 8,
     guaMing: '比',
-    guaXiang: [0, 1, 0, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+    ],
     daXiang: '地上有水，比；先王以建万国，亲诸侯。',
     guaCi: '吉。原筮，元永贞。无咎。不宁方来，后夫凶。',
     yaoCi: [
@@ -125,7 +180,14 @@ export default [
   {
     guaXu: 9,
     guaMing: '小畜',
-    guaXiang: [1, 1, 0, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+    ],
     daXiang: '风行天上，小畜；君子以懿文德。',
     guaCi: '亨。密云不雨，自我西郊。',
     yaoCi: [
@@ -140,7 +202,14 @@ export default [
   {
     guaXu: 10,
     guaMing: '履',
-    guaXiang: [1, 1, 1, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+    ],
     daXiang: '上天下泽，履；君子以辨上下，定民志。',
     guaCi: '履虎尾，不咥人，亨。',
     yaoCi: [
@@ -155,7 +224,14 @@ export default [
   {
     guaXu: 11,
     guaMing: '泰',
-    guaXiang: [0, 0, 0, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+    ],
     daXiang: '天地交，泰；后以财成天地之道，辅相天地之宜，以左右民。',
     guaCi: '小往大来，吉亨。',
     yaoCi: [
@@ -170,7 +246,14 @@ export default [
   {
     guaXu: 12,
     guaMing: '否',
-    guaXiang: [1, 1, 1, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天地不交，否；君子以俭德辟难，不可荣以禄。',
     guaCi: '否之匪人，不利，君子贞；大往小来。',
     yaoCi: [
@@ -185,7 +268,14 @@ export default [
   {
     guaXu: 13,
     guaMing: '同人',
-    guaXiang: [1, 1, 1, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天与火，同人；君子以类族辨物。',
     guaCi: '同人于野，亨，利涉大川，利君子贞。',
     yaoCi: [
@@ -200,7 +290,14 @@ export default [
   {
     guaXu: 14,
     guaMing: '大有',
-    guaXiang: [1, 0, 1, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+    ],
     daXiang: '火在天上，大有；君子以遏恶扬善，顺天休命。',
     guaCi: '元亨。',
     yaoCi: [
@@ -215,7 +312,14 @@ export default [
   {
     guaXu: 15,
     guaMing: '谦',
-    guaXiang: [0, 0, 0, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+    ],
     daXiang: '地中有山，谦；君子以裒多益寡，称物平施。',
     guaCi: '亨。君子有终。',
     yaoCi: [
@@ -230,7 +334,14 @@ export default [
   {
     guaXu: 16,
     guaMing: '豫',
-    guaXiang: [0, 0, 1, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
     daXiang: '雷出地奋，豫；先王以作乐崇德，殷荐之上帝，以配祖考。',
     guaCi: '利建侯，行师。',
     yaoCi: [
@@ -245,7 +356,14 @@ export default [
   {
     guaXu: 17,
     guaMing: '随',
-    guaXiang: [0, 1, 1, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽中有雷，随；君子以向晦入宴息。',
     guaCi: '元亨，利贞，无咎。',
     yaoCi: [
@@ -260,7 +378,14 @@ export default [
   {
     guaXu: 18,
     guaMing: '蛊',
-    guaXiang: [1, 0, 0, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山下有风，蛊；君子以振民育德。',
     guaCi: '元亨。利涉大川；先甲三日，后甲三日。',
     yaoCi: [
@@ -275,7 +400,14 @@ export default [
   {
     guaXu: 19,
     guaMing: '临',
-    guaXiang: [0, 0, 0, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+    ],
     daXiang: '泽上有地，临；君子以教思无穷，容保民无疆。',
     guaCi: '元，亨，利，贞。至于八月有凶。',
     yaoCi: [
@@ -290,7 +422,14 @@ export default [
   {
     guaXu: 20,
     guaMing: '观',
-    guaXiang: [1, 1, 0, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+    ],
     daXiang: '风行地上，观；先王以省方、观民、设教。',
     guaCi: '盥而不荐。有孚顒若。',
     yaoCi: [
@@ -305,7 +444,14 @@ export default [
   {
     guaXu: 21,
     guaMing: '噬嗑',
-    guaXiang: [1, 0, 1, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      1,
+      0,
+      1,
+    ],
     daXiang: '雷电，噬嗑；先王以明罚敕法。',
     guaCi: '亨。利用狱。',
     yaoCi: [
@@ -320,7 +466,14 @@ export default [
   {
     guaXu: 22,
     guaMing: '贲',
-    guaXiang: [1, 0, 0, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山下有火，贲；君子以明庶政，无敢折狱。',
     guaCi: '亨。小利有攸往。',
     yaoCi: [
@@ -335,7 +488,14 @@ export default [
   {
     guaXu: 23,
     guaMing: '剥',
-    guaXiang: [1, 0, 0, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山附于地，剥；上以厚下安宅。',
     guaCi: '不利有攸往。',
     yaoCi: [
@@ -350,7 +510,14 @@ export default [
   {
     guaXu: 24,
     guaMing: '复',
-    guaXiang: [0, 0, 0, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+    ],
     daXiang: '雷在地中，复；先王以至日闭关，商旅不行，后不省方。',
     guaCi: '亨。出入无疾，朋来无咎。反覆其道，七日来复，利有攸往。',
     yaoCi: [
@@ -365,7 +532,14 @@ export default [
   {
     guaXu: 25,
     guaMing: '无妄',
-    guaXiang: [1, 1, 1, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天下雷行物与，无妄；先王以茂对时，育万物。',
     guaCi: '元，亨，利，贞。其匪正有眚，不利有攸往',
     yaoCi: [
@@ -380,7 +554,14 @@ export default [
   {
     guaXu: 26,
     guaMing: '大畜',
-    guaXiang: [1, 0, 0, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+    ],
     daXiang: '天在山中，大畜；君子以多识前言往行，以畜其德。',
     guaCi: '利贞，不家食吉，利涉大川。',
     yaoCi: [
@@ -395,7 +576,14 @@ export default [
   {
     guaXu: 27,
     guaMing: '颐',
-    guaXiang: [1, 0, 0, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山下有雷，颐；君子以慎言语，节饮食。',
     guaCi: '贞吉。观颐，自求口实。',
     yaoCi: [
@@ -410,7 +598,14 @@ export default [
   {
     guaXu: 28,
     guaMing: '大过',
-    guaXiang: [0, 1, 1, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽灭木，大过；君子以独立不惧，遁世无闷。',
     guaCi: '栋挠，利有攸往，亨。',
     yaoCi: [
@@ -425,7 +620,14 @@ export default [
   {
     guaXu: 29,
     guaMing: '坎',
-    guaXiang: [0, 1, 0, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+    ],
     daXiang: '水洊至，习坎；君子以常德行，习教事。',
     guaCi: '有孚，维心亨，行有尚。',
     yaoCi: [
@@ -440,7 +642,14 @@ export default [
   {
     guaXu: 30,
     guaMing: '离',
-    guaXiang: [1, 0, 1, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+    ],
     daXiang: '明两作，离；大人以继明照于四方。',
     guaCi: '利贞，亨。畜牝牛，吉。',
     yaoCi: [
@@ -455,7 +664,14 @@ export default [
   {
     guaXu: 31,
     guaMing: '咸',
-    guaXiang: [0, 1, 1, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      1,
+      1,
+      0,
+    ],
     daXiang: '山上有泽，咸；君子以虚受人。',
     guaCi: '亨，利贞，取女吉。',
     yaoCi: [
@@ -470,7 +686,14 @@ export default [
   {
     guaXu: 32,
     guaMing: '恒',
-    guaXiang: [0, 0, 1, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      1,
+      0,
+      0,
+    ],
     daXiang: '雷风，恒；君子以立不易方。',
     guaCi: '亨，无咎，利贞，利有攸往。',
     yaoCi: [
@@ -485,7 +708,14 @@ export default [
   {
     guaXu: 33,
     guaMing: '遁',
-    guaXiang: [1, 1, 1, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天下有山，遁；君子以远小人，不恶而严。',
     guaCi: '亨，小利贞。',
     yaoCi: [
@@ -500,7 +730,14 @@ export default [
   {
     guaXu: 34,
     guaMing: '大壮',
-    guaXiang: [0, 0, 1, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+    ],
     daXiang: '雷在天上，大壮；君子以非礼弗履。',
     guaCi: '利贞。',
     yaoCi: [
@@ -515,7 +752,14 @@ export default [
   {
     guaXu: 35,
     guaMing: '晋',
-    guaXiang: [1, 0, 1, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      1,
+      0,
+      1,
+    ],
     daXiang: '明出地上，晋；君子以自昭明德。',
     guaCi: '康侯用锡马蕃庶，昼日三接。',
     yaoCi: [
@@ -530,7 +774,14 @@ export default [
   {
     guaXu: 36,
     guaMing: '明夷',
-    guaXiang: [0, 0, 0, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+    ],
     daXiang: '明入地中，明夷；君子以莅众用晦而明。',
     guaCi: '利艰贞。',
     yaoCi: [
@@ -545,7 +796,14 @@ export default [
   {
     guaXu: 37,
     guaMing: '家人',
-    guaXiang: [1, 1, 0, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      0,
+      1,
+      1,
+    ],
     daXiang: '风自火出，家人；君子以言有物而行有恒。',
     guaCi: '利女贞。',
     yaoCi: [
@@ -560,7 +818,14 @@ export default [
   {
     guaXu: 38,
     guaMing: '睽',
-    guaXiang: [1, 0, 1, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+    ],
     daXiang: '上火下泽，睽；君子以同而异。',
     guaCi: '小事吉。',
     yaoCi: [
@@ -575,7 +840,14 @@ export default [
   {
     guaXu: 39,
     guaMing: '蹇',
-    guaXiang: [0, 1, 0, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      0,
+      1,
+      0,
+    ],
     daXiang: '山上有水，蹇；君子以反身修德。',
     guaCi: '利西南，不利东北；利见大人，贞吉。',
     yaoCi: [
@@ -590,7 +862,14 @@ export default [
   {
     guaXu: 40,
     guaMing: '解',
-    guaXiang: [0, 0, 1, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0,
+    ],
     daXiang: '雷雨作，解；君子以赦过宥罪。',
     guaCi: '利西南，无所往，其来复吉。有攸往，夙吉。',
     yaoCi: [
@@ -605,7 +884,14 @@ export default [
   {
     guaXu: 41,
     guaMing: '损',
-    guaXiang: [1, 0, 0, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+    ],
     daXiang: '山下有泽，损；君子以惩忿窒欲。',
     guaCi: '有孚，元吉，无咎，可贞，利有攸往？曷之用，二簋可用享。',
     yaoCi: [
@@ -620,7 +906,14 @@ export default [
   {
     guaXu: 42,
     guaMing: '益',
-    guaXiang: [1, 1, 0, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+    ],
     daXiang: '风雷，益；君子以见善则迁，有过则改。',
     guaCi: '利有攸往，利涉大川。',
     yaoCi: [
@@ -635,7 +928,14 @@ export default [
   {
     guaXu: 43,
     guaMing: '夬',
-    guaXiang: [0, 1, 1, 1, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽上于天，夬；君子以施禄及下，居德则忌。',
     guaCi: '扬于王庭，孚号，有厉，告自邑，不利即戎，利有攸往。',
     yaoCi: [
@@ -650,7 +950,14 @@ export default [
   {
     guaXu: 44,
     guaMing: '姤',
-    guaXiang: [1, 1, 1, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+    ],
     daXiang: '天下有风，姤；后以施命诰四方。',
     guaCi: '女壮，勿用取女。',
     yaoCi: [
@@ -665,7 +972,14 @@ export default [
   {
     guaXu: 45,
     guaMing: '萃',
-    guaXiang: [0, 1, 1, 0, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽上于地，萃；君子以除戎器，戒不虞。',
     guaCi: '亨。王假有庙，利见大人，亨，利贞。用大牲吉，利有攸往。',
     yaoCi: [
@@ -680,7 +994,14 @@ export default [
   {
     guaXu: 46,
     guaMing: '升',
-    guaXiang: [0, 0, 0, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+    ],
     daXiang: '地中升木，升；君子以顺德，积小以高大。',
     guaCi: '元亨，用见大人，勿恤，南征吉。',
     yaoCi: [
@@ -695,7 +1016,14 @@ export default [
   {
     guaXu: 47,
     guaMing: '困',
-    guaXiang: [0, 1, 1, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽无水，困；君子以致命遂志。',
     guaCi: '亨，贞，大人吉，无咎，有言不信。',
     yaoCi: [
@@ -710,7 +1038,14 @@ export default [
   {
     guaXu: 48,
     guaMing: '井',
-    guaXiang: [0, 1, 0, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      0,
+      1,
+      0,
+    ],
     daXiang: '木上有水，井；君子以劳民劝相。',
     guaCi: '改邑不改井，无丧无得，往来井井。汔至，亦未繘井，羸其瓶，凶。',
     yaoCi: [
@@ -725,7 +1060,14 @@ export default [
   {
     guaXu: 49,
     guaMing: '革',
-    guaXiang: [0, 1, 1, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      1,
+      1,
+      0,
+    ],
     daXiang: '泽中有火，革；君子以治历明时。',
     guaCi: '巳日乃孚，元亨利贞，悔亡。',
     yaoCi: [
@@ -740,7 +1082,14 @@ export default [
   {
     guaXu: 50,
     guaMing: '鼎',
-    guaXiang: [1, 0, 1, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+    ],
     daXiang: '木上有火，鼎；君子以正位凝命。',
     guaCi: '元吉，亨。',
     yaoCi: [
@@ -755,7 +1104,14 @@ export default [
   {
     guaXu: 51,
     guaMing: '震',
-    guaXiang: [0, 0, 1, 0, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      0,
+      1,
+      0,
+      0,
+    ],
     daXiang: '洊雷，震；君子以恐惧修省。',
     guaCi: '亨。震来虩虩，笑言哑哑。震惊百里，不丧匕鬯。',
     yaoCi: [
@@ -770,7 +1126,14 @@ export default [
   {
     guaXu: 52,
     guaMing: '艮',
-    guaXiang: [1, 0, 0, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      0,
+      0,
+      1,
+    ],
     daXiang: '兼山，艮；君子以思不出其位。',
     guaCi: '艮其背，不获其身，行其庭，不见其人，无咎。',
     yaoCi: [
@@ -785,7 +1148,14 @@ export default [
   {
     guaXu: 53,
     guaMing: '渐',
-    guaXiang: [1, 1, 0, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      0,
+      1,
+      1,
+    ],
     daXiang: '山上有木，渐；君子以居贤德善俗。',
     guaCi: '女归吉，利贞。',
     yaoCi: [
@@ -800,7 +1170,14 @@ export default [
   {
     guaXu: 54,
     guaMing: '归妹',
-    guaXiang: [0, 0, 1, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+    ],
     daXiang: '泽中有雷，归妹；君子以永终知敝。',
     guaCi: '征凶，无攸利。',
     yaoCi: [
@@ -815,7 +1192,14 @@ export default [
   {
     guaXu: 55,
     guaMing: '丰',
-    guaXiang: [0, 0, 1, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+    ],
     daXiang: '雷电皆至，丰；君子以折狱致刑。',
     guaCi: '亨，王假之，勿忧，宜日中。',
     yaoCi: [
@@ -830,7 +1214,14 @@ export default [
   {
     guaXu: 56,
     guaMing: '旅',
-    guaXiang: [1, 0, 1, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      1,
+      0,
+      1,
+    ],
     daXiang: '山上有火，旅；君子以明慎用刑，而不留狱。',
     guaCi: '小亨，旅贞吉。',
     yaoCi: [
@@ -845,7 +1236,14 @@ export default [
   {
     guaXu: 57,
     guaMing: '巽',
-    guaXiang: [1, 1, 0, 1, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+    ],
     daXiang: '随风，巽；君子以申命行事。',
     guaCi: '小亨，利有攸往，利见大人。',
     yaoCi: [
@@ -860,7 +1258,14 @@ export default [
   {
     guaXu: 58,
     guaMing: '兑',
-    guaXiang: [0, 1, 1, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      1,
+      1,
+      0,
+    ],
     daXiang: '丽泽，兑；君子以朋友讲习。',
     guaCi: '亨，利贞。',
     yaoCi: [
@@ -875,7 +1280,14 @@ export default [
   {
     guaXu: 59,
     guaMing: '涣',
-    guaXiang: [1, 1, 0, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      0,
+      1,
+      1,
+    ],
     daXiang: '风行水上，涣；先王以享于帝，立庙。',
     guaCi: '亨。王假有庙，利涉大川，利贞。',
     yaoCi: [
@@ -890,7 +1302,14 @@ export default [
   {
     guaXu: 60,
     guaMing: '节',
-    guaXiang: [0, 1, 0, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0,
+    ],
     daXiang: '泽上有水，节；君子以制数度，议德行。',
     guaCi: '亨。苦节不可贞。',
     yaoCi: [
@@ -905,7 +1324,14 @@ export default [
   {
     guaXu: 61,
     guaMing: '中孚',
-    guaXiang: [1, 1, 0, 0, 1, 1],
+    guaXiang: [
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+    ],
     daXiang: '泽上有风，中孚；君子以议狱缓死。',
     guaCi: '豚鱼吉，利涉大川，利贞。',
     yaoCi: [
@@ -920,7 +1346,14 @@ export default [
   {
     guaXu: 62,
     guaMing: '小过',
-    guaXiang: [0, 0, 1, 1, 0, 0],
+    guaXiang: [
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+    ],
     daXiang: '山上有雷，小过；君子以行过乎恭，丧过乎哀，用过乎俭。',
     guaCi: '亨，利贞，可小事，不可大事。飞鸟遗之音，不宜上宜下，大吉。',
     yaoCi: [
@@ -935,7 +1368,14 @@ export default [
   {
     guaXu: 63,
     guaMing: '既济',
-    guaXiang: [0, 1, 0, 1, 0, 1],
+    guaXiang: [
+      1,
+      0,
+      1,
+      0,
+      1,
+      0,
+    ],
     daXiang: '水在火上，既济；君子以思患而预防之。',
     guaCi: '亨，小利贞，初吉终乱。',
     yaoCi: [
@@ -950,7 +1390,14 @@ export default [
   {
     guaXu: 64,
     guaMing: '未济',
-    guaXiang: [1, 0, 1, 0, 1, 0],
+    guaXiang: [
+      0,
+      1,
+      0,
+      1,
+      0,
+      1,
+    ],
     daXiang: '火在水上，未济；君子以慎辨物居方。',
     guaCi: '亨，小狐汔济，濡其尾，无攸利。。',
     yaoCi: [
