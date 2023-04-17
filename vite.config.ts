@@ -10,8 +10,7 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
+import Markdown from 'vite-plugin-vue-markdown'
 import vitePrerender from 'vite-plugin-prerender'
 import CopyPlugin from 'vite-copy-plugin'
 import viteMock from 'vite-plugin-easy-mock'
@@ -43,7 +42,9 @@ export default ({ mode }: ConfigEnv) => {
         // mock里面的文件 =>dist/mock文件夹
         { from: 'mock', to: 'dist/mock' },
       ]),
-      vue(),
+      vue({
+        include: [/\.vue$/, /\.md$/],
+      }),
       pages(),
       unocss(),
       VITE_APP_DIST === 'SSF' && viteSingleFile(),
@@ -52,6 +53,7 @@ export default ({ mode }: ConfigEnv) => {
         routes: ['/', '/gua'],
       }),
       viteMock(),
+      Markdown(),
     ],
     build: getBuild(VITE_APP_DIST),
     server: {
