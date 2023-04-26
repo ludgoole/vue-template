@@ -5,8 +5,13 @@ export const menus = [
     icon: 'i-mdi:home',
   },
   {
+    name: '面试',
+    path: '/interview',
+    icon: 'i-mdi:home',
+  },
+  {
     name: '简历',
-    path: '/markdown',
+    path: '/profile',
     icon: 'i-mdi:home',
   },
   {
