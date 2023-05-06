@@ -11,13 +11,13 @@ meta:
 
 <p flex-justify>
 	<span>北京科技大学 | 男 | 1999</span>
-  <span><img src="https://img1.baidu.com/it/u=2813198352,2014080519&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=5&amp;h=5" style="zoom:5%;" /> https://www.yuque.com/ludgoole/knowledge</span>
+  <span flex-center><img mr-2 src="https://img1.baidu.com/it/u=2813198352,2014080519&amp;fm=253&amp;fmt=auto&amp;app=138&amp;f=JPEG?w=5&amp;h=5" style="zoom:5%;" /> https://www.yuque.com/ludgoole/knowledge</span>
 </p>
 
 
 <p flex-justify>
 	<span>177****9999 | ludgoole@163.com </span>
-  <span><img src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg" style="zoom:60%;" /> https://juejin.cn/column/7036687769325797383</span>
+  <span flex-center><img mr-2 src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web/6c61ae65d1c41ae8221a670fa32d05aa.svg" style="zoom:60%;" /> https://juejin.cn/column/7036687769325797383</span>
 </p>
 
 
