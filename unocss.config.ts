@@ -15,6 +15,7 @@ export default defineConfig({
   theme: {
     colors: {
       vue: '#42b983',
+      primary: '#DB6213',
     },
   },
   shortcuts: [

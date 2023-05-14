@@ -30,4 +30,8 @@ export const books = [
     name: '道德经',
     path: '/daodejing',
   },
+  {
+    name: '增广贤文',
+    path: '/zgxw',
+  },
 ]
