@@ -3,7 +3,7 @@ import type { BuildOptions } from 'vite'
 const nameREG = /([_])[.]{3}([^.]+)\1(.css)?/
 const replace = (template: string, value: string) => template.replace(/\[name\]/, value.replace(nameREG, '$2'))
 
-const getBuild = (VITE_APP_DIST: string): BuildOptions => {
+const getBuild = (): BuildOptions => {
   const output: BuildOptions['rollupOptions']['output'] = {
     // https://rollupjs.org/guide/en/#outputassetfilenames
     assetFileNames: (info) => {
@@ -19,13 +19,11 @@ const getBuild = (VITE_APP_DIST: string): BuildOptions => {
     },
   }
 
-  if (VITE_APP_DIST === 'SMC') {
-    output.manualChunks = (id) => {
-      if (id.includes('vant'))
-        return 'vant-vendor'
-      if (id.includes('node_modules'))
-        return 'vendor'
-    }
+  output.manualChunks = (id) => {
+    if (id.includes('vant'))
+      return 'vant-vendor'
+    else if (id.includes('node_modules'))
+      return 'vendor'
   }
 
   return {

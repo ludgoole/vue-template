@@ -26,11 +26,14 @@ axiosInstance.interceptors.request.use(
       })
     }
 
-    config.headers = {
-      ...config.headers,
-      'X-LC-Id': AppID,
-      'X-LC-Key': AppKey,
-    }
+    config.headers = Object.assign({}, config.headers,
+      config.url?.includes('/1.1/classes')
+        ? {
+            'X-LC-Id': AppID,
+            'X-LC-Key': AppKey,
+          }
+        : {},
+    )
 
     return config
   },
