@@ -1,12 +1,17 @@
 export const menus = [
   {
-    name: '首页',
+    name: 'Home',
     path: '/',
     icon: 'home-o',
   },
   {
-    name: '我的',
+    name: 'Order',
+    path: '/order',
+    icon: 'orders-o',
+  },
+  {
+    name: 'Me',
     path: '/mine',
-    icon: 'user-circle-o',
+    icon: 'contact',
   },
 ]

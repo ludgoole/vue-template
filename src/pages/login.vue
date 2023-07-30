@@ -1,6 +1,6 @@
 <route lang="yaml">
 meta:
-  title: 登录
+  title: Login
   hideHeader: true
   hideFooter: true
 </route>
@@ -17,17 +17,14 @@ interface Login {
 }
 
 // created
-const title = 'ONE DAY ONE APPLE'
+const title = 'Login to UPay'
 const username = ref('')
+const phone = ref('')
 const password = ref('')
 
 // method
 const onSubmit = (values: Login) => {
-  if (values.password !== '123456') {
-    return Toast({
-      message: '用户名或密码不正确',
-    })
-  }
+  Toast('login success!')
 
   router.push('/')
   localforage.setItem('Authorization', 'token')
@@ -39,36 +36,73 @@ const onSubmit = (values: Login) => {
 </script>
 
 <template>
-  <div class="Login" text-center>
-    <div class="logo" mt-32>
-      <i text-6xl class="i-carbon:apple"></i>
-    </div>
-    <h1 class="title" mt-4>
-      {{ title }}
-    </h1>
-    <VanForm mt-8 @submit="onSubmit">
-      <VanCellGroup inset>
+  <div class="Login flex-center bg-gray-1 px-8">
+    <section class="container box-base bg-white">
+      <h1 mt-4 text-2xl text-center>
+        {{ title }}
+      </h1>
+      <VanForm @submit="onSubmit">
         <VanField
           v-model="username"
           name="username"
-          label="用户名"
-          placeholder="用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
-        />
+          label="Login Username"
+          placeholder="Login Username"
+          :rules="[{ required: true, message: 'Please enter username' }]"
+        >
+          <template #label>
+            <i i-ic:baseline-person-outline></i>
+            Login Username
+          </template>
+        </VanField>
+        <VanField
+          v-model="phone"
+          type="tel"
+          name="phone"
+          label="Mobile Number"
+          placeholder="Mobile Number"
+          :rules="[{ required: true, message: 'Please enter mobile number' }]"
+        >
+          <template #label>
+            <i i-ph:phone></i>
+            Mobile Number
+          </template>
+        </VanField>
         <VanField
           v-model="password"
           type="password"
           name="password"
-          label="密码"
-          placeholder="密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-      </VanCellGroup>
-      <div style="margin: 16px;">
-        <VanButton round block type="primary" native-type="submit">
-          提交
-        </VanButton>
-      </div>
-    </VanForm>
+          label="Login Password"
+          placeholder="Login password"
+          :rules="[{ required: true, message: 'Please enter password' }]"
+        >
+          <template #label>
+            <i i-ic:outline-lock></i>
+            Login Password
+          </template>
+        </VanField>
+        <div style="margin: 16px;">
+          <VanButton block type="primary" native-type="submit">
+            login
+          </VanButton>
+        </div>
+      </VanForm>
+      <p pr-4 text-right color-gray-4 @click="router.push('/sign')">
+        Sign up
+      </p>
+    </section>
   </div>
 </template>
+
+<style lang="less">
+.Login {
+  .container {
+    width: 80vw;
+  }
+  .van-field {
+    flex-direction: column;
+    &__label {
+      width: 100%;
+    }
+  }
+}
+</style>
