@@ -10,7 +10,7 @@ watch(() => route.meta, (meta) => {
 </script>
 
 <template>
-  <div flex="~ col" justify-between h-100vh>
+  <div flex="~ col" justify-between w-100vw h-100vh>
     <AppHeader v-if="isShowHeader" />
     <RouterView flex-1 overflow-auto text-center />
     <AppFooter v-if="isShowFooter" />

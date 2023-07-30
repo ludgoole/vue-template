@@ -8,17 +8,16 @@ import unocss from 'unocss/vite'
 import pages from 'vite-plugin-pages'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
 import vitePrerender from 'vite-plugin-prerender'
-import CopyPlugin from 'vite-copy-plugin'
-import viteMock from 'vite-plugin-easy-mock'
 import getBuild from './vite.build'
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
   const env = loadEnv(mode, process.cwd())
-  const { VITE_APP_BASE_URL, VITE_APP_DIST } = env
+  const { VITE_APP_AppUrl, VITE_APP_BASE_URL, VITE_APP_DIST } = env
 
   return defineConfig({
     base: VITE_APP_BASE_URL,
@@ -36,14 +35,10 @@ export default ({ mode }: ConfigEnv) => {
         dts: './src/components.d.ts',
         resolvers: [VantResolver()],
       }),
+      visualizer({
+        open: true,
+      }),
       // https://www.npmjs.com/package/vite-copy-plugin
-      CopyPlugin([
-        { from: 'config.xml.bak', to: 'dist/config.xml' },
-      // mock里面的文件 =>dist/mock文件夹
-      // { from: 'mock', to: 'dist/mock' },
-      // { from: 'server.js', to: 'dist/app.js' },
-      // { from: 'start.bat', to: 'dist/start.bat' },
-      ]),
       vue(),
       pages(),
       unocss(),
@@ -52,12 +47,11 @@ export default ({ mode }: ConfigEnv) => {
         staticDir: resolve(__dirname, 'dist'),
         routes: ['/', '/login'],
       }),
-      viteMock(),
     ],
     build: getBuild(VITE_APP_DIST),
     server: {
       proxy: {
-        '/1.1/classes': 'https://njr7h2zt.lc-cn-n1-shared.com',
+        '/1.1/classes': VITE_APP_AppUrl,
       },
     },
   })

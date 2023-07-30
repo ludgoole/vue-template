@@ -21,14 +21,10 @@ const getBuild = (VITE_APP_DIST: string): BuildOptions => {
 
   if (VITE_APP_DIST === 'SMC') {
     output.manualChunks = (id) => {
-      if (VITE_APP_DIST === 'SMC') {
-        if (id.includes('element'))
-          return 'element-vendor'
-        else if (id.includes('lunar'))
-          return 'lunar-vendor'
-        else if (id.includes('node_modules'))
-          return 'vendor'
-      }
+      if (id.includes('vant'))
+        return 'vant-vendor'
+      if (id.includes('node_modules'))
+        return 'vendor'
     }
   }
 

@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { Toast } from 'vant'
-const baseURL = import.meta.env.VITE_APP_BASE_URL
 const AppID = import.meta.env.VITE_APP_AppID
 const AppKey = import.meta.env.VITE_APP_AppKey
+const AppUrl = import.meta.env.VITE_APP_AppUrl
 
 /**
   * 创建axios实例
   */
 const axiosInstance = axios.create({
-  baseURL,
+  baseURL: AppUrl,
   timeout: 15000,
 })
 
