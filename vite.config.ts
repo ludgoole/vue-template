@@ -8,10 +8,8 @@ import unocss from 'unocss/vite'
 import pages from 'vite-plugin-pages'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-import { visualizer } from 'rollup-plugin-visualizer'
 import { VantResolver } from 'unplugin-vue-components/resolvers'
 import { viteSingleFile } from 'vite-plugin-singlefile'
-import vitePrerender from 'vite-plugin-prerender'
 import getBuild from './vite.build'
 
 // https://vitejs.dev/config/
@@ -35,18 +33,11 @@ export default ({ mode }: ConfigEnv) => {
         dts: './src/components.d.ts',
         resolvers: [VantResolver()],
       }),
-      visualizer({
-        open: true,
-      }),
       // https://www.npmjs.com/package/vite-copy-plugin
       vue(),
       pages(),
       unocss(),
       VITE_APP_DIST === 'SSF' && viteSingleFile(),
-      VITE_APP_DIST === 'SSG' && vitePrerender({
-        staticDir: resolve(__dirname, 'dist'),
-        routes: ['/', '/login'],
-      }),
     ],
     build: getBuild(VITE_APP_DIST),
     server: {
