@@ -20,7 +20,7 @@ getTestData({ id: 1 }).then((data) => {
 <template>
   <div class="Home">
     <p>this is home page</p>
-    <VanButton type="primary" @click="count++">
+    <VanButton type="primary" size="small" @click="count++">
       count is: {{ count }}
     </VanButton>
   </div>
