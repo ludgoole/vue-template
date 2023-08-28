@@ -21,7 +21,7 @@
     "mitt": "^3.0.0",
     "pinia": "^2.0.21",
     "pinia-plugin-persistedstate-2": "^2.0.1",
-    "vant": "^4.6.6",
+    "vant": "3.6.12",
     "vue": "^3.2.37",
     "vue-router": "^4.1.3"
   },

@@ -54,7 +54,7 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     // 关闭 loading
-    if (error.config.loading)
+    if (error.config?.loading)
       Toast.clear()
 
     // 对响应错误做点什么
