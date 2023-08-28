@@ -5,23 +5,51 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { useCounterStore } from '@/stores/counter'
-import { getTestData } from '@/apis/test'
-import TEST from '@/mock/test'
-console.log('🚀 ~ file: index.vue ~ line 11 ~ TEST', TEST)
+import bookList from '@/mock/books'
+import { useHeaderStore } from '@/stores/header'
+const { title } = toRefs(useHeaderStore())
+const router = useRouter()
+const active = ref(0)
+const trimAll = (str: string) => str.replaceAll(' ', '')
 
-const { count } = toRefs(useCounterStore())
+const toPalace = (image = bookList[0].images[0]) => {
+  router.push({
+    path: '/palace',
+    query: {
+      image: JSON.stringify(image),
+    },
+  })
+}
 
-getTestData({ id: 1 }).then((data) => {
-  console.log('🚀 ~ file: index.vue ~ line 24 ~ getTestData ~ data', data)
+onMounted(() => {
+  title.value = bookList[0].poem
 })
 </script>
 
 <template>
   <div class="Home">
-    <p>this is home page</p>
-    <VanButton type="primary" size="small" @click="count++">
-      count is: {{ count }}
-    </VanButton>
+    <VanTabs v-model:active="active">
+      <VanTab v-for="book in bookList" :key="book.book" :title="book.book">
+        <ul px-2 flex flex-wrap>
+          <li
+            v-for="(word, i) in trimAll(book.words)" :key="i"
+            class="basis-1\/5 aspect-square p-2"
+            @click="toPalace(book.images[i])"
+          >
+            <p class="word" w-full h-full flex-center text-3xl>
+              {{ word }}
+            </p>
+          </li>
+        </ul>
+      </VanTab>
+    </VanTabs>
   </div>
 </template>
+
+<style lang="less" scoped>
+ .word {
+    background: url('https://www.cidianwang.com/images/z_100.gif') center center no-repeat;
+    border: 1px solid sandybrown;
+  }
+</style>
+/src/mock/books

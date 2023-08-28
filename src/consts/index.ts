@@ -5,8 +5,8 @@ export const menus = [
     icon: 'home-o',
   },
   {
-    name: '我的',
-    path: '/mine',
-    icon: 'user-circle-o',
+    name: '查询',
+    path: '/search',
+    icon: 'search',
   },
 ]

@@ -1,12 +1,8 @@
 <script lang="ts" setup>
-import { Toast } from 'vant'
 import { menus } from '@/consts'
 const router = useRouter()
 const active = ref(0)
 const onChange = (index: number) => {
-  Toast({
-    message: `标签 ${index}`,
-  })
   router.push({
     path: menus[index].path,
   })

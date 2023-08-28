@@ -22,6 +22,8 @@ export default ({ mode }: ConfigEnv) => {
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'), // 设置 `@` 指向 `src` 目录
+        'Mock': resolve(__dirname, 'src/mock'),
+        'Utils': resolve(__dirname, 'src/utils'),
       },
     },
     plugins: [
