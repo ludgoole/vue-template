@@ -24,14 +24,14 @@ export const menus = [
 export const books = [
   {
     name: '周易',
-    path: '/zhouyi',
+    path: '/book/zhouyi',
   },
   {
     name: '道德经',
-    path: '/daodejing',
+    path: '/book/daodejing',
   },
   {
     name: '增广贤文',
-    path: '/zgxw',
+    path: '/book/zgxw',
   },
 ]

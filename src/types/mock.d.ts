@@ -4,8 +4,9 @@ declare module '@/mock/*/index' {
   // export = ZHOUYI
 }
 
-declare module '@/mock/*' {
-
+declare module 'num2capital' {
+  const num2Capital: (num: number) => string
+  export { num2Capital }
 }
 
 declare namespace MOCK {
@@ -16,23 +17,22 @@ declare namespace MOCK {
     [key: string]: string
   }
   interface PILE {
-    id: string
-    order: number
-    sentence: string
-    name: string
+    id: number
+    info: string | number[]
     note: string
   }
   interface IMAGE {
-    id: string
-    name: string
+    id: number
     path: string
+    name: string
+    book: string
     piles: PILE[]
   }
 
   interface BOOK {
-    book: string
-    poem: string
-    words: string
+    name: string
+    film: string
+    col: number
     images: IMAGE[]
   }
 }
