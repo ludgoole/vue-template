@@ -4,6 +4,7 @@ const route = useRoute()
 const imageStr = route.query.image as string
 const image = JSON.parse(imageStr) as MOCK.IMAGE
 const notes = ref<string[]>([])
+const imageSrc = ref('')
 const getGuaName = (guaxiang: number[]) => {
   const bagua = {
     '111': '天',
@@ -18,18 +19,40 @@ const getGuaName = (guaxiang: number[]) => {
   const key = guaxiang.reverse().join('') as keyof typeof bagua
   return bagua[key]
 }
+
+const getData = async () => {
+  const data: any = (await localforage.getItem(image.book) || {})
+  if (!data[image.name])
+    data[image.name] = {}
+
+  return data
+}
+
 // 初始化
 const init = async () => {
-  const data = (await localforage.getItem(image.book) || {}) as { [key: string]: string[] }
+  const data = await getData()
 
-  notes.value = data[image.name] || []
+  console.log(data)
+
+  notes.value = data[image.name].notes || []
+  imageSrc.value = data[image.name].imageSrc || image.path
 }
 
 const onchange = async () => {
-  const data = (await localforage.getItem(image.book) || {}) as { [key: string]: string[] }
-  data[image.name] = JSON.parse(JSON.stringify(notes.value))
+  const data = await getData()
 
+  data[image.name].notes = JSON.parse(JSON.stringify(notes.value))
   localforage.setItem(image.book, data)
+}
+
+const save = async (imageSrc: string) => {
+  const data = await getData()
+  data[image.name].imageSrc = imageSrc
+  localforage.setItem(image.book, data)
+}
+
+const redraw = () => {
+  imageSrc.value = image.path
 }
 
 init()
@@ -37,7 +60,7 @@ init()
 
 <template>
   <div flex m-4>
-    <img object-fit="cover" :src="image.path" />
+    <BaseMark :key="imageSrc" :src="imageSrc" :origin-src="image.path" @save="save" @redraw="redraw" />
     <div ml-16>
       <h1 text-2xl>
         {{ image.name }}

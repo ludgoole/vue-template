@@ -19,6 +19,7 @@
     "dexie": "^3.2.3",
     "downloadjs": "^1.4.7",
     "element-plus": "^2.2.15",
+    "fabric": "^5.5.2",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
