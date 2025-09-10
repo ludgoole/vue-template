@@ -8,13 +8,13 @@ const imageSrc = ref('')
 const getGuaName = (guaxiang: number[]) => {
   const bagua = {
     '111': '天',
-    '011': '泽',
+    '110': '泽',
     '101': '火',
-    '001': '雷',
-    '110': '风',
+    '100': '雷',
+    '011': '风',
     '010': '水',
-    '100': '山',
-    '000': '土',
+    '001': '山',
+    '000': '地',
   }
   const key = guaxiang.reverse().join('') as keyof typeof bagua
   return bagua[key]
@@ -59,9 +59,9 @@ init()
 </script>
 
 <template>
-  <div flex m-4>
+  <div flex m-4 overflow-hidden>
     <BaseMark :key="imageSrc" :src="imageSrc" :origin-src="image.path" @save="save" @redraw="redraw" />
-    <div ml-16>
+    <div flex-1 ml-16 overflow-y-auto>
       <h1 text-2xl>
         {{ image.name }}
       </h1>

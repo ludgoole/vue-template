@@ -46,7 +46,7 @@ const init = () => {
   // canvas.freeDrawingBrush.color = '#11999e'
 
   // 设置画笔粗细
-  canvas.freeDrawingBrush.width = 2
+  canvas.freeDrawingBrush.width = 1
 
   // 画笔投影
   // canvas.freeDrawingBrush.shadow = new fabric.Shadow({
@@ -83,6 +83,18 @@ const drawImage = () => {
 //   return point
 // }
 
+// const drawTextbox = (text, x, y) => {
+//   const textbox = new fabric.Textbox(text, {
+//     fill: '#F56C6C',
+//     fontSize: 40,
+//   })
+//   textbox.set({
+//     left: x,
+//     top: y,
+//   })
+//   return textbox
+// }
+
 const drawLine = (point1, point2) => {
   const line = new fabric.Line([
     point1.x, point1.y,
@@ -94,18 +106,6 @@ const drawLine = (point1, point2) => {
     originY: 'center',
   })
   return line
-}
-
-const drawTextbox = (text, x, y) => {
-  const textbox = new fabric.Textbox(text, {
-    fill: '#F56C6C',
-    fontSize: 40,
-  })
-  textbox.set({
-    left: x,
-    top: y,
-  })
-  return textbox
 }
 
 const drawFree = () => {
@@ -149,10 +149,14 @@ const download = (imageSrc) => {
   document.body.removeChild(a)
 }
 const saveImage = () => {
+  // 还原缩放
+  resetZomm()
+
   const imageSrc = canvas.toDataURL({
     format: 'webp',
-    quality: 0.1,
+    quality: 1,
   })
+  console.log('saveImage', imageSrc)
   emit('save', imageSrc)
   download(imageSrc)
 }
@@ -177,7 +181,7 @@ onMounted(() => {
 
     // canvas.remove(groupText).add(groupText)
     // canvas.remove(groupLine).add(groupLine)
-    canvas.add(drawTextbox(points.length.toString(), x, y))
+    // canvas.add(drawTextbox(points.length.toString(), x, y))
   })
 
   canvas.on('mouse:wheel', (opt) => {
