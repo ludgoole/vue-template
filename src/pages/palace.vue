@@ -5,6 +5,7 @@ const imageStr = route.query.image as string
 const image = JSON.parse(imageStr) as MOCK.IMAGE
 const notes = ref<string[]>([])
 const imageSrc = ref('')
+const objects = ref([])
 const getGuaName = (guaxiang: number[]) => {
   const bagua = {
     '111': '天',
@@ -36,6 +37,7 @@ const init = async () => {
 
   notes.value = data[image.name].notes || []
   imageSrc.value = data[image.name].imageSrc || image.path
+  objects.value = data[image.name].objects
 }
 
 const onchange = async () => {
@@ -45,14 +47,15 @@ const onchange = async () => {
   localforage.setItem(image.book, data)
 }
 
-const save = async (imageSrc: string) => {
+const save = async (objects: any[]) => {
   const data = await getData()
-  data[image.name].imageSrc = imageSrc
+  data[image.name].objects = objects
   localforage.setItem(image.book, data)
 }
 
 const redraw = () => {
   imageSrc.value = image.path
+  objects.value = []
 }
 
 init()
@@ -60,7 +63,7 @@ init()
 
 <template>
   <div flex m-4 overflow-hidden>
-    <BaseMark :key="imageSrc" :src="imageSrc" :origin-src="image.path" @save="save" @redraw="redraw" />
+    <BaseMark :key="imageSrc" :src="imageSrc" :origin-src="image.path" :objects="objects" @save="save" @redraw="redraw" />
     <div flex-1 ml-16 overflow-y-auto>
       <h1 text-2xl>
         {{ image.name }}
