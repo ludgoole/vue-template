@@ -135,44 +135,6 @@ const drawObjects = () => {
   })
 }
 
-const init = async () => {
-  createCanvas()
-  await drawImage()
-  drawObjects()
-}
-
-const initEvent = () => {
-  canvas.on('mouse:down', (opt) => {
-    if (!isDrawing) return
-
-    const evt = opt.e
-    console.log('mouse:down', opt)
-    const { x, y } = canvas.getPointer(evt)
-    points.push({ x, y })
-
-    if (points.length > 1) {
-      const point1 = points[points.length - 2]
-      const point2 = points[points.length - 1]
-      // groupLine.addWithUpdate(drawLine(point1, point2))
-      canvas.add(drawLine(point1, point2))
-    }
-
-    canvas.add(drawTextbox(points.length.toString(), x, y))
-  })
-
-  canvas.on('mouse:wheel', (opt) => {
-    const delta = opt.e.deltaY
-    let zoom = canvas.getZoom()
-    console.log(zoom, delta)
-
-    zoom *= 0.999 ** delta
-    if (zoom > 20) zoom = 20
-    if (zoom < 0.01) zoom = 0.01
-    canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
-    opt.e.preventDefault()
-    opt.e.stopPropagation()
-  })
-}
 const drawFree = () => {
   isDrawing = false
   canvas.isDrawingMode = !canvas.isDrawingMode
@@ -235,9 +197,84 @@ const download = () => {
   document.body.removeChild(a)
 }
 
+const keydownhandler = (evt) => {
+  console.log('🚀 ~ initEvent ~ evt:', evt.key)
+  if (evt.key === 'Delete')
+    clearSelect()
+}
+
+const init = async () => {
+  createCanvas()
+  await drawImage()
+  drawObjects()
+}
+
+const initEvent = () => {
+  canvas.on('mouse:down', (opt) => {
+    const evt = opt.e
+    // 移动前置准备
+    if (evt.ctrlKey === true) { // 是否按住alt
+      canvas.isDragging = true // isDragging 是自定义的，开启移动状态
+      canvas.lastPosX = evt.clientX // lastPosX 是自定义的
+      canvas.lastPosY = evt.clientY // lastPosY 是自定义的
+    }
+
+    if (!isDrawing) return
+
+    console.log('mouse:down', opt)
+    const { x, y } = canvas.getPointer(evt)
+    points.push({ x, y })
+
+    if (points.length > 1) {
+      const point1 = points[points.length - 2]
+      const point2 = points[points.length - 1]
+      // groupLine.addWithUpdate(drawLine(point1, point2))
+      canvas.add(drawLine(point1, point2))
+    }
+
+    canvas.add(drawTextbox(points.length.toString(), x, y))
+  })
+
+  canvas.on('mouse:move', (opt) => { // 鼠标移动时触发
+    if (canvas.isDragging) {
+      const evt = opt.e
+      const vpt = canvas.viewportTransform // 聚焦视图的转换
+      vpt[4] += evt.clientX - canvas.lastPosX
+      vpt[5] += evt.clientY - canvas.lastPosY
+      canvas.requestRenderAll() // 重新渲染
+      canvas.lastPosX = evt.clientX
+      canvas.lastPosY = evt.clientY
+    }
+  })
+
+  canvas.on('mouse:up', () => { // 鼠标松开时触发
+    canvas.setViewportTransform(canvas.viewportTransform) // 设置此画布实例的视口转换
+    canvas.isDragging = false // 关闭移动状态
+  })
+
+  canvas.on('mouse:wheel', (opt) => {
+    const delta = opt.e.deltaY
+    let zoom = canvas.getZoom()
+    console.log(zoom, delta)
+
+    zoom *= 0.999 ** delta
+    if (zoom > 20) zoom = 20
+    if (zoom < 0.01) zoom = 0.01
+    canvas.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom)
+    opt.e.preventDefault()
+    opt.e.stopPropagation()
+  })
+
+  document.addEventListener('keydown', keydownhandler)
+}
+
 onMounted(() => {
   init()
   initEvent()
+})
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', keydownhandler)
 })
 </script>
 
@@ -285,7 +322,7 @@ onMounted(() => {
   width: v-bind(width);
   height: v-bind(height);
 
-  &>>>.el-tag {
+  &:deep(.el-tag) {
     margin-left: 0.5rem;
     cursor: pointer;
 
