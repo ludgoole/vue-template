@@ -23,7 +23,7 @@ const switchTo = (image: MOCK.IMAGE) => {
 </script>
 
 <template>
-  <ul grid gap-4 mt-4 grid-cols-8 :style="{ 'grid-template-columns': `repeat(${book.col}, minmax(0, 1fr))` }">
+  <ul m-4 grid gap-4 grid-cols-8 grid-auto-rows-max :style="{ 'grid-template-columns': `repeat(${book.col}, minmax(0, 1fr))` }">
     <li
       v-for="image in book.images" :key="image.id"
       cursor-pointer hover:transform="scale-110" transition="duration-200"

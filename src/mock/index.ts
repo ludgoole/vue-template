@@ -2,18 +2,19 @@ import zhouyi from './zhouyi'
 import daodejing from './daodejing'
 import yaoxing from './yaoxing'
 
+// 异步按需加载
 const books = [
   {
     name: '周易',
-    data: zhouyi,
+    data: () => zhouyi,
   },
   {
     name: '道德经',
-    data: daodejing,
+    data: () => daodejing,
   },
   {
     name: '药性歌赋',
-    data: yaoxing,
+    data: () => yaoxing,
   },
 ]
 

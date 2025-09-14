@@ -21,7 +21,7 @@ const switchTo = (book: MOCK.BOOK) => {
 <template>
   <div class="Home">
     <ul flex mt-4>
-      <li v-for="book in books" :key="book.name" @click="switchTo(book.data)">
+      <li v-for="book in books" :key="book.name" @click="switchTo(book.data())">
         <i class="i-material-symbols:book" text-size-20 color-yellow-5></i>
         <p>{{ book.name }}</p>
       </li>

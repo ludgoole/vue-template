@@ -8,7 +8,7 @@ export default {
     return {
       id: i + 1,
       book: '药性歌赋',
-      path: new URL(`./images/${i + 1}.jpg`, import.meta.url).href,
+      path: new URL(`./images/${i + 1}.webp`, import.meta.url).href,
       width: 800,
       height: 450,
       name: book[i].name,
