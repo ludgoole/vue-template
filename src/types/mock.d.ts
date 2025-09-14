@@ -24,6 +24,8 @@ declare namespace MOCK {
   interface IMAGE {
     id: number
     path: string
+    width: number
+    height: number
     name: string
     book: string
     piles: PILE[]

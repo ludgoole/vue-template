@@ -1,5 +1,6 @@
 import zhouyi from './zhouyi'
 import daodejing from './daodejing'
+import yaoxing from './yaoxing'
 
 const books = [
   {
@@ -9,6 +10,10 @@ const books = [
   {
     name: '道德经',
     data: daodejing,
+  },
+  {
+    name: '药性歌赋',
+    data: yaoxing,
   },
 ]
 

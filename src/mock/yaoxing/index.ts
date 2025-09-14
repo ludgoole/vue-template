@@ -1,18 +1,16 @@
 import book from './book'
 
 export default {
-  name: '道德经',
-  film: '数字',
-  width: 800,
-  height: 600,
-  col: 9,
+  name: '药性歌赋',
+  film: '我不是药神',
+  col: 10,
   images: book.map((item, i) => {
     return {
       id: i + 1,
-      book: '道德经',
-      path: new URL(`./images/${i + 1}.JPG`, import.meta.url).href,
+      book: '药性歌赋',
+      path: new URL(`./images/${i + 1}.jpg`, import.meta.url).href,
       width: 800,
-      height: 600,
+      height: 450,
       name: book[i].name,
       piles: item.sentences.map((v, j) => {
         return {

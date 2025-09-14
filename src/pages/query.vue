@@ -30,7 +30,7 @@ const onSearch = () => {
 
 // mounted
 onMounted(() => {
-  search.value = route.query.记忆 as string
+  search.value = route.query.search as string
   onSearch()
 })
 </script>

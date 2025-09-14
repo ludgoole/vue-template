@@ -16,79 +16,28 @@ const props = defineProps({
       return []
     },
   },
-  src: {
+  imageSrc: {
     type: String,
-    required: true,
+    default: '',
   },
   originSrc: {
     type: String,
-    default: '',
+    required: true,
   },
 })
 const emit = defineEmits(['save', 'redraw'])
 
 let canvas = null
 let isDrawing = false
-let defaultViewportTransform = [1, 0, 0, 1, 0, 0]
 let points = []
+const defaultViewportTransform = [1, 0, 0, 1, 0, 0]
 // const groupLine = new fabric.Group()
 const width = props.width
 const height = props.height
 const objects = props.objects
-const src = props.src
+const imageSrc = props.imageSrc || props.originSrc
 const originSrc = props.originSrc
 const isOriginal = ref(false)
-
-// const drawPoint = (x, y) => {
-//   const point = new fabric.Circle({
-//     radius: 5,
-//     fill: 'red',
-//     originX: 'center',
-//     originY: 'center',
-//   })
-//   point.set({
-//     left: x,
-//     top: y,
-//   })
-//   return point
-// }
-
-const drawTextbox = (text, x, y) => {
-  const textbox = new fabric.Textbox(text, {
-    fill: '#F56C6C',
-    fontSize: 40,
-  })
-  textbox.set({
-    left: x,
-    top: y,
-  })
-  return textbox
-}
-
-const drawLine = (point1, point2) => {
-  const line = new fabric.Line([
-    point1.x, point1.y,
-    point2.x, point2.y,
-  ], {
-    stroke: '#4047d6ff',
-    strokeWidth: 5,
-    originX: 'center',
-    originY: 'center',
-  })
-  return line
-}
-
-const drawPath = (path, left, top) => {
-  const pathline = new fabric.Path(path, {
-    stroke: '#000000',
-    fill: 'transparent',
-    strokeWidth: 1,
-    left,
-    top,
-  })
-
-  return pathline
-}
 
 const createCanvas = () => {
   canvas = new fabric.Canvas('canvas', {
@@ -96,7 +45,6 @@ const createCanvas = () => {
     height,
   })
 
-  defaultViewportTransform = canvas.viewportTransform
   window.canvas = canvas
 
   // 设置画笔颜色
@@ -117,7 +65,7 @@ const createCanvas = () => {
 
 const drawImage = () => {
   return new Promise((resolve) => {
-    fabric.Image.fromURL(src, (oImg) => {
+    fabric.Image.fromURL(imageSrc, (oImg) => {
       oImg.width = screen.width
       oImg.height = screen.height
       oImg.scale(screen.width / oImg.width)
@@ -127,11 +75,77 @@ const drawImage = () => {
     })
   })
 }
+const drawCircle = (x, y) => {
+  const point = new fabric.Circle({
+    radius: 5,
+    fill: '#4047d6',
+    originX: 'center',
+    originY: 'center',
+    left: x,
+    top: y,
+    selectable: false,
+  })
+  return point
+}
+
+const drawTextbox = (text, x, y) => {
+  const fontSize = 32
+  const textbox = new fabric.Textbox(text, {
+    fill: 'red',
+    fontSize,
+    left: x - fontSize / 4,
+    top: y + fontSize / 8,
+    selectable: true,
+  })
+  return textbox
+}
+
+const drawLine = (points, x, y) => {
+  const line = new fabric.Line(points, {
+    stroke: '#4047d6',
+    strokeWidth: 5,
+    originX: 'center',
+    originY: 'center',
+    selectable: false,
+  })
+  if (x && y) {
+    line.set({
+      left: x,
+      top: y,
+    })
+  }
+  return line
+}
+
+const drawPath = (path, left, top) => {
+  const pathline = new fabric.Path(path, {
+    stroke: '#000000',
+    fill: 'transparent',
+    strokeWidth: 1,
+    left,
+    top,
+  })
+
+  return pathline
+}
+
+const drawObject = (object) => {
+  switch (object.type) {
+    case 'circle':
+      return drawCircle(object.left, object.top)
+    case 'textbox':
+      return drawTextbox(object.text, object.left, object.top)
+    case 'line':
+      return drawLine([object.x1, object.y1, object.x2, object.y2], object.left, object.top)
+    case 'path':
+      return drawPath(object.path, object.left, object.top)
+  }
+}
 
 const drawObjects = () => {
   objects.forEach((object) => {
-    const pathline = drawPath(object.path, object.left, object.top)
-    canvas.add(pathline)
+    const Object = drawObject(object)
+    canvas.add(Object)
   })
 }
 
@@ -141,7 +155,6 @@ const drawFree = () => {
 }
 
 const drawGuideLine = () => {
-  points = []
   canvas.isDrawingMod = false
   isDrawing = !isDrawing
 }
@@ -158,6 +171,7 @@ const clearSelect = () => {
 }
 
 const clearAll = () => {
+  points = []
   canvas.clear()
   drawCancel()
   drawImage()
@@ -165,6 +179,24 @@ const clearAll = () => {
 
 const resetZomm = () => {
   canvas.setViewportTransform(defaultViewportTransform)
+  console.log('🚀 ~ resetZomm ~ defaultViewportTransform:', defaultViewportTransform)
+}
+
+const switchOriginal = () => {
+  isOriginal.value = !isOriginal.value
+}
+
+const undo = () => {
+  const lastObject = canvas.toObject().objects.slice(-1)[0]
+  const isPoint = lastObject.type === 'circle'
+  const isImage = lastObject.type === 'image'
+
+  // 保留背景图
+  if (isImage) return
+
+  canvas.remove(canvas.getObjects().slice(-1)[0])
+
+  isPoint && points.pop()
 }
 
 const saveImage = () => {
@@ -172,16 +204,10 @@ const saveImage = () => {
   resetZomm()
 
   // 不保存背景图
-  const objects = canvas.toObject().objects.slice(1).map((v) => {
-    return {
-      path: v.path,
-      left: v.left,
-      top: v.top,
-    }
-  })
+  const objects = canvas.toObject().objects.slice(1)
+  emit('save', objects)
 
   console.log('saveImage', objects)
-  emit('save', objects)
 }
 
 const download = () => {
@@ -199,8 +225,38 @@ const download = () => {
 
 const keydownhandler = (evt) => {
   console.log('🚀 ~ initEvent ~ evt:', evt.key)
-  if (evt.key === 'Delete')
-    clearSelect()
+  switch (evt.key) {
+    case 'Escape':
+      drawCancel()
+      break
+    case 'Delete':
+      clearSelect()
+      break
+    case 'Tab':
+      switchOriginal()
+      break
+    case 'ArrowLeft':
+      undo()
+      break
+    case 'f':
+      drawFree()
+      break
+    case 'g':
+      drawGuideLine()
+      break
+    case 'd':
+      clearSelect()
+      break
+    case 'c':
+      clearAll()
+      break
+    case 'r':
+      resetZomm()
+      break
+    case 's':
+      saveImage()
+      break
+  }
 }
 
 const init = async () => {
@@ -229,9 +285,10 @@ const initEvent = () => {
       const point1 = points[points.length - 2]
       const point2 = points[points.length - 1]
       // groupLine.addWithUpdate(drawLine(point1, point2))
-      canvas.add(drawLine(point1, point2))
+      canvas.add(drawLine([point1.x, point1.y, point2.x, point2.y]))
     }
 
+    canvas.add(drawCircle(x, y))
     canvas.add(drawTextbox(points.length.toString(), x, y))
   })
 
@@ -249,6 +306,7 @@ const initEvent = () => {
 
   canvas.on('mouse:up', () => { // 鼠标松开时触发
     canvas.setViewportTransform(canvas.viewportTransform) // 设置此画布实例的视口转换
+    console.log('🚀 ~ initEvent ~ canvas.viewportTransform:', canvas.viewportTransform)
     canvas.isDragging = false // 关闭移动状态
   })
 
@@ -279,10 +337,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="BaseMark" relative>
-    <canvas v-show="!isOriginal" id="canvas"></canvas>
-    <img v-show="isOriginal" absolute top-0 :src="originSrc" />
-    <div absolute top-0 m-2>
+  <div class="BaseMark">
+    <div mb-2 text-left>
       <ElTag type="info" @click="drawFree">
         自由绘制
       </ElTag>
@@ -301,7 +357,7 @@ onUnmounted(() => {
       <ElTag type="info" @click="resetZomm">
         还原缩放
       </ElTag>
-      <ElTag v-if="originSrc" type="info" @click="isOriginal = !isOriginal">
+      <ElTag v-if="originSrc" type="info" @click="switchOriginal">
         {{ isOriginal ? '切换缩略图' : '切换原图' }}
       </ElTag>
       <ElTag type="info" @click="emit('redraw')">
@@ -314,6 +370,10 @@ onUnmounted(() => {
         下载图片
       </ElTag>
     </div>
+    <div relative>
+      <canvas v-show="!isOriginal" id="canvas"></canvas>
+      <img v-show="isOriginal" absolute top-0 :src="originSrc" />
+    </div>
   </div>
 </template>
 
@@ -323,7 +383,7 @@ onUnmounted(() => {
   height: v-bind(height);
 
   &:deep(.el-tag) {
-    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     cursor: pointer;
 
     &:hover {

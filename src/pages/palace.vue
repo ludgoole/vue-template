@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import localforage from 'localforage'
 const route = useRoute()
+const router = useRouter()
 const imageStr = route.query.image as string
 const image = JSON.parse(imageStr) as MOCK.IMAGE
 const notes = ref<string[]>([])
@@ -36,7 +37,7 @@ const init = async () => {
   console.log(data)
 
   notes.value = data[image.name].notes || []
-  imageSrc.value = data[image.name].imageSrc || image.path
+  imageSrc.value = data[image.name].imageSrc
   objects.value = data[image.name].objects
 }
 
@@ -54,8 +55,17 @@ const save = async (objects: any[]) => {
 }
 
 const redraw = () => {
-  imageSrc.value = image.path
+  imageSrc.value = ''
   objects.value = []
+}
+
+const toQuery = (info: string) => {
+  router.push({
+    path: '/query',
+    query: {
+      search: info,
+    },
+  })
 }
 
 init()
@@ -63,7 +73,16 @@ init()
 
 <template>
   <div flex m-4 overflow-hidden>
-    <BaseMark :key="imageSrc" :src="imageSrc" :origin-src="image.path" :objects="objects" @save="save" @redraw="redraw" />
+    <BaseMark
+      :key="imageSrc"
+      :width="image.width"
+      :height="image.height"
+      :image-src="imageSrc"
+      :origin-src="image.path"
+      :objects="objects"
+      @save="save"
+      @redraw="redraw"
+    />
     <div flex-1 ml-16 overflow-y-auto>
       <h1 text-2xl>
         {{ image.name }}
@@ -78,9 +97,11 @@ init()
             </p>
           </template>
           <template v-else>
-            {{ i + 1 }}. {{ pile.info }}
+            <p @click="toQuery(pile.info)">
+              {{ i + 1 }}. {{ pile.info }}
+            </p>
           </template>
-          <ElInput v-model="notes[i]" placeholder="笔记" clearable @change="onchange" />
+          <ElInput v-model="notes[i]" type="textarea" :rows="1" autosize placeholder="笔记" clearable @change="onchange" />
         </li>
       </ul>
     </div>

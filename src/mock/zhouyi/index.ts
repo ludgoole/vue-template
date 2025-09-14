@@ -8,8 +8,10 @@ export default {
     return {
       id: i + 1,
       path: new URL(`./images/${i + 1}.jpg`, import.meta.url).href,
-      name: book[i].guaMing,
+      width: 800,
+      height: 600,
       book: '周易',
+      name: book[i].guaMing,
       piles: [item.guaMing, item.guaXiang, item.daXiang, ...item.yaoCi].map((v, j) => {
         return {
           id: j + 1,
