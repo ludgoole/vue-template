@@ -10,7 +10,7 @@ export default {
     return {
       id: i + 1,
       book: '道德经',
-      path: new URL(`./images/${i + 1}.JPG`, import.meta.url).href,
+      path: new URL(`./images/${i + 1}.webp`, import.meta.url).href,
       width: 800,
       height: 600,
       name: book[i].name,
