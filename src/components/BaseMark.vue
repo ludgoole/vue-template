@@ -38,6 +38,7 @@ const objects = props.objects
 const imageSrc = props.imageSrc || props.originSrc
 const originSrc = props.originSrc
 const isOriginal = ref(false)
+const color = ref('#000000')
 
 const createCanvas = () => {
   canvas = new fabric.Canvas('canvas', {
@@ -63,6 +64,10 @@ const createCanvas = () => {
   // })
 }
 
+const changeColor = (color) => {
+  canvas.freeDrawingBrush.color = color
+}
+
 const drawImage = () => {
   return new Promise((resolve) => {
     fabric.Image.fromURL(imageSrc, (oImg) => {
@@ -83,7 +88,6 @@ const drawCircle = (x, y) => {
     originY: 'center',
     left: x,
     top: y,
-    selectable: false,
   })
   return point
 }
@@ -95,7 +99,6 @@ const drawTextbox = (text, x, y) => {
     fontSize,
     left: x - fontSize / 4,
     top: y + fontSize / 8,
-    selectable: true,
   })
   return textbox
 }
@@ -106,7 +109,6 @@ const drawLine = (points, x, y) => {
     strokeWidth: 5,
     originX: 'center',
     originY: 'center',
-    selectable: false,
   })
   if (x && y) {
     line.set({
@@ -145,6 +147,7 @@ const drawObject = (object) => {
 const drawObjects = () => {
   objects.forEach((object) => {
     const Object = drawObject(object)
+    Object.selectable = false
     canvas.add(Object)
   })
 }
@@ -172,9 +175,9 @@ const clearSelect = () => {
 
 const clearAll = () => {
   points = []
-  canvas.clear()
-  drawCancel()
-  drawImage()
+  canvas.getObjects().forEach((object) => {
+    object.selectable && canvas.remove(object)
+  })
 }
 
 const resetZomm = () => {
@@ -369,6 +372,7 @@ onUnmounted(() => {
       <ElTag type="info" @click="download">
         下载图片
       </ElTag>
+      <ElColorPicker v-model="color" @change="changeColor" />
     </div>
     <div relative>
       <canvas v-show="!isOriginal" id="canvas"></canvas>
