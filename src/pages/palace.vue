@@ -49,9 +49,14 @@ const onchange = async () => {
 }
 
 const save = async (objects: any[]) => {
-  const data = await getData()
-  data[image.name].objects = objects
-  localforage.setItem(image.book, data)
+  if (objects.length) {
+    const data = await getData()
+    data[image.name].objects = objects
+    localforage.setItem(image.book, data)
+  }
+  else {
+    console.log('save, no objects')
+  }
 }
 
 const redraw = () => {

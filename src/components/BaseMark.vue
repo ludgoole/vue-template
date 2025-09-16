@@ -88,17 +88,18 @@ const drawCircle = (x, y) => {
     originY: 'center',
     left: x,
     top: y,
+    selectable: false,
   })
   return point
 }
 
 const drawTextbox = (text, x, y) => {
-  const fontSize = 32
   const textbox = new fabric.Textbox(text, {
     fill: 'red',
-    fontSize,
-    left: x - fontSize / 4,
-    top: y + fontSize / 8,
+    fontSize: 32,
+    left: x,
+    top: y,
+    selectable: true,
   })
   return textbox
 }
@@ -109,6 +110,7 @@ const drawLine = (points, x, y) => {
     strokeWidth: 5,
     originX: 'center',
     originY: 'center',
+    selectable: false,
   })
   if (x && y) {
     line.set({
@@ -119,9 +121,9 @@ const drawLine = (points, x, y) => {
   return line
 }
 
-const drawPath = (path, left, top) => {
+const drawPath = (path, left, top, stroke = 'black') => {
   const pathline = new fabric.Path(path, {
-    stroke: '#000000',
+    stroke,
     fill: 'transparent',
     strokeWidth: 1,
     left,
@@ -140,14 +142,14 @@ const drawObject = (object) => {
     case 'line':
       return drawLine([object.x1, object.y1, object.x2, object.y2], object.left, object.top)
     case 'path':
-      return drawPath(object.path, object.left, object.top)
+      return drawPath(object.path, object.left, object.top, object.stroke)
   }
 }
 
 const drawObjects = () => {
   objects.forEach((object) => {
     const Object = drawObject(object)
-    Object.selectable = false
+    // Object.selectable = true
     canvas.add(Object)
   })
 }
@@ -208,7 +210,9 @@ const saveImage = () => {
 
   // 不保存背景图
   const objects = canvas.toObject().objects.slice(1)
-  emit('save', objects)
+
+  if (objects.length)
+    emit('save', objects)
 
   console.log('saveImage', objects)
 }
@@ -250,9 +254,6 @@ const keydownhandler = (evt) => {
     case 'd':
       clearSelect()
       break
-    case 'c':
-      clearAll()
-      break
     case 'r':
       resetZomm()
       break
@@ -292,7 +293,7 @@ const initEvent = () => {
     }
 
     canvas.add(drawCircle(x, y))
-    canvas.add(drawTextbox(points.length.toString(), x, y))
+    canvas.add(drawTextbox(points.length.toString(), x - 8, y + 4))
   })
 
   canvas.on('mouse:move', (opt) => { // 鼠标移动时触发
@@ -332,6 +333,10 @@ const initEvent = () => {
 onMounted(() => {
   init()
   initEvent()
+})
+
+onBeforeUnmount(() => {
+  saveImage()
 })
 
 onUnmounted(() => {
