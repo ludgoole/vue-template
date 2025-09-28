@@ -17,6 +17,7 @@ const switchTo = (image: MOCK.IMAGE) => {
     path: '/palace',
     query: {
       image: JSON.stringify(image),
+      detail: JSON.stringify(book.detail || []),
     },
   })
 }

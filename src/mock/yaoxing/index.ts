@@ -1,4 +1,5 @@
 import book from './book'
+import detail from './detail'
 
 export default {
   name: '药性歌赋',
@@ -21,4 +22,5 @@ export default {
       }),
     }
   }),
+  detail,
 }

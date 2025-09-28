@@ -4,6 +4,8 @@ const route = useRoute()
 const router = useRouter()
 const imageStr = route.query.image as string
 const image = JSON.parse(imageStr) as MOCK.IMAGE
+const detailStr = route.query.detail as string
+const detail = JSON.parse(detailStr) as string[][]
 const notes = ref<string[]>([])
 const imageSrc = ref('')
 const objects = ref([])
@@ -28,6 +30,13 @@ const getData = async () => {
     data[image.name] = {}
 
   return data
+}
+
+const getHref = (info: string) => {
+  if (detail.length === 0)
+    return ''
+
+  return detail.find((item) => item[0].includes(info))?.[1]
 }
 
 // 初始化
@@ -64,6 +73,13 @@ const redraw = () => {
   objects.value = []
 }
 
+const toDetail = (info: string) => {
+  const href = getHref(info)
+
+  if (href)
+    window.open(href)
+}
+
 const toQuery = (info: string) => {
   router.push({
     path: '/query',
@@ -92,7 +108,7 @@ init()
       <h1 text-2xl>
         {{ image.name }}
       </h1>
-      <ul mt-4>
+      <ul mt-4 grid grid-flow-col grid-rows-5 gap-8>
         <li v-for="(pile, i) in image.piles" :key="pile.id" text-left mb-4>
           <template v-if="Array.isArray(pile.info)">
             <p flex items-center>
@@ -102,7 +118,7 @@ init()
             </p>
           </template>
           <template v-else>
-            <p @click="toQuery(pile.info)">
+            <p @dblclick="toQuery(pile.info)" @click="toDetail(pile.info)">
               {{ i + 1 }}. {{ pile.info }}
             </p>
           </template>

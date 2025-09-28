@@ -35,7 +35,8 @@ declare namespace MOCK {
     name: string
     film: string
     col: number
-    images: IMAGE[]
+    images: IMAGE[],
+    detail?: string[][]
   }
 }
 
